@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMS Rising Public School - ERP Portal</title>
+    <title>JMS Rising Public School - Advanced School ERP</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-50 font-sans antialiased">
+<body class="bg-slate-100 font-sans antialiased">
 
     <!-- ================= 1. SECURE LOGIN SCREEN ================= -->
-    <div id="login-screen" class="fixed inset-0 bg-slate-900 z-50 flex items-center justify-center p-4">
+    <div id="login-screen" class="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-8 border border-slate-100">
             <div class="text-center mb-6">
                 <div class="inline-flex w-16 h-16 bg-indigo-600 text-white rounded-2xl items-center justify-center text-3xl shadow-lg shadow-indigo-200 mb-3">
@@ -20,7 +20,7 @@
                 </div>
                 <h2 class="text-xl font-bold text-slate-900 uppercase">JMS Rising Public School</h2>
                 <p class="text-xs text-slate-400 mt-0.5">Rasoiya Dhamna, Barhi</p>
-                <div class="mt-3 text-xs bg-slate-100 py-1.5 px-3 rounded-lg text-slate-600 flex justify-around">
+                <div class="mt-3 text-xs bg-slate-100 py-2 px-3 rounded-xl text-slate-700 flex justify-around">
                     <span><b>Dir:</b> Sanjay Kumar</span>
                     <span><b>Prin:</b> Sakshi Kumari</span>
                 </div>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-100">
-                    Secure Login
+                    Secure Login to ERP
                 </button>
             </form>
         </div>
@@ -67,20 +67,20 @@
                 <i class="fa-solid fa-graduation-cap text-indigo-400 text-xl"></i>
                 <div>
                     <span class="text-white font-bold text-sm tracking-wide block leading-tight">JMS RISING P.S.</span>
-                    <span class="text-[10px] text-slate-400">Rasoiya Dhamna, Barhi</span>
+                    <span class="text-[10px] text-slate-400">Barhi, Hazaribagh</span>
                 </div>
             </div>
             
             <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1 text-sm">
-                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Modules</p>
+                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Detailed Modules</p>
                 
                 <a href="#" onclick="switchTab('overview')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg bg-indigo-600 text-white transition"><i class="fa-solid fa-chart-pie w-5"></i><span>Overview</span></a>
-                <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-wallet w-5"></i><span>Fees & Payments</span></a>
-                <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-comments w-5"></i><span>Communication & WhatsApp</span></a>
-                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i><span>Marksheets & Exams</span></a>
+                <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-wallet w-5"></i><span>Fee Management</span></a>
+                <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-comments w-5"></i><span>WhatsApp & Broadcast</span></a>
+                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i><span>Exams & Marksheets</span></a>
                 <a href="#" onclick="switchTab('people')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-users w-5"></i><span>People & CRM</span></a>
-                <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-book-open w-5"></i><span>Class & Schedule</span></a>
-                <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-boxes-stacked w-5"></i><span>Operations & Store</span></a>
+                <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-book-open w-5"></i><span>Class & Timetable</span></a>
+                <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-boxes-stacked w-5"></i><span>Library & Inventory</span></a>
                 <a href="#" onclick="switchTab('hr')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-id-badge w-5"></i><span>Staff Payroll & HR</span></a>
                 <a href="#" onclick="switchTab('transport')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-bus w-5"></i><span>Transport & GPS</span></a>
                 <a href="#" onclick="switchTab('reports')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-chart-line w-5"></i><span>Reports & Analytics</span></a>
@@ -88,7 +88,7 @@
                 <a href="#" onclick="switchTab('settings')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-gear w-5"></i><span>System Settings</span></a>
             </div>
 
-            <div class="p-3 border-t border-slate-800 text-[11px] text-slate-500 text-center">
+            <div class="p-3 border-t border-slate-800 text-[11px] text-slate-500 text-center leading-tight">
                 Director: Sanjay Kumar<br>Principal: Sakshi Kumari
             </div>
         </aside>
@@ -114,7 +114,7 @@
             </header>
 
             <!-- Dynamic Views Container -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6 space-y-6">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-100 p-6 space-y-6">
                 
                 <!-- 1. OVERVIEW -->
                 <div id="tab-overview" class="tab-content space-y-6">
@@ -122,7 +122,7 @@
                         <div>
                             <span class="bg-indigo-800 text-indigo-200 text-xs px-3 py-1 rounded-full font-semibold">Rasoiya Dhamna, Barhi</span>
                             <h2 class="text-2xl font-bold mt-2">JMS Rising Public School</h2>
-                            <p class="text-indigo-200 text-sm mt-1">Smart Automated School ERP Portal</p>
+                            <p class="text-indigo-200 text-sm mt-1">All-in-One Comprehensive School Management Solution</p>
                         </div>
                         <div class="mt-4 md:mt-0 text-right bg-indigo-900/80 p-3 rounded-xl border border-indigo-800 text-xs space-y-1">
                             <p><b>Director:</b> Sanjay Kumar</p>
@@ -151,129 +151,167 @@
 
                 <!-- 2. FEES & PAYMENTS -->
                 <div id="tab-fees" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Cash Counter & Automated Fee Collection</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input type="text" id="fee-student" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
-                            <input type="number" id="fee-amount" placeholder="Amount (₹)" class="border p-2.5 rounded-lg text-sm">
-                            <select id="fee-mode" class="border p-2.5 rounded-lg text-sm"><option>Cash Counter</option><option>UPI / Online Gateway</option><option>Card Payment</option></select>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Smart Fee Collection & Cash Counter</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Student Name</label><input type="text" id="fee-student" placeholder="e.g. Rahul Kumar" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Class & Roll</label><input type="text" id="fee-class" placeholder="e.g. Class 8 - 14" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Amount (₹)</label><input type="number" id="fee-amount" placeholder="e.g. 2500" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Payment Mode</label><select id="fee-mode" class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Cash Counter</option><option>UPI / Online Gateway</option><option>Card Payment</option></select></div>
                         </div>
-                        <button onclick="collectFee()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Collect & Generate Invoice</button>
-                        <div id="fee-result" class="text-sm text-emerald-600 font-medium mt-2"></div>
+                        <button onclick="collectFee()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Record Payment & Send Free WhatsApp Invoice</button>
+                        
+                        <div class="mt-6 border-t pt-4">
+                            <h4 class="font-semibold text-sm text-slate-700 mb-3">Recent Transactions</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm" id="fee-table">
+                                    <thead class="bg-slate-50 text-slate-600 border-b">
+                                        <tr><th class="p-3">Receipt No</th><th class="p-3">Student Name</th><th class="p-3">Class</th><th class="p-3">Amount</th><th class="p-3">Mode</th><th class="p-3">Status</th></tr>
+                                    </thead>
+                                    <tbody class="divide-y">
+                                        <tr><td class="p-3">#RCP-101</td><td class="p-3">Aman Verma</td><td class="p-3">Class 10</td><td class="p-3">₹3,000</td><td class="p-3">UPI</td><td class="p-3 text-emerald-600 font-medium">Paid & Sent</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 3. COMMUNICATION & WHATSAPP -->
                 <div id="tab-communication" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4 max-w-xl">
-                        <h3 class="text-lg font-bold text-slate-800">Broadcast & WhatsApp Integration</h3>
-                        <select id="comm-type" class="w-full border p-2.5 rounded-lg text-sm"><option>Instant Broadcast Notice</option><option>School Circular</option><option>WhatsApp Fee Reminder</option></select>
-                        <textarea id="comm-msg" rows="3" placeholder="Type your message here..." class="w-full border p-2.5 rounded-lg text-sm"></textarea>
-                        <button onclick="sendBroadcast()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Send via Portal & WhatsApp</button>
-                        <p id="comm-status" class="text-sm font-medium text-emerald-600"></p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">WhatsApp Integration & Broadcast Hub</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Broadcast Type</label><select id="comm-type" class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Instant Announcement</option><option>School Circular</option><option>Fee Due Reminder</option><option>Event Notice</option></select></div>
+                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Target Audience</label><select class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>All Parents & Guardians</option><option>Staff & Teachers Only</option><option>Specific Class</option></select></div>
+                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Message Content</label><textarea id="comm-msg" rows="4" placeholder="Type your message here..." class="w-full border p-2.5 rounded-lg text-sm"></textarea></div>
+                                <button onclick="sendBroadcast()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Broadcast via SMS & WhatsApp API</button>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-700 mb-2">WhatsApp Integration Status</h4>
+                                    <p class="text-xs text-slate-500 mb-4">Official API gateway connected. 1 Free WhatsApp invoice included per student/month.</p>
+                                    <div id="comm-log" class="text-xs text-emerald-600 font-medium space-y-1"></div>
+                                </div>
+                                <div class="text-[11px] text-slate-400 border-t pt-2">JMS Rising Public School Notification Gateway Active</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 4. MARKSHEETS & EXAMS -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Automated Marks Entry & Report Cards</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            <input type="text" id="mark-student" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
-                            <input type="number" id="mark-math" placeholder="Maths (100)" class="border p-2.5 rounded-lg text-sm">
-                            <input type="number" id="mark-sci" placeholder="Science (100)" class="border p-2.5 rounded-lg text-sm">
-                            <input type="number" id="mark-eng" placeholder="English (100)" class="border p-2.5 rounded-lg text-sm">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Examination, Marks Entry & Report Card Generator</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Student Name</label><input type="text" id="mark-student" placeholder="Student Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Maths (100)</label><input type="number" id="mark-math" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Science (100)</label><input type="number" id="mark-sci" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">English (100)</label><input type="number" id="mark-eng" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div class="flex items-end"><button onclick="calculateMarksheet()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Generate</button></div>
                         </div>
-                        <button onclick="calculateMarksheet()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Generate Marksheet</button>
-                        <div id="marksheet-output" class="p-4 bg-slate-50 border rounded-lg text-sm hidden"></div>
+                        <div id="marksheet-output" class="p-4 bg-slate-50 border rounded-xl text-sm hidden space-y-2"></div>
                     </div>
                 </div>
 
                 <!-- 5. PEOPLE & CRM -->
                 <div id="tab-people" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Student Admission CRM & Visitor Log</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input type="text" id="crm-name" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
-                            <input type="text" id="crm-class" placeholder="Applying for Class" class="border p-2.5 rounded-lg text-sm">
-                            <input type="text" id="crm-phone" placeholder="Parent Mobile" class="border p-2.5 rounded-lg text-sm">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Student Admission CRM & Visitor Log</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Student Name</label><input type="text" id="crm-name" placeholder="Full Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Target Class</label><input type="text" id="crm-class" placeholder="Class" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Parent Phone</label><input type="text" id="crm-phone" placeholder="Mobile No" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div class="flex items-end"><button onclick="addAdmission()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Save Inquiry</button></div>
                         </div>
-                        <button onclick="addAdmission()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Register Admission Inquiry</button>
-                        <div id="crm-list" class="mt-4 text-sm text-slate-700"></div>
+                        <div id="crm-list" class="text-sm text-slate-700 mt-2"></div>
                     </div>
                 </div>
 
                 <!-- 6. ACADEMICS & SCHEDULE -->
                 <div id="tab-academics" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Smart Timetable & Homework Tracker</h3>
-                        <p class="text-sm text-slate-600">Assign homework or configure daily class periods automatically.</p>
-                        <input type="text" id="hw-input" placeholder="Enter Homework Details" class="w-full border p-2.5 rounded-lg text-sm">
-                        <button onclick="postHomework()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Post Homework to Portal</button>
-                        <p id="hw-status" class="text-emerald-600 text-sm"></p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Class Timetable & Homework Tracker</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Select Class</label><select class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Class 9th</option><option>Class 10th</option></select></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Homework Details</label><input type="text" id="hw-input" placeholder="e.g. Complete Exercise 4.2 in Maths" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                        </div>
+                        <button onclick="postHomework()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Broadcast Homework</button>
+                        <p id="hw-status" class="text-emerald-600 text-sm font-medium"></p>
                     </div>
                 </div>
 
                 <!-- 7. OPERATIONS & STORE -->
                 <div id="tab-operations" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Library & Inventory Management</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" id="lib-book" placeholder="Book Name" class="border p-2.5 rounded-lg text-sm">
-                            <input type="text" id="lib-student" placeholder="Issued To Student" class="border p-2.5 rounded-lg text-sm">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Library & Inventory Management</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Book Name / Asset</label><input type="text" id="lib-book" placeholder="Book Title" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Issued To Student</label><input type="text" id="lib-student" placeholder="Student Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div class="flex items-end"><button onclick="issueBook()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Issue Book</button></div>
                         </div>
-                        <button onclick="issueBook()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Issue Library Book</button>
-                        <p id="lib-status" class="text-emerald-600 text-sm"></p>
+                        <p id="lib-status" class="text-emerald-600 text-sm font-medium"></p>
                     </div>
                 </div>
 
                 <!-- 8. HR & PAYROLL -->
                 <div id="tab-hr" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Staff Payroll & Salary Slip Generation</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="text" id="staff-name" placeholder="Staff Member Name" class="border p-2.5 rounded-lg text-sm">
-                            <input type="number" id="staff-salary" placeholder="Monthly Salary (₹)" class="border p-2.5 rounded-lg text-sm">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Staff Attendance & Payroll Automation</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Staff Member Name</label><input type="text" id="staff-name" placeholder="Teacher Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Monthly Salary (₹)</label><input type="number" id="staff-salary" placeholder="Salary Amount" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                            <div class="flex items-end"><button onclick="generateSalarySlip()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Generate Salary Slip</button></div>
                         </div>
-                        <button onclick="generateSalarySlip()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Generate Salary Slip</button>
-                        <div id="salary-output" class="p-3 bg-slate-50 border rounded text-sm hidden"></div>
+                        <div id="salary-output" class="p-4 bg-slate-50 border rounded-xl text-sm hidden"></div>
                     </div>
                 </div>
 
                 <!-- 9. TRANSPORT & GPS -->
                 <div id="tab-transport" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">School Bus Routes & GPS Tracking</h3>
-                        <p class="text-sm text-slate-600">Bus No. JH-12-3456 (Barhi - Rasoiya Dhamna Route) is currently running on schedule with live GPS active.</p>
-                        <button onclick="alert('GPS Route Live Ping Sent Successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Ping Live Bus Location</button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Transport & GPS Bus Tracking</h3>
+                        <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-xl space-y-2">
+                            <h4 class="font-bold text-slate-800 text-sm">Bus Route #1: Barhi to Rasoiya Dhamna</h4>
+                            <p class="text-xs text-slate-600">Vehicle No: <b>JH-12-AB-3456</b> | Driver: Ramesh Singh (Ph: 9876543210)</p>
+                            <p class="text-xs text-emerald-600 font-semibold">Status: GPS Live Tracking Active (Speed: 38 km/h)</p>
+                        </div>
+                        <button onclick="alert('GPS Ping refreshed successfully. Bus is on scheduled route.')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Ping Live Bus Location</button>
                     </div>
                 </div>
 
                 <!-- 10. REPORTS & ANALYTICS -->
                 <div id="tab-reports" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">Financial & Performance Analytics</h3>
-                        <p class="text-sm text-slate-600">Total Revenue Collection, Student Pass Percentage, and Attendance Graphs compiled automatically.</p>
-                        <button onclick="alert('Analytics report downloaded successfully.')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Download Full Report</button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Detailed Analytics & Reports</h3>
+                        <p class="text-sm text-slate-600">Comprehensive administrative summary for JMS Rising Public School, Barhi.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Fee Collection Rate</p><h4 class="text-xl font-bold text-slate-800 mt-1">91.2%</h4></div>
+                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Overall Student Pass %</p><h4 class="text-xl font-bold text-slate-800 mt-1">96.8%</h4></div>
+                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Staff Attendance Rate</p><h4 class="text-xl font-bold text-slate-800 mt-1">98.5%</h4></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 11. UDISE+ REPORT -->
                 <div id="tab-udise" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
-                        <h3 class="text-lg font-bold text-slate-800">UDISE+ Report Generation</h3>
-                        <p class="text-sm text-slate-600">JMS Rising Public School, Barhi UDISE compliance file ready for export.</p>
-                        <button onclick="alert('UDISE+ Report JSON/Excel exported successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Export UDISE+ Report</button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">UDISE+ Report Generation</h3>
+                        <p class="text-sm text-slate-600">Compile official UDISE+ school data profile, infrastructure details, and enrollment records for government compliance.</p>
+                        <button onclick="alert('UDISE+ Data compiled and exported successfully in structured format.')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Export UDISE+ Compliance Report</button>
                     </div>
                 </div>
 
                 <!-- 12. SYSTEM SETTINGS -->
                 <div id="tab-settings" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4 max-w-xl">
-                        <h3 class="text-lg font-bold text-slate-800">System Configuration</h3>
-                        <div><label class="block text-xs font-bold text-slate-700">School Name</label><input type="text" value="JMS Rising Public School" class="w-full border p-2 rounded text-sm"></div>
-                        <div><label class="block text-xs font-bold text-slate-700">Location</label><input type="text" value="Rasoiya Dhamna, Barhi" class="w-full border p-2 rounded text-sm"></div>
-                        <button onclick="alert('Settings saved successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Save Changes</button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5 max-w-xl">
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">System Settings</h3>
+                        <div><label class="block text-xs font-bold text-slate-700 mb-1">School Name</label><input type="text" value="JMS Rising Public School" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Location</label><input type="text" value="Rasoiya Dhamna, Barhi" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Director</label><input type="text" value="Sanjay Kumar" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Principal</label><input type="text" value="Sakshi Kumari" class="w-full border p-2.5 rounded-lg text-sm"></div>
+                        <button onclick="alert('Settings updated successfully!')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Save Configuration</button>
                     </div>
                 </div>
 
@@ -310,27 +348,39 @@
             event.currentTarget.classList.add('bg-indigo-600', 'text-white');
             
             const titles = {
-                'overview': 'Dashboard Overview', 'fees': 'Fees & Payments System', 'communication': 'Communication & WhatsApp',
-                'marksheet': 'Marksheets & Examinations', 'people': 'People & CRM', 'academics': 'Class & Schedule',
-                'operations': 'Operations & Store', 'hr': 'Staff Payroll & HR', 'transport': 'Transport & GPS',
+                'overview': 'Dashboard Overview', 'fees': 'Fee Management & Cash Counter', 'communication': 'WhatsApp & Broadcast Hub',
+                'marksheet': 'Exams & Marksheet Generator', 'people': 'People & Admission CRM', 'academics': 'Class Timetable & Homework',
+                'operations': 'Library & Inventory', 'hr': 'Staff Payroll & HR', 'transport': 'Transport & GPS Tracking',
                 'reports': 'Reports & Analytics', 'udise': 'UDISE+ Report', 'settings': 'System Settings'
             };
             document.getElementById('current-title').innerText = titles[tabId] || 'Dashboard';
         }
 
-        // Automated Features Logic
+        let receiptCounter = 102;
         function collectFee() {
             let name = document.getElementById('fee-student').value;
+            let cls = document.getElementById('fee-class').value;
             let amt = document.getElementById('fee-amount').value;
             let mode = document.getElementById('fee-mode').value;
             if(!name || !amt) { alert('Please enter student name and amount'); return; }
-            document.getElementById('fee-result').innerText = `Success! ₹${amt} received from ${name} via ${mode}. Free WhatsApp invoice triggered.`;
+            
+            let tbody = document.querySelector('#fee-table tbody');
+            let row = document.createElement('tr');
+            row.innerHTML = `<td class="p-3">#RCP-${receiptCounter++}</td><td class="p-3">${name}</td><td class="p-3">${cls}</td><td class="p-3">₹${amt}</td><td class="p-3">${mode}</td><td class="p-3 text-emerald-600 font-medium">Paid & WhatsApp Sent</td>`;
+            tbody.prepend(row);
+            alert(`Fee of ₹${amt} successfully collected from ${name}! Free WhatsApp invoice sent.`);
+            document.getElementById('fee-student').value = '';
+            document.getElementById('fee-amount').value = '';
         }
 
         function sendBroadcast() {
             let msg = document.getElementById('comm-msg').value;
+            let type = document.getElementById('comm-type').value;
             if(!msg) { alert('Please type a message'); return; }
-            document.getElementById('comm-status').innerText = 'Broadcast sent successfully to all parent portals and WhatsApp!';
+            let log = document.getElementById('comm-log');
+            log.innerHTML += `<div>[Sent] ${type}: "${msg.substring(0, 35)}..." via WhatsApp API</div>`;
+            alert('Broadcast successfully sent to parents and staff via WhatsApp & SMS!');
+            document.getElementById('comm-msg').value = '';
         }
 
         function calculateMarksheet() {
@@ -338,36 +388,42 @@
             let m1 = parseFloat(document.getElementById('mark-math').value) || 0;
             let m2 = parseFloat(document.getElementById('mark-sci').value) || 0;
             let m3 = parseFloat(document.getElementById('mark-eng').value) || 0;
+            if(!name) { alert('Please enter student name'); return; }
+            
             let total = m1 + m2 + m3;
             let percentage = (total / 300) * 100;
-            let grade = percentage >= 80 ? 'A+' : percentage >= 60 ? 'A' : 'B';
+            let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : 'B (Pass)';
 
             let output = document.getElementById('marksheet-output');
             output.classList.remove('hidden');
-            output.innerHTML = `<b>Student:</b> ${name} | <b>Total Marks:</b> ${total}/300 | <b>Percentage:</b> ${percentage.toFixed(2)}% | <b>Grade:</b> ${grade} <br><span class="text-indigo-600 font-semibold">Report card generated and parent visibility updated.</span>`;
+            output.innerHTML = `<h4 class="font-bold text-slate-800">Report Card: ${name}</h4>
+                <p>Maths: ${m1} | Science: ${m2} | English: ${m3}</p>
+                <p><b>Total Marks:</b> ${total}/300 | <b>Percentage:</b> ${percentage.toFixed(2)}% | <b>Grade:</b> ${grade}</p>
+                <span class="text-indigo-600 font-semibold block mt-1">Digital mark sheet generated and made visible on Parent Portal.</span>`;
         }
 
         let admissionCount = 1250;
         function addAdmission() {
             let name = document.getElementById('crm-name').value;
             let cls = document.getElementById('crm-class').value;
+            let phone = document.getElementById('crm-phone').value;
             if(!name) { alert('Enter student name'); return; }
             admissionCount++;
             document.getElementById('stat-students').innerText = admissionCount;
-            document.getElementById('crm-list').innerHTML = `<b>Last Added Inquiry:</b> ${name} for Class ${cls} recorded successfully! Total students updated automatically.`;
+            document.getElementById('crm-list').innerHTML = `<div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800"><b>New Inquiry Recorded:</b> ${name} for Class ${cls} (Contact: ${phone}). Total strength updated.</div>`;
         }
 
         function postHomework() {
             let hw = document.getElementById('hw-input').value;
             if(!hw) return;
-            document.getElementById('hw-status').innerText = 'Homework successfully broadcasted to student app and parent portal!';
+            document.getElementById('hw-status').innerText = 'Homework broadcasted successfully to all student mobile apps and parent portals!';
         }
 
         function issueBook() {
             let book = document.getElementById('lib-book').value;
             let student = document.getElementById('lib-student').value;
             if(!book || !student) return;
-            document.getElementById('lib-status').innerText = `Book "${book}" successfully issued to ${student}. Due tracking active.`;
+            document.getElementById('lib-status').innerText = `Book "${book}" successfully issued to ${student}. Due date tracked automatically.`;
         }
 
         function generateSalarySlip() {
@@ -376,7 +432,7 @@
             if(!name || !sal) return;
             let out = document.getElementById('salary-output');
             out.classList.remove('hidden');
-            out.innerHTML = `Salary slip for <b>${name}</b> amounting to <b>₹${sal}</b> generated and compliant HR records updated.`;
+            out.innerHTML = `<h4 class="font-bold text-slate-800">Salary Slip Generated</h4><p>Staff: <b>${name}</b></p><p>Net Payable Salary: <b>₹${sal}</b></p><span class="text-emerald-600 font-semibold">HR compliance records and bank disbursement file updated.</span>`;
         }
     </script>
 </body>
