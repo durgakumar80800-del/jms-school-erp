@@ -10,7 +10,7 @@
         @media print {
             body * { visibility: hidden; }
             #printable-certificate, #printable-certificate * { visibility: visible; }
-            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; border: none; box-shadow: none; }
         }
     </style>
 </head>
@@ -27,7 +27,6 @@
                 </div>
             </div>
 
-            <!-- LOGIN FORM -->
             <form @submit.prevent="login()" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
@@ -126,8 +125,8 @@
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
                     <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">📚 Advanced Academic & Custom Certificate Hub</h3>
-                            <p class="text-xs text-slate-500">Select certificate type, fill or edit any custom details manually, and print or save instantly.</p>
+                            <h3 class="text-lg font-bold text-slate-800">📚 Tab 4: Advanced Academic Data Entry & Certificate Generator</h3>
+                            <p class="text-xs text-slate-500">Enter or edit complete student details manually and generate any official school document instantly.</p>
                         </div>
                         <!-- Document Type Switcher -->
                         <div class="flex gap-2 flex-wrap text-xs">
@@ -139,11 +138,11 @@
                         </div>
                     </div>
 
-                    <!-- CUSTOM EDIT INPUT PANEL (Yahan se user kuch bhi manually type karke enter kar sakta hai) -->
+                    <!-- FULL DATA ENTRY PANEL -->
                     <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4 text-xs">
                         <div class="flex justify-between items-center border-b pb-2">
-                            <h4 class="font-bold text-slate-900 uppercase tracking-wide">✍️ Custom Data Input Panel (Live Editing)</h4>
-                            <span class="text-[11px] text-amber-700 bg-amber-100 px-2 py-0.5 rounded font-semibold">Any text can be modified below</span>
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide">✍️ Student Data Entry Form (Custom Input)</h4>
+                            <span class="text-[11px] text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded font-semibold">Changes reflect live in preview</span>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -156,6 +155,17 @@
                                 <input type="text" x-model="formData.fatherName" class="w-full border p-2 rounded bg-white">
                             </div>
                             <div>
+                                <label class="block font-bold text-slate-700 mb-1">Mother's Name</label>
+                                <input type="text" x-model="formData.motherName" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Date of Birth (DOB)</label>
+                                <input type="text" x-model="formData.dob" class="w-full border p-2 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
+                            <div>
                                 <label class="block font-bold text-slate-700 mb-1">Class & Section</label>
                                 <input type="text" x-model="formData.classSec" class="w-full border p-2 rounded bg-white">
                             </div>
@@ -163,21 +173,37 @@
                                 <label class="block font-bold text-slate-700 mb-1">Roll Number</label>
                                 <input type="text" x-model="formData.rollNo" class="w-full border p-2 rounded bg-white">
                             </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                             <div>
-                                <label class="block font-bold text-slate-700 mb-1">Exam Title / Session</label>
+                                <label class="block font-bold text-slate-700 mb-1">Exam / Session Title</label>
                                 <input type="text" x-model="formData.examTitle" class="w-full border p-2 rounded bg-white">
                             </div>
                             <div>
-                                <label class="block font-bold text-slate-700 mb-1">Certificate / Ref Number</label>
+                                <label class="block font-bold text-slate-700 mb-1">Certificate / TC No.</label>
                                 <input type="text" x-model="formData.certNo" class="w-full border p-2 rounded bg-white">
                             </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-4 pt-2">
                             <div>
-                                <label class="block font-bold text-slate-700 mb-1">Achievement / Custom Remark</label>
+                                <label class="block font-bold text-slate-700 mb-1">Custom Remark / Description</label>
                                 <input type="text" x-model="formData.customRemark" class="w-full border p-2 rounded bg-white">
                             </div>
+                        </div>
+
+                        <!-- Special Marks/Subjects Editor (Only visible when Marksheet is active) -->
+                        <div x-show="docType === 'marksheet'" class="border-t pt-4 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold text-slate-800">📊 Subject-wise Marks Entry (Dynamic)</h5>
+                                <button @click="addSubject()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[11px] font-bold">+ Add Subject</button>
+                            </div>
+                            <template x-for="(sub, index) in formData.subjects" :key="index">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" x-model="sub.name" placeholder="Subject Name" class="border p-1.5 rounded flex-1 bg-white">
+                                    <input type="number" x-model.number="sub.max" placeholder="Max Marks" class="border p-1.5 rounded w-28 bg-white">
+                                    <input type="number" x-model.number="sub.obt" placeholder="Obtained" class="border p-1.5 rounded w-28 bg-white">
+                                    <button @click="formData.subjects.splice(index, 1)" class="bg-red-500 hover:bg-red-600 text-white px-2.5 py-1.5 rounded font-bold">✕</button>
+                                </div>
+                            </template>
                         </div>
                     </div>
 
@@ -205,11 +231,12 @@
                                 <div class="col-span-2 space-y-2">
                                     <p><strong class="text-slate-700">Student Name:</strong> <span class="text-slate-900 font-bold text-sm" x-text="formData.studentName"></span></p>
                                     <p><strong class="text-slate-700">Father's Name:</strong> <span class="text-slate-900" x-text="formData.fatherName"></span></p>
+                                    <p><strong class="text-slate-700">Mother's Name:</strong> <span class="text-slate-900" x-text="formData.motherName"></span></p>
                                     <p><strong class="text-slate-700">Class & Section:</strong> <span class="text-slate-900" x-text="formData.classSec"></span></p>
                                     <p><strong class="text-slate-700">Roll Number:</strong> <span class="text-slate-900 font-bold" x-text="formData.rollNo"></span></p>
                                     <p><strong class="text-slate-700">Exam Center:</strong> <span class="text-slate-900" x-text="settings.schoolName + ', ' + settings.schoolLocation"></span></p>
                                 </div>
-                                <div class="border border-slate-300 p-2 flex items-center justify-center bg-slate-50 text-slate-400 text-center text-[11px] h-32 rounded">
+                                <div class="border border-slate-300 p-2 flex items-center justify-center bg-slate-50 text-slate-400 text-center text-[11px] h-36 rounded font-semibold">
                                     [ Student Photo ]
                                 </div>
                             </div>
@@ -239,8 +266,16 @@
                                 STATEMENT OF MARKS & PERFORMANCE REPORT (<span x-text="formData.examTitle"></span>)
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-3 rounded border border-slate-200">
-                                <div><p><strong>Student Name:</strong> <span class="font-bold" x-text="formData.studentName"></span></p><p><strong>Roll No:</strong> <span x-text="formData.rollNo"></span></p></div>
-                                <div><p><strong>Class:</strong> <span x-text="formData.classSec"></span></p><p><strong>Session:</strong> <span x-text="settings.academicSession"></span></p></div>
+                                <div>
+                                    <p><strong>Student Name:</strong> <span class="font-bold" x-text="formData.studentName"></span></p>
+                                    <p><strong>Father's Name:</strong> <span x-text="formData.fatherName"></span></p>
+                                    <p><strong>Roll No:</strong> <span x-text="formData.rollNo"></span></p>
+                                </div>
+                                <div>
+                                    <p><strong>Class:</strong> <span x-text="formData.classSec"></span></p>
+                                    <p><strong>Date of Birth:</strong> <span x-text="formData.dob"></span></p>
+                                    <p><strong>Session:</strong> <span x-text="settings.academicSession"></span></p>
+                                </div>
                             </div>
                             <!-- Marks Table -->
                             <table class="w-full text-xs border-collapse border border-slate-300">
@@ -249,15 +284,21 @@
                                         <th class="border border-slate-300 p-2 text-left">Subject</th>
                                         <th class="border border-slate-300 p-2 text-center">Max Marks</th>
                                         <th class="border border-slate-300 p-2 text-center">Marks Obtained</th>
-                                        <th class="border border-slate-300 p-2 text-center">Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td class="border border-slate-300 p-2">Mathematics</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">92</td><td class="border border-slate-300 p-2 text-center">A1</td></tr>
-                                    <tr><td class="border border-slate-300 p-2">Science</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">88</td><td class="border border-slate-300 p-2 text-center">A2</td></tr>
-                                    <tr><td class="border border-slate-300 p-2">Social Science</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">85</td><td class="border border-slate-300 p-2 text-center">A2</td></tr>
-                                    <tr><td class="border border-slate-300 p-2">English</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">90</td><td class="border border-slate-300 p-2 text-center">A1</td></tr>
-                                    <tr class="bg-slate-100 font-bold"><td class="border border-slate-300 p-2">Total / Percentage</td><td class="border border-slate-300 p-2 text-center">400</td><td class="border border-slate-300 p-2 text-center">355 (88.75%)</td><td class="border border-slate-300 p-2 text-center">Distinction</td></tr>
+                                    <template x-for="sub in formData.subjects">
+                                        <tr>
+                                            <td class="border border-slate-300 p-2" x-text="sub.name"></td>
+                                            <td class="border border-slate-300 p-2 text-center" x-text="sub.max"></td>
+                                            <td class="border border-slate-300 p-2 text-center font-bold" x-text="sub.obt"></td>
+                                        </tr>
+                                    </template>
+                                    <tr class="bg-slate-100 font-bold">
+                                        <td class="border border-slate-300 p-2">Total / Percentage (%)</td>
+                                        <td class="border border-slate-300 p-2 text-center" x-text="totalMaxMarks"></td>
+                                        <td class="border border-slate-300 p-2 text-center text-blue-900" x-text="totalObtMarks + ' (' + totalPercentage + '%)'"></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -270,9 +311,9 @@
                             <p class="text-xs text-slate-500 uppercase" x-text="'Certificate No: ' + formData.certNo"></p>
                             
                             <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
-                                This is to certify that <strong class="text-slate-900 text-base underline" x-text="formData.studentName"></strong>, son/daughter of <strong class="text-slate-900" x-text="formData.fatherName"></strong>, is a bonafide regular student of this institution studying in <strong class="text-slate-900" x-text="formData.classSec"></strong> under Roll Number <strong class="text-slate-900" x-text="formData.rollNo"></strong> for the academic session <span x-text="settings.academicSession"></span>. 
+                                This is to certify that <strong class="text-slate-900 text-base underline" x-text="formData.studentName"></strong>, son/daughter of <strong class="text-slate-900" x-text="formData.fatherName"></strong> and <strong class="text-slate-900" x-text="formData.motherName"></strong>, is a bonafide regular student of this institution studying in <strong class="text-slate-900" x-text="formData.classSec"></strong> under Roll Number <strong class="text-slate-900" x-text="formData.rollNo"></strong> for the academic session <span x-text="settings.academicSession"></span>. 
                                 <br><br>
-                                <span x-text="formData.customRemark">To the best of my knowledge and school records, their character & conduct has been exemplary.</span>
+                                Date of Birth as per school records is <strong class="text-slate-900" x-text="formData.dob"></strong>. <span x-text="formData.customRemark">Their character & conduct has been exemplary.</span>
                             </p>
                         </div>
 
@@ -284,9 +325,9 @@
                             <p class="text-xs text-slate-500 uppercase" x-text="'TC Register No: ' + formData.certNo + ' | UDISE: ' + settings.udiseCode"></p>
                             
                             <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
-                                This is to certify that <strong class="text-slate-900 text-base" x-text="formData.studentName"></strong>, child of <strong class="text-slate-900" x-text="formData.fatherName"></strong>, has completed their studies in <strong class="text-slate-900" x-text="formData.classSec"></strong> at <strong class="text-slate-900" x-text="settings.schoolName"></strong>. 
+                                This is to certify that <strong class="text-slate-900 text-base" x-text="formData.studentName"></strong>, child of <strong class="text-slate-900" x-text="formData.fatherName"></strong> and <strong class="text-slate-900" x-text="formData.motherName"></strong>, born on <strong class="text-slate-900" x-text="formData.dob"></strong>, has completed their studies in <strong class="text-slate-900" x-text="formData.classSec"></strong> at <strong class="text-slate-900" x-text="settings.schoolName"></strong>. 
                                 <br><br>
-                                <span x-text="formData.customRemark">During their stay, they cleared all school dues and exhibited good moral character. We wish them grand success.</span>
+                                <span x-text="formData.customRemark">During their stay, all school dues were cleared and they exhibited good moral character. We wish them grand success.</span>
                             </p>
                         </div>
 
@@ -298,7 +339,7 @@
                             <p class="text-xs text-slate-600 font-medium">This certificate is proudly presented to</p>
                             <h2 class="text-2xl font-black text-slate-900 underline" x-text="formData.studentName"></h2>
                             <p class="text-xs text-slate-700 max-w-lg mx-auto leading-relaxed" x-text="formData.customRemark">
-                                For outstanding performance and securing top honors in school cultural and sports activities during session 2026-27.
+                                For outstanding performance and securing top honors in school cultural and sports competitions during academic session 2026-27.
                             </p>
                         </div>
 
@@ -353,18 +394,26 @@
                 loginPass: '',
                 currentTab: 'academics',
 
-                // Certificate Hub State
                 docType: 'admitCard', // admitCard, marksheet, bonafide, leaving, extracurric
                 
-                // Live Custom Editable Data Model
+                // Complete Custom Data Entry Model
                 formData: {
                     studentName: 'Aarav Kumar',
                     fatherName: 'Mr. Rajesh Kumar',
+                    motherName: 'Mrs. Sunita Devi',
+                    dob: '15-Aug-2010',
                     classSec: 'Class X - Section A',
                     rollNo: '101',
-                    examTitle: 'Annual Examination 2026-27',
+                    examTitle: 'Annual Board Examination 2026-27',
                     certNo: 'JMS/CERT/2026/101',
-                    customRemark: 'To the best of my knowledge and school records, their character & conduct has been exemplary.'
+                    customRemark: 'To the best of my knowledge and school records, their character & conduct has been exemplary.',
+                    subjects: [
+                        { name: 'Mathematics', max: 100, obt: 92 },
+                        { name: 'Science & Technology', max: 100, obt: 88 },
+                        { name: 'Social Science', max: 100, obt: 85 },
+                        { name: 'English Language', max: 100, obt: 90 },
+                        { name: 'Hindi Course-A', max: 100, obt: 86 }
+                    ]
                 },
 
                 settings: {
@@ -375,6 +424,23 @@
                     principalName: 'Sakshi Kumari',
                     helpline: '+91 9876543210',
                     academicSession: '2026-27'
+                },
+
+                get totalMaxMarks() {
+                    return this.formData.subjects.reduce((sum, sub) => sum + Number(sub.max || 0), 0);
+                },
+
+                get totalObtMarks() {
+                    return this.formData.subjects.reduce((sum, sub) => sum + Number(sub.obt || 0), 0);
+                },
+
+                get totalPercentage() {
+                    if (this.totalMaxMarks === 0) return 0;
+                    return ((this.totalObtMarks / this.totalMaxMarks) * 100).toFixed(2);
+                },
+
+                addSubject() {
+                    this.formData.subjects.push({ name: 'New Subject', max: 100, obt: 75 });
                 },
 
                 login() {
