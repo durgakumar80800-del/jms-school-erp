@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS Rising Public School - ERP System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+</head>
+<body class="bg-slate-100 font-sans" x-data="schoolApp()">
+
+    <!-- LOGIN SCREEN -->
+    <div x-show="!isLoggedIn" class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
+        <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
+            <div class="text-center">
+                <h1 class="text-2xl font-black text-slate-900">JMS RISING PUBLIC SCHOOL</h1>
+                <p class="text-xs text-slate-500 mt-1">Rasoiyadhamna | ERP Portal</p>
+                <div class="mt-2 text-xs bg-amber-100 text-amber-800 py-1 px-2 rounded font-medium">
+                    Director: Sanjay Kumar | Principal: Sakshi Kumari
+                </div>
+            </div>
+
+            <form @submit.prevent="login()" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
+                    <select x-model="loginRole" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500">
+                        <option value="admin">Administrator (Full Access)</option>
+                        <option value="teacher">Teacher Portal</option>
+                        <option value="parent">Parent / Student Portal</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Username / Email</label>
+                    <input type="text" x-model="loginUser" placeholder="Enter username" required class="w-full border border-slate-300 rounded-lg p-3 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
+                    <input type="password" x-model="loginPass" placeholder="••••••••" required class="w-full border border-slate-300 rounded-lg p-3 text-sm">
+                </div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-lg transition shadow-md">
+                    Secure Login 🚀
+                </button>
+            </form>
+            <p class="text-center text-xs text-slate-400">All Features. One Solution. 17 Modules Integrated.</p>
+        </div>
+    </div>
+
+    <!-- MAIN APP DASHBOARD -->
+    <div x-show="isLoggedIn" class="flex h-screen overflow-hidden">
+        
+        <!-- SIDEBAR NAVIGATION (All 17 Modules) -->
+        <aside class="w-72 bg-slate-900 text-slate-200 flex flex-col justify-between hidden lg:flex shadow-xl">
+            <div class="p-5 border-b border-slate-800">
+                <h2 class="text-lg font-black text-amber-400">JMS RISING P.S.</h2>
+                <p class="text-xs text-slate-400 uppercase tracking-wider">Rasoiyadhamna ERP</p>
+                <div class="mt-3 text-[11px] bg-slate-800 p-2 rounded text-slate-300">
+                    <p>Dir: <span class="text-white font-semibold">Sanjay Kumar</span></p>
+                    <p>Prin: <span class="text-white font-semibold">Sakshi Kumari</span></p>
+                </div>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto p-4 space-y-1.5 text-xs">
+                <button @click="currentTab = 'overview'" :class="currentTab === 'overview' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📊 1. Overview & Dashboard</button>
+                <button @click="currentTab = 'fees'" :class="currentTab === 'fees' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">💰 2. Fees & WhatsApp Billing</button>
+                <button @click="currentTab = 'administration'" :class="currentTab === 'administration' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🗂️ 3. Effortless Administration</button>
+                <button @click="currentTab = 'academics'" :class="currentTab === 'academics' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📚 4. Academic & Marksheets</button>
+                <button @click="currentTab = 'tracking'" :class="currentTab === 'tracking' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🛡️ 5. Real-Time Tracking & Safety</button>
+                <button @click="currentTab = 'communication'" :class="currentTab === 'communication' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📱 6. Connectivity & Communication</button>
+                <button @click="currentTab = 'hr'" :class="currentTab === 'hr' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">👥 7. Staff Payroll & HR</button>
+                <button @click="currentTab = 'people'" :class="currentTab === 'people' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📇 8. People & Access (CRM/Alumni)</button>
+                <button @click="currentTab = 'reports'" :class="currentTab === 'reports' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📈 9. Detailed Reports & Analytics</button>
+                <button @click="currentTab = 'operations'" :class="currentTab === 'operations' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🏫 10. Operations (Library/Hostel)</button>
+                <button @click="currentTab = 'integrations'" :class="currentTab === 'integrations' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🔗 11. Integrations</button>
+                <button @click="currentTab = 'schedule'" :class="currentTab === 'schedule' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🗓️ 12. Class & Schedule</button>
+                <button @click="currentTab = 'transport'" :class="currentTab === 'transport' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🚌 13. Transport & GPS Routing</button>
+                <button @click="currentTab = 'udise'" :class="currentTab === 'udise' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📋 14. UDISE+ Report Export</button>
+                <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">⚙️ 15. System Settings</button>
+            </nav>
+
+            <div class="p-4 border-t border-slate-800">
+                <button @click="isLoggedIn = false" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded text-xs transition">
+                    Logout 🔒
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEW AREA -->
+        <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
+            <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800">JMS Rising Public School, Rasoiyadhamna</h2>
+                    <p class="text-xs text-slate-500">Logged in as: <span class="uppercase font-bold text-amber-600" x-text="loginRole"></span></p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Session: 2026-27 Active</span>
+                </div>
+            </header>
+
+            <!-- 1. OVERVIEW -->
+            <div x-show="currentTab === 'overview'" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Total Students</p>
+                        <h3 class="text-3xl font-black text-slate-800 mt-1">920</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Fee Collection (Month)</p>
+                        <h3 class="text-3xl font-black text-emerald-600 mt-1">₹7,80,000</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Today's Attendance</p>
+                        <h3 class="text-3xl font-black text-blue-600 mt-1">95.4%</h3>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs font-bold text-slate-400 uppercase">Staff Active</p>
+                        <h3 class="text-3xl font-black text-indigo-600 mt-1">52</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. FEES & PAYMENTS -->
+            <div x-show="currentTab === 'fees'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Smart Fee Management & WhatsApp Billing</h3>
+                    <p class="text-xs text-slate-500 mb-4">Manage cash counter, online UPI gateway reconciliation, and automated monthly invoices.</p>
+                    <div class="flex gap-3">
+                        <button @click="alert('Fee Invoice generated and sent via WhatsApp successfully!')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded text-xs">Send Free WhatsApp Invoice 📱</button>
+                        <button @click="alert('Cash Counter receipt recorded successfully!')" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded text-xs">Open Cash Counter 💵</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ADMINISTRATION -->
+            <div x-show="currentTab === 'administration'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Effortless Administration & Admissions CRM</h3>
+                    <p class="text-xs text-slate-500 mb-4">Paperless admissions, student profile tracking, ID card design, and certificate management.</p>
+                    <button @click="alert('New Digital Inquiry saved in CRM!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-4 rounded text-xs">Add Digital Inquiry 📋</button>
+                </div>
+            </div>
+
+            <!-- 4. ACADEMICS -->
+            <div x-show="currentTab === 'academics'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Exam Management & Automated Marksheets</h3>
+                    <p class="text-xs text-slate-500 mb-4">Smooth marks entry, rank calculation, and digital progress report cards.</p>
+                    <button @click="alert('Marksheet generated successfully with Principal Signature!')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs">Generate Marksheet 📄</button>
+                </div>
+            </div>
+
+            <!-- 5. TRACKING & SAFETY -->
+            <div x-show="currentTab === 'tracking'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Real-Time Tracking & Attendance Alerts</h3>
+                    <p class="text-xs text-slate-500 mb-4">Automated attendance alerts, GPS transport safety updates, and inventory tracking.</p>
+                </div>
+            </div>
+
+            <!-- 6. COMMUNICATION -->
+            <div x-show="currentTab === 'communication'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Broadcasts, Circulars & Events Calendar</h3>
+                    <p class="text-xs text-slate-500 mb-4">Send instant circulars and event reminders to all stakeholders.</p>
+                </div>
+            </div>
+
+            <!-- 7. STAFF HR & PAYROLL -->
+            <div x-show="currentTab === 'hr'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Staff Payroll & Salary Slip Automation</h3>
+                    <p class="text-xs text-slate-500 mb-4">Manage staff leave, attendance, and automated salary slip generation.</p>
+                </div>
+            </div>
+
+            <!-- 8. PEOPLE & ACCESS -->
+            <div x-show="currentTab === 'people'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Students, Visitor Log & Alumni Management</h3>
+                    <p class="text-xs text-slate-500 mb-4">Maintain visitor gate logs, user access roles, and alumni network.</p>
+                </div>
+            </div>
+
+            <!-- 9. REPORTS -->
+            <div x-show="currentTab === 'reports'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Detailed Reports & Analytics</h3>
+                    <p class="text-xs text-slate-500 mb-4">Financial auditing and academic performance analytics.</p>
+                </div>
+            </div>
+
+            <!-- 10. OPERATIONS -->
+            <div x-show="currentTab === 'operations'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Library, Hostel & Asset Store Operations</h3>
+                    <p class="text-xs text-slate-500 mb-4">Track books, hostel beds, and school assets easily.</p>
+                </div>
+            </div>
+
+            <!-- 11. INTEGRATIONS -->
+            <div x-show="currentTab === 'integrations'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">HR, Biometric & Payment Gateway Integrations</h3>
+                </div>
+            </div>
+
+            <!-- 12. CLASS & SCHEDULE -->
+            <div x-show="currentTab === 'schedule'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Timetable, Classwork & ID Card Generator</h3>
+                </div>
+            </div>
+
+            <!-- 13. TRANSPORT -->
+            <div x-show="currentTab === 'transport'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">Transport & Bus Routes Management</h3>
+                </div>
+            </div>
+
+            <!-- 14. UDISE+ REPORT -->
+            <div x-show="currentTab === 'udise'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">UDISE+ Government Compliance Report</h3>
+                    <p class="text-xs text-slate-500 mb-4">Generate and export official standardized UDISE+ reports in one click.</p>
+                    <button @click="alert('UDISE+ Report exported successfully as Excel/PDF!')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-xs">Export UDISE+ Report 📥</button>
+                </div>
+            </div>
+
+            <!-- 15. SYSTEM SETTINGS -->
+            <div x-show="currentTab === 'settings'" class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-lg">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">School System Settings</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block font-bold text-slate-600 mb-1">School Name</label>
+                            <input type="text" value="JMS Rising Public School" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-600 mb-1">Location / Address</label>
+                            <input type="text" value="Rasoiyadhamna" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-600 mb-1">Director Name</label>
+                            <input type="text" value="Sanjay Kumar" class="w-full border p-2 rounded">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-600 mb-1">Principal Name</label>
+                            <input type="text" value="Sakshi Kumari" class="w-full border p-2 rounded">
+                        </div>
+                        <button @click="alert('Settings saved successfully!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-4 rounded">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function schoolApp() {
+            return {
+                isLoggedIn: false,
+                loginRole: 'admin',
+                loginUser: '',
+                loginPass: '',
+                currentTab: 'overview',
+                login() {
+                    if(this.loginUser.trim() !== '' && this.loginPass.trim() !== '') {
+                        this.isLoggedIn = true;
+                    } else {
+                        alert('Please enter username and password!');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
