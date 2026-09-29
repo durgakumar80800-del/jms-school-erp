@@ -9,8 +9,8 @@
 </head>
 <body class="bg-slate-100 font-sans" x-data="schoolApp()">
 
-    <!-- LOGIN SCREEN -->
-    <div x-show="!isLoggedIn" class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
+    <!-- LOGIN / REGISTER SCREEN -->
+    <div x-show="!isLoggedIn" class="min-h-screen flex items-center justify-center bg-slate-900 px-4 py-8">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
                 <h1 class="text-2xl font-black text-slate-900">JMS RISING PUBLIC SCHOOL</h1>
@@ -20,8 +20,8 @@
                 </div>
             </div>
 
-            <!-- NORMAL LOGIN FORM -->
-            <form x-show="!showForgot" @submit.prevent="login()" class="space-y-4">
+            <!-- 1. NORMAL LOGIN FORM -->
+            <form x-show="authMode === 'login'" @submit.prevent="login()" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
                     <select x-model="loginRole" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500">
@@ -41,15 +41,18 @@
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-lg transition shadow-md">
                     Secure Login 🚀
                 </button>
-                <div class="text-right">
-                    <button type="button" @click="showForgot = true" class="text-xs text-amber-600 hover:underline font-semibold">
-                        Forgot Username or Password?
+                <div class="flex justify-between items-center text-xs">
+                    <button type="button" @click="authMode = 'forgot'" class="text-amber-600 hover:underline font-semibold">
+                        Forgot Password?
+                    </button>
+                    <button type="button" @click="authMode = 'register'" class="text-slate-700 hover:underline font-bold">
+                        New User? Register 📝
                     </button>
                 </div>
             </form>
 
-            <!-- FORGOT PASSWORD FORM -->
-            <form x-show="showForgot" @submit.prevent="recoverPassword()" class="space-y-4">
+            <!-- 2. FORGOT PASSWORD FORM -->
+            <form x-show="authMode === 'forgot'" @submit.prevent="recoverPassword()" class="space-y-4">
                 <div class="text-center mb-2">
                     <h3 class="text-sm font-bold text-slate-800">Password Recovery</h3>
                     <p class="text-[11px] text-slate-500">Enter your registered email or phone to reset credentials.</p>
@@ -62,8 +65,44 @@
                     Send Reset Instructions 📩
                 </button>
                 <div class="text-center">
-                    <button type="button" @click="showForgot = false" class="text-xs text-slate-500 hover:underline">
+                    <button type="button" @click="authMode = 'login'" class="text-xs text-slate-500 hover:underline">
                         Back to Login
+                    </button>
+                </div>
+            </form>
+
+            <!-- 3. NEW USER REGISTRATION FORM -->
+            <form x-show="authMode === 'register'" @submit.prevent="registerUser()" class="space-y-3">
+                <div class="text-center mb-1">
+                    <h3 class="text-sm font-bold text-slate-800">Create New Account</h3>
+                    <p class="text-[11px] text-slate-500">Register for portal access.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
+                    <select x-model="regRole" class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-amber-500">
+                        <option value="teacher">Teacher</option>
+                        <option value="parent">Parent / Student</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
+                    <input type="text" x-model="regName" placeholder="Enter your full name" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email / Username</label>
+                    <input type="text" x-model="regUser" placeholder="Choose a username or email" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
+                    <input type="password" x-model="regPass" placeholder="••••••••" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg transition shadow-md text-xs">
+                    Complete Registration ✅
+                </button>
+                <div class="text-center">
+                    <button type="button" @click="authMode = 'login'" class="text-xs text-slate-500 hover:underline">
+                        Already have an account? Login
                     </button>
                 </div>
             </form>
@@ -286,12 +325,24 @@
         function schoolApp() {
             return {
                 isLoggedIn: false,
+                authMode: 'login', // 'login', 'forgot', 'register'
+                
+                // Login state
                 loginRole: 'admin',
                 loginUser: '',
                 loginPass: '',
-                showForgot: false,
+
+                // Forgot password state
                 forgotInput: '',
+
+                // Registration state
+                regRole: 'teacher',
+                regName: '',
+                regUser: '',
+                regPass: '',
+
                 currentTab: 'overview',
+
                 login() {
                     if(this.loginUser.trim() !== '' && this.loginPass.trim() !== '') {
                         this.isLoggedIn = true;
@@ -299,13 +350,32 @@
                         alert('Please enter username and password!');
                     }
                 },
+
                 recoverPassword() {
                     if(this.forgotInput.trim() !== '') {
-                        alert('Password reset instructions have been sent to ' + this.forgotInput + '. Please check your phone/email.');
+                        alert('Password reset instructions have been sent to ' + this.forgotInput + '.');
                         this.forgotInput = '';
-                        this.showForgot = false;
+                        this.authMode = 'login';
                     } else {
                         alert('Please enter your registered email or phone number.');
+                    }
+                },
+
+                registerUser() {
+                    if(this.regName.trim() !== '' && this.regUser.trim() !== '' && this.regPass.trim() !== '') {
+                        alert('Account created successfully for ' + this.regName + '! You can now log in.');
+                        // Auto-fill login credentials with registered details for convenience
+                        this.loginRole = this.regRole;
+                        this.loginUser = this.regUser;
+                        this.loginPass = this.regPass;
+                        
+                        // Reset registration fields and switch to login view
+                        this.regName = '';
+                        this.regUser = '';
+                        this.regPass = '';
+                        this.authMode = 'login';
+                    } else {
+                        alert('Please fill in all registration fields!');
                     }
                 }
             }
