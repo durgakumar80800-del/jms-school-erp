@@ -6,10 +6,17 @@
     <title>JMS Rising Public School - ERP System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #printable-certificate, #printable-certificate * { visibility: visible; }
+            #printable-certificate { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
 </head>
 <body class="bg-slate-100 font-sans" x-data="schoolApp()">
 
-    <!-- LOGIN SCREEN (Clean & Secure) -->
+    <!-- LOGIN SCREEN -->
     <div x-show="!isLoggedIn" class="min-h-screen flex items-center justify-center bg-slate-900 px-4 py-8">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
@@ -20,7 +27,7 @@
                 </div>
             </div>
 
-            <!-- 1. NORMAL LOGIN FORM -->
+            <!-- LOGIN FORM -->
             <form x-show="authMode === 'login'" @submit.prevent="login()" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
@@ -41,35 +48,7 @@
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-lg transition shadow-md">
                     Secure Login 🚀
                 </button>
-                <div class="flex justify-between items-center text-xs">
-                    <button type="button" @click="authMode = 'forgot'" class="text-amber-600 hover:underline font-semibold">
-                        Forgot Password?
-                    </button>
-                    <span class="text-slate-400">Restricted Portal Access</span>
-                </div>
             </form>
-
-            <!-- 2. FORGOT PASSWORD FORM -->
-            <form x-show="authMode === 'forgot'" @submit.prevent="recoverPassword()" class="space-y-4">
-                <div class="text-center mb-2">
-                    <h3 class="text-sm font-bold text-slate-800">Password Recovery</h3>
-                    <p class="text-[11px] text-slate-500">Enter your registered email or phone to reset credentials.</p>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Registered Email / Phone</label>
-                    <input type="text" x-model="forgotInput" placeholder="Enter email or mobile number" required class="w-full border border-slate-300 rounded-lg p-3 text-sm">
-                </div>
-                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition shadow-md text-xs">
-                    Send Reset Instructions 📩
-                </button>
-                <div class="text-center">
-                    <button type="button" @click="authMode = 'login'" class="text-xs text-slate-500 hover:underline">
-                        Back to Login
-                    </button>
-                </div>
-            </form>
-
-            <p class="text-center text-xs text-slate-400">All Features. One Solution. 17 Modules Integrated.</p>
         </div>
     </div>
 
@@ -81,27 +60,23 @@
             <div class="p-5 border-b border-slate-800">
                 <h2 class="text-lg font-black text-amber-400" x-text="settings.schoolName">JMS RISING P.S.</h2>
                 <p class="text-xs text-slate-400 uppercase tracking-wider" x-text="settings.schoolLocation + ' ERP'">Rasoiyadhamna ERP</p>
-                <div class="mt-3 text-[11px] bg-slate-800 p-2 rounded text-slate-300">
-                    <p>Dir: <span class="text-white font-semibold" x-text="settings.directorName">Sanjay Kumar</span></p>
-                    <p>Prin: <span class="text-white font-semibold" x-text="settings.principalName">Sakshi Kumari</span></p>
-                </div>
             </div>
 
             <nav class="flex-1 overflow-y-auto p-4 space-y-1.5 text-xs">
                 <button @click="currentTab = 'overview'" :class="currentTab === 'overview' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📊 1. Overview & Dashboard</button>
                 <button @click="currentTab = 'fees'" :class="currentTab === 'fees' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">💰 2. Fees & WhatsApp Billing</button>
                 <button @click="currentTab = 'administration'" :class="currentTab === 'administration' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🗂️ 3. Effortless Administration</button>
-                <button @click="currentTab = 'academics'" :class="currentTab === 'academics' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📚 4. Academic & Marksheets</button>
+                <button @click="currentTab = 'academics'" :class="currentTab === 'academics' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📚 4. Academic & Certificates Hub</button>
                 <button @click="currentTab = 'tracking'" :class="currentTab === 'tracking' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🛡️ 5. Real-Time Tracking & Safety</button>
                 <button @click="currentTab = 'communication'" :class="currentTab === 'communication' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📱 6. Connectivity & Communication</button>
                 <button @click="currentTab = 'hr'" :class="currentTab === 'hr' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">👥 7. Staff Payroll & HR</button>
-                <button @click="currentTab = 'people'" :class="currentTab === 'people' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📇 8. People & Access (CRM/Alumni)</button>
-                <button @click="currentTab = 'reports'" :class="currentTab === 'reports' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📈 9. Detailed Reports & Analytics</button>
-                <button @click="currentTab = 'operations'" :class="currentTab === 'operations' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🏫 10. Operations (Library/Hostel)</button>
+                <button @click="currentTab = 'people'" :class="currentTab === 'people' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📇 8. People & Access</button>
+                <button @click="currentTab = 'reports'" :class="currentTab === 'reports' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📈 9. Detailed Reports</button>
+                <button @click="currentTab = 'operations'" :class="currentTab === 'operations' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🏫 10. Operations</button>
                 <button @click="currentTab = 'integrations'" :class="currentTab === 'integrations' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🔗 11. Integrations</button>
                 <button @click="currentTab = 'schedule'" :class="currentTab === 'schedule' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🗓️ 12. Class & Schedule</button>
-                <button @click="currentTab = 'transport'" :class="currentTab === 'transport' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🚌 13. Transport & GPS Routing</button>
-                <button @click="currentTab = 'udise'" :class="currentTab === 'udise' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📋 14. UDISE+ Report Export</button>
+                <button @click="currentTab = 'transport'" :class="currentTab === 'transport' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🚌 13. Transport & GPS</button>
+                <button @click="currentTab = 'udise'" :class="currentTab === 'udise' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📋 14. UDISE+ Report</button>
                 <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">⚙️ 15. System Settings</button>
             </nav>
 
@@ -150,11 +125,7 @@
             <div x-show="currentTab === 'fees'" class="space-y-6">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-slate-800 mb-2">Smart Fee Management & WhatsApp Billing</h3>
-                    <p class="text-xs text-slate-500 mb-4">Manage cash counter, online UPI gateway reconciliation, and automated monthly invoices.</p>
-                    <div class="flex gap-3">
-                        <button @click="alert('Fee Invoice generated and sent via WhatsApp successfully!')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded text-xs">Send Free WhatsApp Invoice 📱</button>
-                        <button @click="alert('Cash Counter receipt recorded successfully!')" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded text-xs">Open Cash Counter 💵</button>
-                    </div>
+                    <button @click="alert('Fee Invoice generated and sent via WhatsApp successfully!')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded text-xs">Send Free WhatsApp Invoice 📱</button>
                 </div>
             </div>
 
@@ -162,239 +133,218 @@
             <div x-show="currentTab === 'administration'" class="space-y-6">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-slate-800 mb-2">Effortless Administration & Admissions CRM</h3>
-                    <p class="text-xs text-slate-500 mb-4">Paperless admissions, student profile tracking, ID card design, and certificate management.</p>
                     <button @click="alert('New Digital Inquiry saved in CRM!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-4 rounded text-xs">Add Digital Inquiry 📋</button>
                 </div>
             </div>
 
-            <!-- 4. ACADEMICS -->
-            <div x-show="currentTab === 'academics'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Exam Management & Automated Marksheets</h3>
-                    <p class="text-xs text-slate-500 mb-4">Smooth marks entry, rank calculation, and digital progress report cards.</p>
-                    <button @click="alert('Marksheet generated successfully with Principal Signature!')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs">Generate Marksheet 📄</button>
+            <!-- 4. ACADEMICS & DETAILED CERTIFICATE GENERATOR -->
+            <div x-show="currentTab === 'academics'" class="space-y-6 max-w-6xl">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">📚 Advanced Academic & Certificate Generator Hub</h3>
+                            <p class="text-xs text-slate-500">Auto-generate or manually customize Admit Cards, Marksheets, Bonafide, Transfer, and Merit Certificates.</p>
+                        </div>
+                        <!-- Document Type Switcher -->
+                        <div class="flex gap-2 flex-wrap text-xs">
+                            <button @click="docType = 'admitCard'" :class="docType === 'admitCard' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">🎫 Admit Card</button>
+                            <button @click="docType = 'marksheet'" :class="docType === 'marksheet' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">📄 Marksheet</button>
+                            <button @click="docType = 'bonafide'" :class="docType === 'bonafide' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">📜 Bonafide</button>
+                            <button @click="docType = 'leaving'" :class="docType === 'leaving' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">🏛️ Leaving / Original</button>
+                            <button @click="docType = 'extracurric'" :class="docType === 'extracurric' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">🏆 Extra-Curricular</button>
+                        </div>
+                    </div>
+
+                    <!-- Input Parameters Panel (Auto or Manual) -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Select Student</label>
+                            <select x-model="selectedStudent" class="w-full border p-2 rounded bg-white">
+                                <option value="Aarav Kumar">Aarav Kumar (Roll: 101, Class X)</option>
+                                <option value="Sneha Kumari">Sneha Kumari (Roll: 102, Class X)</option>
+                                <option value="Rohan Sharma">Rohan Sharma (Roll: 103, Class IX)</option>
+                                <option value="Priya Singh">Priya Singh (Roll: 104, Class VIII)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Generation Mode</label>
+                            <select x-model="genMode" class="w-full border p-2 rounded bg-white">
+                                <option value="auto">⚡ Automatic (From DB Records)</option>
+                                <option value="manual">✍️ Manual Custom Edit</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Exam / Session Title</label>
+                            <input type="text" x-model="docSession" class="w-full border p-2 rounded bg-white">
+                        </div>
+                        <div class="flex items-end">
+                            <button @click="generateDoc()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition shadow-sm">
+                                Render Document 🖨️
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LIVE PREVIEW & PRINTABLE DOCUMENT CONTAINER -->
+                    <div id="printable-certificate" class="bg-white border-2 border-slate-300 rounded-xl p-8 shadow-md space-y-6 relative overflow-hidden">
+                        
+                        <!-- Watermark -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none">
+                            <h1 class="text-6xl font-black uppercase tracking-widest text-slate-900" x-text="settings.schoolName"></h1>
+                        </div>
+
+                        <!-- School Header -->
+                        <div class="text-center border-b-2 border-slate-800 pb-4">
+                            <h2 class="text-2xl font-black text-slate-900 uppercase" x-text="settings.schoolName"></h2>
+                            <p class="text-xs text-slate-600 font-semibold" x-text="'Location: ' + settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
+                            <p class="text-xs text-slate-500" x-text="'Helpline: ' + settings.helpline + ' | Session: ' + settings.academicSession"></p>
+                        </div>
+
+                        <!-- 1. ADMIT CARD TEMPLATE -->
+                        <div x-show="docType === 'admitCard'" class="space-y-4">
+                            <div class="text-center bg-slate-900 text-white py-1.5 rounded font-bold text-sm tracking-wider uppercase">
+                                EXAMINATION ADMIT CARD (<span x-text="docSession"></span>)
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-xs pt-2">
+                                <div class="col-span-2 space-y-2">
+                                    <p><strong class="text-slate-700">Student Name:</strong> <span class="text-slate-900 font-bold" x-text="selectedStudent"></span></p>
+                                    <p><strong class="text-slate-700">Father's Name:</strong> <span class="text-slate-900" x-text="manualData.fatherName">Rajesh Kumar</span></p>
+                                    <p><strong class="text-slate-700">Class & Section:</strong> <span class="text-slate-900" x-text="manualData.classSec">Class X - Section A</span></p>
+                                    <p><strong class="text-slate-700">Roll Number:</strong> <span class="text-slate-900 font-bold" x-text="manualData.rollNo">101</span></p>
+                                    <p><strong class="text-slate-700">Exam Center:</strong> <span class="text-slate-900" x-text="settings.schoolName + ', ' + settings.schoolLocation"></span></p>
+                                </div>
+                                <div class="border border-slate-300 p-2 flex items-center justify-center bg-slate-50 text-slate-400 text-center text-[11px] h-32 rounded">
+                                    [ Student Photograph ]
+                                </div>
+                            </div>
+                            <!-- Exam Schedule Table -->
+                            <div class="pt-2">
+                                <h4 class="font-bold text-xs text-slate-800 mb-2">Examination Schedule</h4>
+                                <table class="w-full text-xs border-collapse border border-slate-300">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-slate-700">
+                                            <th class="border border-slate-300 p-2 text-left">Date</th>
+                                            <th class="border border-slate-300 p-2 text-left">Subject</th>
+                                            <th class="border border-slate-300 p-2 text-left">Timing</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td class="border border-slate-300 p-1.5">10 Nov 2026</td><td class="border border-slate-300 p-1.5">Mathematics</td><td class="border border-slate-300 p-1.5">09:00 AM - 12:00 PM</td></tr>
+                                        <tr><td class="border border-slate-300 p-1.5">12 Nov 2026</td><td class="border border-slate-300 p-1.5">Science & Technology</td><td class="border border-slate-300 p-1.5">09:00 AM - 12:00 PM</td></tr>
+                                        <tr><td class="border border-slate-300 p-1.5">14 Nov 2026</td><td class="border border-slate-300 p-1.5">Social Science</td><td class="border border-slate-300 p-1.5">09:00 AM - 12:00 PM</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 2. MARKSHEET TEMPLATE -->
+                        <div x-show="docType === 'marksheet'" class="space-y-4">
+                            <div class="text-center bg-blue-900 text-white py-1.5 rounded font-bold text-sm tracking-wider uppercase">
+                                STATEMENT OF MARKS & PERFORMANCE REPORT (<span x-text="docSession"></span>)
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-3 rounded border border-slate-200">
+                                <div><p><strong>Student Name:</strong> <span x-text="selectedStudent"></span></p><p><strong>Roll No:</strong> <span x-text="manualData.rollNo">101</span></p></div>
+                                <div><p><strong>Class:</strong> <span x-text="manualData.classSec">Class X</span></p><p><strong>Academic Session:</strong> <span x-text="settings.academicSession"></span></p></div>
+                            </div>
+                            <!-- Marks Table -->
+                            <table class="w-full text-xs border-collapse border border-slate-300">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-700">
+                                        <th class="border border-slate-300 p-2 text-left">Subject</th>
+                                        <th class="border border-slate-300 p-2 text-center">Max Marks</th>
+                                        <th class="border border-slate-300 p-2 text-center">Marks Obtained</th>
+                                        <th class="border border-slate-300 p-2 text-center">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="border border-slate-300 p-2">Mathematics</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">92</td><td class="border border-slate-300 p-2 text-center">A1</td></tr>
+                                    <tr><td class="border border-slate-300 p-2">Science</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">88</td><td class="border border-slate-300 p-2 text-center">A2</td></tr>
+                                    <tr><td class="border border-slate-300 p-2">Social Science</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">85</td><td class="border border-slate-300 p-2 text-center">A2</td></tr>
+                                    <tr><td class="border border-slate-300 p-2">English</td><td class="border border-slate-300 p-2 text-center">100</td><td class="border border-slate-300 p-2 text-center font-bold">90</td><td class="border border-slate-300 p-2 text-center">A1</td></tr>
+                                    <tr class="bg-slate-100 font-bold"><td class="border border-slate-300 p-2">Total / Percentage</td><td class="border border-slate-300 p-2 text-center">400</td><td class="border border-slate-300 p-2 text-center">355 (88.75%)</td><td class="border border-slate-300 p-2 text-center">Distinction</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 3. BONAFIDE CERTIFICATE TEMPLATE -->
+                        <div x-show="docType === 'bonafide'" class="space-y-6 text-center py-6">
+                            <div class="inline-block border-b-2 border-amber-500 pb-1">
+                                <h3 class="text-lg font-bold text-slate-800 uppercase tracking-widest">BONAFIDE STUDENT CERTIFICATE</h3>
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase">Certificate No: JMS/BON/2026/094</p>
+                            
+                            <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
+                                This is to certify that <strong class="text-slate-900 text-base underline" x-text="selectedStudent"></strong>, son/daughter of <strong class="text-slate-900" x-text="manualData.fatherName">Mr. Rajesh Kumar</strong>, is a bonafide regular student of this institution studying in <strong class="text-slate-900" x-text="manualData.classSec">Class X</strong> under Roll Number <strong class="text-slate-900" x-text="manualData.rollNo">101</strong> for the academic session <span x-text="settings.academicSession"></span>. 
+                                <br><br>
+                                To the best of my knowledge and school records, their date of birth is <strong class="text-slate-900">15-Aug-2010</strong> and their character & conduct has been found to be exemplary.
+                            </p>
+                        </div>
+
+                        <!-- 4. LEAVING / ORIGINAL CERTIFICATE TEMPLATE -->
+                        <div x-show="docType === 'leaving'" class="space-y-6 text-center py-6">
+                            <div class="inline-block border-b-2 border-slate-800 pb-1">
+                                <h3 class="text-lg font-bold text-slate-800 uppercase tracking-widest">SCHOOL LEAVING / TRANSFER CERTIFICATE</h3>
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase">TC Register No: 1422 | UDISE: <span x-text="settings.udiseCode"></span></p>
+                            
+                            <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
+                                This is to certify that <strong class="text-slate-900 text-base" x-text="selectedStudent"></strong> has completed their studies at <strong class="text-slate-900" x-text="settings.schoolName"></strong>. During their stay in school, they successfully cleared all school dues and exhibited good moral character. We wish them success in all their future endeavors.
+                            </p>
+                        </div>
+
+                        <!-- 5. EXTRA-CURRICULAR CERTIFICATE TEMPLATE -->
+                        <div x-show="docType === 'extracurric'" class="space-y-6 text-center py-6 bg-amber-50/50 p-6 rounded-xl border border-amber-200">
+                            <div class="inline-block border-b-2 border-amber-600 pb-1">
+                                <h3 class="text-lg font-bold text-amber-900 uppercase tracking-widest">CERTIFICATE OF EXCELLENCE</h3>
+                            </div>
+                            <p class="text-xs text-slate-600 font-medium">This certificate is proudly presented to</p>
+                            <h2 class="text-2xl font-black text-slate-900 underline" x-text="selectedStudent"></h2>
+                            <p class="text-xs text-slate-700 max-w-lg mx-auto leading-relaxed">
+                                For outstanding performance and securing <strong>1st Position</strong> in the Inter-School Science Quiz & Cultural Fest organized during the academic session <span x-text="settings.academicSession"></span>.
+                            </p>
+                        </div>
+
+                        <!-- Signatures Footer -->
+                        <div class="flex justify-between items-end pt-12 text-xs">
+                            <div class="text-center space-y-1">
+                                <div class="font-bold text-slate-800" x-text="settings.directorName">Sanjay Kumar</div>
+                                <div class="border-t border-slate-400 pt-1 text-slate-500 font-semibold">Director</div>
+                            </div>
+                            <div class="text-center space-y-1">
+                                <div class="font-bold text-slate-800" x-text="settings.principalName">Sakshi Kumari</div>
+                                <div class="border-t border-slate-400 pt-1 text-slate-500 font-semibold">Principal & Seal</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Print / Export Action Button -->
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button @click="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-6 rounded text-xs transition shadow-md">
+                            Print / Save PDF 🖨️
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- 5. TRACKING & SAFETY -->
+            <!-- 5. TRACKING -->
             <div x-show="currentTab === 'tracking'" class="space-y-6">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-lg font-bold text-slate-800 mb-2">Real-Time Tracking & Attendance Alerts</h3>
-                    <p class="text-xs text-slate-500 mb-4">Automated attendance alerts, GPS transport safety updates, and inventory tracking.</p>
                 </div>
             </div>
 
-            <!-- 6. COMMUNICATION -->
-            <div x-show="currentTab === 'communication'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Broadcasts, Circulars & Events Calendar</h3>
-                    <p class="text-xs text-slate-500 mb-4">Send instant circulars and event reminders to all stakeholders.</p>
-                </div>
-            </div>
-
-            <!-- 7. STAFF HR & PAYROLL -->
-            <div x-show="currentTab === 'hr'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Staff Payroll & Salary Slip Automation</h3>
-                    <p class="text-xs text-slate-500 mb-4">Manage staff leave, attendance, and automated salary slip generation.</p>
-                </div>
-            </div>
-
-            <!-- 8. PEOPLE & ACCESS -->
-            <div x-show="currentTab === 'people'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Students, Visitor Log & Alumni Management</h3>
-                    <p class="text-xs text-slate-500 mb-4">Maintain visitor gate logs, user access roles, and alumni network.</p>
-                </div>
-            </div>
-
-            <!-- 9. REPORTS -->
-            <div x-show="currentTab === 'reports'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Detailed Reports & Analytics</h3>
-                    <p class="text-xs text-slate-500 mb-4">Financial auditing and academic performance analytics.</p>
-                </div>
-            </div>
-
-            <!-- 10. OPERATIONS -->
-            <div x-show="currentTab === 'operations'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Library, Hostel & Asset Store Operations</h3>
-                    <p class="text-xs text-slate-500 mb-4">Track books, hostel beds, and school assets easily.</p>
-                </div>
-            </div>
-
-            <!-- 11. INTEGRATIONS -->
-            <div x-show="currentTab === 'integrations'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">HR, Biometric & Payment Gateway Integrations</h3>
-                </div>
-            </div>
-
-            <!-- 12. CLASS & SCHEDULE -->
-            <div x-show="currentTab === 'schedule'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Timetable, Classwork & ID Card Generator</h3>
-                </div>
-            </div>
-
-            <!-- 13. TRANSPORT -->
-            <div x-show="currentTab === 'transport'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Transport & Bus Routes Management</h3>
-                </div>
-            </div>
-
-            <!-- 14. UDISE+ REPORT -->
-            <div x-show="currentTab === 'udise'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">UDISE+ Government Compliance Report</h3>
-                    <p class="text-xs text-slate-500 mb-4">Generate and export official standardized UDISE+ reports in one click.</p>
-                    <button @click="alert('UDISE+ Report exported successfully as Excel/PDF!')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-xs">Export UDISE+ Report 📥</button>
-                </div>
-            </div>
-
-            <!-- 15. DETAILED SYSTEM SETTINGS & USER REGISTRATION -->
-            <div x-show="currentTab === 'settings'" class="space-y-6 max-w-4xl">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
-                    <div class="border-b pb-4">
-                        <h3 class="text-lg font-bold text-slate-800">⚙️ Advanced School System Settings & User Management</h3>
-                        <p class="text-xs text-slate-500">Configure core institutional details and register new portal users securely.</p>
-                    </div>
-
-                    <!-- Grid Layout for Settings Sections -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                        
-                        <!-- Section 1: Institution Profile -->
-                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">1. Institution Profile</h4>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">School Name</label>
-                                <input type="text" x-model="settings.schoolName" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Location / Address</label>
-                                <input type="text" x-model="settings.schoolLocation" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Affiliation Code / UDISE No</label>
-                                <input type="text" x-model="settings.udiseCode" class="w-full border p-2 rounded bg-white">
-                            </div>
-                        </div>
-
-                        <!-- Section 2: Management & Authorities -->
-                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">2. Management & Authorities</h4>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Director Name</label>
-                                <input type="text" x-model="settings.directorName" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Principal Name</label>
-                                <input type="text" x-model="settings.principalName" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Contact Phone / Helpline</label>
-                                <input type="text" x-model="settings.helpline" class="w-full border p-2 rounded bg-white">
-                            </div>
-                        </div>
-
-                        <!-- Section 3: Academic & Operational Setup -->
-                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">3. Academic Session & Timings</h4>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Active Academic Session</label>
-                                <select x-model="settings.academicSession" class="w-full border p-2 rounded bg-white">
-                                    <option value="2025-26">2025-26</option>
-                                    <option value="2026-27">2026-27</option>
-                                    <option value="2027-28">2027-28</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">School Starting Time</label>
-                                <input type="time" x-model="settings.startTime" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">School Closing Time</label>
-                                <input type="time" x-model="settings.closeTime" class="w-full border p-2 rounded bg-white">
-                            </div>
-                        </div>
-
-                        <!-- Section 4: Communications & Security -->
-                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">4. Communications & Security</h4>
-                            <div class="flex items-center justify-between pt-2">
-                                <span class="font-bold text-slate-700">Automated WhatsApp Alerts</span>
-                                <input type="checkbox" x-model="settings.whatsappAlerts" class="w-4 h-4 accent-amber-500">
-                            </div>
-                            <div class="flex items-center justify-between pt-2">
-                                <span class="font-bold text-slate-700">Biometric Attendance Sync</span>
-                                <input type="checkbox" x-model="settings.biometricSync" class="w-4 h-4 accent-amber-500">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">System Theme</label>
-                                <select x-model="settings.themeMode" class="w-full border p-2 rounded bg-white">
-                                    <option value="light">Classic Light & Slate</option>
-                                    <option value="dark">Dark Executive</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Section 5: NEW USER REGISTRATION PORTAL INSIDE SETTINGS -->
-                    <div class="mt-6 bg-emerald-50 p-5 rounded-xl border border-emerald-200 space-y-4 text-xs">
-                        <h4 class="font-bold text-emerald-900 uppercase tracking-wide border-b border-emerald-200 pb-2">
-                            👥 5. Register New User / Staff Account
-                        </h4>
-                        <p class="text-emerald-700">Create new login credentials for teachers, parents, or additional administrators.</p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Role</label>
-                                <select x-model="regRole" class="w-full border p-2 rounded bg-white">
-                                    <option value="teacher">Teacher</option>
-                                    <option value="parent">Parent / Student</option>
-                                    <option value="admin">Administrator</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Full Name</label>
-                                <input type="text" x-model="regName" placeholder="Enter full name" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Username / Email</label>
-                                <input type="text" x-model="regUser" placeholder="Choose username" class="w-full border p-2 rounded bg-white">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-slate-700 mb-1">Password</label>
-                                <input type="password" x-model="regPass" placeholder="Password" class="w-full border p-2 rounded bg-white">
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center pt-2">
-                            <span class="text-slate-600 font-medium">Total Registered Users in System: <span class="font-bold text-slate-900" x-text="registeredUsers.length"></span></span>
-                            <button @click="registerUser()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded transition shadow-sm">
-                                Register User Now ✅
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Save Action Button -->
-                    <div class="pt-4 border-t flex justify-between items-center">
-                        <span class="text-xs text-emerald-600 font-semibold" x-text="saveStatus"></span>
-                        <div class="space-x-3">
-                            <button @click="resetSettings()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2.5 px-4 rounded text-xs transition">
-                                Reset Default
-                            </button>
-                            <button @click="saveSettings()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 px-6 rounded text-xs transition shadow-md">
-                                Save All Settings 💾
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <!-- 6-15 Other Tabs Stubs -->
+            <div x-show="currentTab === 'communication'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Broadcasts & Circulars</h3></div>
+            <div x-show="currentTab === 'hr'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Staff Payroll</h3></div>
+            <div x-show="currentTab === 'people'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">People & Access</h3></div>
+            <div x-show="currentTab === 'reports'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Reports & Analytics</h3></div>
+            <div x-show="currentTab === 'operations'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Library & Operations</h3></div>
+            <div x-show="currentTab === 'integrations'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Integrations</h3></div>
+            <div x-show="currentTab === 'schedule'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Timetable & Schedule</h3></div>
+            <div x-show="currentTab === 'transport'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Transport & GPS</h3></div>
+            <div x-show="currentTab === 'udise'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">UDISE+ Compliance Report</h3></div>
+            <div x-show="currentTab === 'settings'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">System Settings</h3></div>
 
         </main>
     </div>
@@ -403,30 +353,24 @@
         function schoolApp() {
             return {
                 isLoggedIn: false,
-                authMode: 'login', // 'login', 'forgot'
-                
-                // Login state
+                authMode: 'login',
                 loginRole: 'admin',
                 loginUser: '',
                 loginPass: '',
+                currentTab: 'academics',
 
-                // Forgot password state
-                forgotInput: '',
+                // Certificate / Academic Hub State
+                docType: 'admitCard', // admitCard, marksheet, bonafide, leaving, extracurric
+                selectedStudent: 'Aarav Kumar',
+                genMode: 'auto',
+                docSession: 'Annual Examination 2026-27',
+                
+                manualData: {
+                    fatherName: 'Mr. Rajesh Kumar',
+                    classSec: 'Class X - Section A',
+                    rollNo: '101'
+                },
 
-                // Registration state (Inside Settings tab)
-                regRole: 'teacher',
-                regName: '',
-                regUser: '',
-                regPass: '',
-                registeredUsers: [
-                    { name: 'Sanjay Kumar', user: 'director', role: 'admin' },
-                    { name: 'Sakshi Kumari', user: 'principal', role: 'admin' }
-                ],
-
-                currentTab: 'overview',
-                saveStatus: '',
-
-                // Detailed Settings Data Model
                 settings: {
                     schoolName: 'JMS RISING PUBLIC SCHOOL',
                     schoolLocation: 'Rasoiyadhamna',
@@ -434,12 +378,7 @@
                     directorName: 'Sanjay Kumar',
                     principalName: 'Sakshi Kumari',
                     helpline: '+91 9876543210',
-                    academicSession: '2026-27',
-                    startTime: '08:00',
-                    closeTime: '14:30',
-                    whatsappAlerts: true,
-                    biometricSync: true,
-                    themeMode: 'light'
+                    academicSession: '2026-27'
                 },
 
                 login() {
@@ -450,56 +389,11 @@
                     }
                 },
 
-                recoverPassword() {
-                    if(this.forgotInput.trim() !== '') {
-                        alert('Password reset instructions have been sent to ' + this.forgotInput + '.');
-                        this.forgotInput = '';
-                        this.authMode = 'login';
+                generateDoc() {
+                    if(this.genMode === 'auto') {
+                        alert('✨ Automatically fetched records for ' + this.selectedStudent + ' and rendered ' + this.docType.toUpperCase() + ' successfully!');
                     } else {
-                        alert('Please enter your registered email or phone number.');
-                    }
-                },
-
-                registerUser() {
-                    if(this.regName.trim() !== '' && this.regUser.trim() !== '' && this.regPass.trim() !== '') {
-                        this.registeredUsers.push({
-                            name: this.regName,
-                            user: this.regUser,
-                            role: this.regRole
-                        });
-                        alert('New account successfully registered for ' + this.regName + ' (' + this.regRole.toUpperCase() + ')!');
-                        this.regName = '';
-                        this.regUser = '';
-                        this.regPass = '';
-                    } else {
-                        alert('Please fill in all registration fields!');
-                    }
-                },
-
-                saveSettings() {
-                    this.saveStatus = '✅ Settings & User accounts updated successfully across the ERP portal!';
-                    setTimeout(() => {
-                        this.saveStatus = '';
-                    }, 4000);
-                },
-
-                resetSettings() {
-                    if(confirm('Are you sure you want to reset settings to default?')) {
-                        this.settings = {
-                            schoolName: 'JMS RISING PUBLIC SCHOOL',
-                            schoolLocation: 'Rasoiyadhamna',
-                            udiseCode: 'UDISE10293847',
-                            directorName: 'Sanjay Kumar',
-                            principalName: 'Sakshi Kumari',
-                            helpline: '+91 9876543210',
-                            academicSession: '2026-27',
-                            startTime: '08:00',
-                            closeTime: '14:30',
-                            whatsappAlerts: true,
-                            biometricSync: true,
-                            themeMode: 'light'
-                        };
-                        alert('Settings restored to default.');
+                        alert('✍️ Rendered document in Manual Edit mode for ' + this.selectedStudent + '!');
                     }
                 }
             }
