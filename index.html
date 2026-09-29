@@ -189,7 +189,7 @@
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 gap-4">
                             <div>
                                 <h3 class="text-lg font-bold text-slate-800">Premium White & Gold Certificate Studio</h3>
-                                <p class="text-xs text-slate-500">Customize all fields, manage subjects, and print professional white-background certificates</p>
+                                <p class="text-xs text-slate-500">Customize all fields, manage subjects, exam schedules, and print professional white-background certificates</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="switchDocType('admit')" class="doc-btn px-3 py-1.5 bg-amber-700 text-white rounded-lg text-xs font-bold transition shadow-sm">Admit Card</button>
@@ -202,18 +202,24 @@
 
                         <!-- Manual Input Controls Form -->
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            <div class="bg-slate-50 p-4 rounded-xl border space-y-3 lg:col-span-1 max-h-[600px] overflow-y-auto">
-                                <h4 class="font-bold text-xs uppercase text-slate-700 tracking-wider">Master Data Inputs</h4>
+                            <div class="bg-slate-50 p-4 rounded-xl border space-y-3 lg:col-span-1 max-h-[620px] overflow-y-auto">
+                                <h4 class="font-bold text-xs uppercase text-slate-700 tracking-wider">Master Personal & Academic Data</h4>
                                 
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-600 mb-1">Student Full Name</label>
                                     <input type="text" id="doc-name" value="Ankit Kumar Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Father's Name</label>
-                                    <input type="text" id="doc-father" value="Rajesh Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
-                                </div>
                                 <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Father's Name</label>
+                                        <input type="text" id="doc-father" value="Rajesh Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Mother's Name</label>
+                                        <input type="text" id="doc-mother" value="Sunita Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-2">
                                     <div>
                                         <label class="block text-xs font-semibold text-slate-600 mb-1">Class</label>
                                         <input type="text" id="doc-class" value="Class 10th" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
@@ -222,9 +228,13 @@
                                         <label class="block text-xs font-semibold text-slate-600 mb-1">Roll No.</label>
                                         <input type="text" id="doc-roll" value="12" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
                                     </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">DOB</label>
+                                        <input type="text" id="doc-dob" value="15/08/2010" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    </div>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Registration No</label>
+                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Registration / Unique ID</label>
                                     <input type="text" id="doc-reg" value="JMS/2026/894" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
                                 </div>
                                 <div>
@@ -255,25 +265,31 @@
                                         <i class="fa-solid fa-graduation-cap text-[350px] text-amber-900"></i>
                                     </div>
 
-                                    <!-- School Header (Landscape) -->
-                                    <div class="text-center border-b-2 border-amber-600 pb-3 relative z-10 flex justify-between items-center">
-                                        <div class="text-left">
+                                    <!-- School Header (Landscape with Uploaded Logo & Centered School Name) -->
+                                    <div class="border-b-2 border-amber-600 pb-3 relative z-10 flex justify-between items-center">
+                                        <!-- School Logo on Left -->
+                                        <div class="w-16 h-16 rounded-full border-2 border-amber-600 overflow-hidden bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-preview">
+                                        </div>
+
+                                        <!-- Centered School Name & Address -->
+                                        <div class="text-center flex-1 px-4">
                                             <div class="text-[9px] font-bold text-amber-800 uppercase tracking-widest">ISO 9001:2015 Certified Institute</div>
                                             <h3 class="text-xl font-black uppercase text-slate-900 tracking-wide font-serif">JMS Rising Public School</h3>
                                             <p class="text-[10px] font-semibold text-slate-600">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
-                                        </div>
-                                        <div>
-                                            <span id="doc-badge" class="inline-block bg-amber-700 text-white text-[10px] px-4 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm">Admit Card 2026-27</span>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="w-16 h-20 bg-slate-100 rounded border-2 border-amber-600 overflow-hidden inline-block shadow-sm">
-                                                <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="w-full h-full object-cover">
+                                            <div class="mt-1">
+                                                <span id="doc-badge" class="inline-block bg-amber-700 text-white text-[9px] px-3 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">Annual Exam Admit Card</span>
                                             </div>
+                                        </div>
+
+                                        <!-- Student Photo on Right -->
+                                        <div class="w-16 h-20 bg-slate-100 rounded border-2 border-amber-600 overflow-hidden flex-shrink-0 shadow-sm">
+                                            <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="w-full h-full object-cover">
                                         </div>
                                     </div>
 
                                     <!-- Main Landscape Content Body -->
-                                    <div id="preview-body" class="text-xs text-slate-800 my-auto relative z-10 space-y-3 px-4">
+                                    <div id="preview-body" class="text-xs text-slate-800 my-auto relative z-10 space-y-3 px-2">
                                         <!-- Dynamic Body Content -->
                                     </div>
 
@@ -430,9 +446,9 @@
         let currentDoc = 'admit';
 
         let subjectsList = [
-            { name: 'Mathematics', max: 100, obt: 88 },
-            { name: 'Science', max: 100, obt: 92 },
-            { name: 'English', max: 100, obt: 85 }
+            { name: 'Mathematics', max: 100, obt: 88, date: '10 Mar 2026', time: '10:00 AM - 01:00 PM' },
+            { name: 'Science', max: 100, obt: 92, date: '12 Mar 2026', time: '10:00 AM - 01:00 PM' },
+            { name: 'English', max: 100, obt: 85, date: '15 Mar 2026', time: '10:00 AM - 01:00 PM' }
         ];
 
         function switchDocType(type) {
@@ -469,7 +485,7 @@
         }
 
         function addSubjectRow() {
-            subjectsList.push({ name: 'New Subject', max: 100, obt: 75 });
+            subjectsList.push({ name: 'New Subject', max: 100, obt: 75, date: '18 Mar 2026', time: '10:00 AM - 01:00 PM' });
             renderDynamicInputs();
             updateDocumentPreview();
         }
@@ -484,25 +500,40 @@
             if(field === 'name') subjectsList[index].name = value;
             else if(field === 'obt') subjectsList[index].obt = parseFloat(value) || 0;
             else if(field === 'max') subjectsList[index].max = parseFloat(value) || 100;
+            else if(field === 'date') subjectsList[index].date = value;
+            else if(field === 'time') subjectsList[index].time = value;
             updateDocumentPreview();
         }
 
         function renderDynamicInputs() {
             let container = document.getElementById('dynamic-inputs');
             if(currentDoc === 'admit') {
-                container.innerHTML = `
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Exam Center (Editable)</label><input type="text" id="inp-center" value="JMS Campus, Rasoiya Dhamna, Barhi" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
-                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Exam Dates (Editable)</label><input type="text" id="inp-dates" value="March 10 - March 22, 2026" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
-                `;
+                let subHtml = `<div class="flex justify-between items-center"><label class="block text-xs font-semibold text-slate-700">Admit Card: Exam Dates & Times</label><button onclick="addSubjectRow()" class="text-xs bg-amber-700 text-white px-2 py-1 rounded font-semibold">+ Subject</button></div><div class="space-y-2 max-h-44 overflow-y-auto pr-1">`;
+                subjectsList.forEach((sub, idx) => {
+                    subHtml += `
+                        <div class="bg-white p-2 rounded border space-y-1">
+                            <div class="flex gap-1 items-center">
+                                <input type="text" value="${sub.name}" oninput="updateSubjectData(${idx}, 'name', this.value)" class="w-full border p-1 rounded text-xs font-semibold" placeholder="Subject Name">
+                                <button onclick="removeSubjectRow(${idx})" class="text-red-500 text-xs px-1"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                            <div class="grid grid-cols-2 gap-1">
+                                <input type="text" value="${sub.date}" oninput="updateSubjectData(${idx}, 'date', this.value)" class="border p-1 rounded text-xs" placeholder="Date (e.g. 10 Mar)">
+                                <input type="text" value="${sub.time}" oninput="updateSubjectData(${idx}, 'time', this.value)" class="border p-1 rounded text-xs" placeholder="Time slot">
+                            </div>
+                        </div>
+                    `;
+                });
+                subHtml += `</div>`;
+                container.innerHTML = subHtml;
             } else if(currentDoc === 'marksheet') {
-                let subHtml = `<div class="flex justify-between items-center"><label class="block text-xs font-semibold text-slate-700">Manage Subjects & Marks</label><button onclick="addSubjectRow()" class="text-xs bg-amber-700 text-white px-2 py-1 rounded font-semibold">+ Add Subject</button></div><div class="space-y-2 max-h-40 overflow-y-auto pr-1">`;
+                let subHtml = `<div class="flex justify-between items-center"><label class="block text-xs font-semibold text-slate-700">Manage Marksheet Subjects & Marks</label><button onclick="addSubjectRow()" class="text-xs bg-amber-700 text-white px-2 py-1 rounded font-semibold">+ Subject</button></div><div class="space-y-2 max-h-44 overflow-y-auto pr-1">`;
                 subjectsList.forEach((sub, idx) => {
                     subHtml += `
                         <div class="flex gap-2 items-center bg-white p-1.5 rounded border">
                             <input type="text" value="${sub.name}" oninput="updateSubjectData(${idx}, 'name', this.value)" class="w-24 border p-1 rounded text-xs">
-                            <input type="number" value="${sub.obt}" oninput="updateSubjectData(${idx}, 'obt', this.value)" class="w-14 border p-1 rounded text-xs">
+                            <input type="number" value="${sub.obt}" oninput="updateSubjectData(${idx}, 'obt', this.value)" class="w-14 border p-1 rounded text-xs" title="Obtained">
                             <span class="text-xs">/</span>
-                            <input type="number" value="${sub.max}" oninput="updateSubjectData(${idx}, 'max', this.value)" class="w-14 border p-1 rounded text-xs">
+                            <input type="number" value="${sub.max}" oninput="updateSubjectData(${idx}, 'max', this.value)" class="w-14 border p-1 rounded text-xs" title="Max">
                             <button onclick="removeSubjectRow(${idx})" class="text-red-500 text-xs px-1"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     `;
@@ -529,28 +560,35 @@
         function updateDocumentPreview() {
             let name = document.getElementById('doc-name').value;
             let father = document.getElementById('doc-father').value;
+            let mother = document.getElementById('doc-mother').value;
             let cls = document.getElementById('doc-class').value;
             let roll = document.getElementById('doc-roll').value;
+            let dob = document.getElementById('doc-dob').value;
             let reg = document.getElementById('doc-reg').value;
 
             let body = document.getElementById('preview-body');
 
             if(currentDoc === 'admit') {
-                let center = document.getElementById('inp-center')?.value || '';
-                let dates = document.getElementById('inp-dates')?.value || '';
+                let tableRows = '';
+                subjectsList.forEach(sub => {
+                    tableRows += `<tr class="border-b border-slate-200"><td class="p-1.5 font-semibold">${sub.name}</td><td class="p-1.5 text-center">${sub.date}</td><td class="p-1.5 text-center text-amber-900 font-bold">${sub.time}</td></tr>`;
+                });
+
                 body.innerHTML = `
-                    <div class="space-y-3 text-center">
-                        <p class="font-bold text-amber-900 uppercase text-xs tracking-wider">Admit Card & Examination Authorization</p>
-                        <div class="bg-amber-50/60 p-3 rounded-lg border border-amber-200 text-left text-xs grid grid-cols-2 gap-2 shadow-sm">
-                            <p><b>Candidate:</b> ${name}</p>
+                    <div class="space-y-2">
+                        <div class="bg-amber-50/60 p-2.5 rounded-lg border border-amber-200 text-xs grid grid-cols-2 gap-x-4 gap-y-1 shadow-sm">
+                            <p><b>Student Name:</b> <span class="text-slate-900 font-bold">${name}</span></p>
+                            <p><b>Registration No:</b> <span class="text-slate-900 font-bold">${reg}</span></p>
                             <p><b>Father's Name:</b> ${father}</p>
+                            <p><b>Mother's Name:</b> ${mother}</p>
                             <p><b>Class:</b> ${cls} &nbsp;&nbsp;|&nbsp;&nbsp; <b>Roll No:</b> ${roll}</p>
-                            <p><b>Registration:</b> ${reg}</p>
+                            <p><b>Date of Birth (DOB):</b> ${dob}</p>
                         </div>
-                        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded text-xs text-left space-y-1">
-                            <p><b>Exam Center:</b> ${center}</p>
-                            <p><b>Schedule:</b> ${dates}</p>
-                        </div>
+                        <table class="w-full text-left border border-slate-200 text-[11px] bg-white shadow-sm rounded">
+                            <tr class="bg-amber-800 text-white"><th class="p-1.5">Subject Paper</th><th class="p-1.5 text-center">Exam Date</th><th class="p-1.5 text-center">Timing Slot</th></tr>
+                            ${tableRows}
+                        </table>
+                        <p class="text-[10px] text-center text-slate-500 italic">Note: Candidate must bring this admit card to the examination hall along with school ID.</p>
                     </div>
                 `;
             } else if(currentDoc === 'marksheet') {
@@ -558,23 +596,27 @@
                 subjectsList.forEach(sub => {
                     totalObt += sub.obt;
                     totalMax += sub.max;
-                    tableRows += `<tr class="border-b border-slate-200"><td class="p-1.5">${sub.name}</td><td class="p-1.5 text-center">${sub.max}</td><td class="p-1.5 text-center font-bold text-amber-800">${sub.obt}</td></tr>`;
+                    tableRows += `<tr class="border-b border-slate-200"><td class="p-1.5 font-semibold">${sub.name}</td><td class="p-1.5 text-center">${sub.max}</td><td class="p-1.5 text-center font-bold text-amber-800">${sub.obt}</td></tr>`;
                 });
                 let percentage = totalMax > 0 ? (totalObt / totalMax) * 100 : 0;
                 let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : 'B';
 
                 body.innerHTML = `
                     <div class="space-y-2">
-                        <div class="flex justify-between text-[11px] bg-amber-50/50 p-2 rounded border border-amber-200">
-                            <span><b>Name:</b> ${name} (Class: ${cls}, Roll: ${roll})</span>
-                            <span><b>Reg:</b> ${reg}</span>
+                        <div class="bg-amber-50/60 p-2.5 rounded-lg border border-amber-200 text-xs grid grid-cols-2 gap-x-4 gap-y-1 shadow-sm">
+                            <p><b>Student Name:</b> <span class="text-slate-900 font-bold">${name}</span></p>
+                            <p><b>Registration No:</b> <span class="text-slate-900 font-bold">${reg}</span></p>
+                            <p><b>Father's Name:</b> ${father}</p>
+                            <p><b>Mother's Name:</b> ${mother}</p>
+                            <p><b>Class:</b> ${cls} &nbsp;&nbsp;|&nbsp;&nbsp; <b>Roll No:</b> ${roll}</p>
+                            <p><b>Date of Birth (DOB):</b> ${dob}</p>
                         </div>
                         <table class="w-full text-left border border-slate-200 text-[11px] bg-white shadow-sm rounded">
                             <tr class="bg-amber-800 text-white"><th class="p-1.5">Subject</th><th class="p-1.5 text-center">Max Marks</th><th class="p-1.5 text-center">Marks Obtained</th></tr>
                             ${tableRows}
                         </table>
-                        <div class="flex justify-between items-center bg-amber-50 p-2.5 rounded border border-amber-300 text-[11px] font-bold text-amber-950">
-                            <span>Total Marks: ${totalObt}/${totalMax}</span>
+                        <div class="flex justify-between items-center bg-amber-50 p-2 rounded border border-amber-300 text-[11px] font-bold text-amber-950">
+                            <span>Total: ${totalObt}/${totalMax}</span>
                             <span>Percentage: ${percentage.toFixed(2)}%</span>
                             <span>Grade: ${grade}</span>
                         </div>
@@ -588,7 +630,7 @@
                         <p class="text-[10px] uppercase tracking-widest text-amber-800 font-bold">Certificate of Academic Completion</p>
                         <p class="text-xs text-slate-600 font-medium">This is to certify with honor and distinction that</p>
                         <p class="text-base font-black text-slate-900 uppercase tracking-wide font-serif">${name}</p>
-                        <p class="text-[11px] text-slate-700 max-w-lg mx-auto">Son/Daughter of Sri <b>${father}</b> (Class: ${cls}, Roll No: ${roll}, Reg: ${reg}) has successfully completed studies and passed the annual examination held in session <b>${sess}</b>.</p>
+                        <p class="text-[11px] text-slate-700 max-w-lg mx-auto">Son/Daughter of Sri <b>${father}</b> & Smt <b>${mother}</b> (DOB: ${dob}, Class: ${cls}, Roll No: ${roll}, Reg: ${reg}) has successfully completed studies and passed annual examination held in session <b>${sess}</b>.</p>
                         <div class="inline-block bg-amber-50 border border-amber-300 px-4 py-1.5 rounded-lg text-amber-900 font-extrabold text-xs shadow-sm">
                             Award Classification: ${div}
                         </div>
@@ -600,7 +642,7 @@
                     <div class="space-y-2.5 text-justify text-[11px]">
                         <p class="font-bold text-center text-amber-900 uppercase tracking-wider text-xs">Bonafide Student Certificate</p>
                         <p class="text-center font-semibold text-slate-700">To Whomsoever It May Concern,</p>
-                        <p class="text-slate-700 leading-relaxed">This is to certify that <b>${name}</b>, son/daughter of Sri <b>${father}</b>, bearing registration number <b>${reg}</b>, is a bonafide student of JMS Rising Public School, Barhi, currently enrolled in <b>Class ${cls}</b> (Roll No: ${roll}).</p>
+                        <p class="text-slate-700 leading-relaxed">This is to certify that <b>${name}</b>, son/daughter of Sri <b>${father}</b> and Smt <b>${mother}</b> (DOB: ${dob}), bearing registration number <b>${reg}</b>, is a bonafide student of JMS Rising Public School, Barhi, currently enrolled in <b>Class ${cls}</b> (Roll No: ${roll}).</p>
                         <p class="bg-amber-50/70 p-2.5 rounded border border-amber-200 text-slate-800"><b>Stated Purpose:</b> This certificate is issued upon official request for <b>${purp}</b>.</p>
                     </div>
                 `;
