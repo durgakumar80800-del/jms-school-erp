@@ -76,7 +76,7 @@
                 <button @click="currentTab = 'schedule'" :class="currentTab === 'schedule' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🗓️ 12. Class & Schedule</button>
                 <button @click="currentTab = 'transport'" :class="currentTab === 'transport' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">🚌 13. Transport & GPS</button>
                 <button @click="currentTab = 'udise'" :class="currentTab === 'udise' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">📋 14. UDISE+ Report</button>
-                <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">⚙️ 15. System Settings</button>
+                <button @click="currentTab = 'settings'" :class="currentTab === 'settings' ? 'bg-amber-500 text-slate-950 font-bold' : 'hover:bg-slate-800'" class="w-full text-left py-2 px-3 rounded transition">⚙️ 15. Premium System Control Hub</button>
             </nav>
 
             <div class="p-4 border-t border-slate-800">
@@ -126,9 +126,8 @@
                     <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800">📚 Tab 4: Premium Unique Academic Certificates & Admit Card Hub</h3>
-                            <p class="text-xs text-slate-500">Generate clean documents with centered headers, passport photos, and a premium watermark.</p>
+                            <p class="text-xs text-slate-500">Logos removed from certificates with enhanced attractive multi-layer background watermark.</p>
                         </div>
-                        <!-- Document Type Switcher -->
                         <div class="flex gap-2 flex-wrap text-xs">
                             <button @click="docType = 'admitCard'" :class="docType === 'admitCard' ? 'bg-amber-500 text-slate-950 font-bold shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">🎫 Admit Card</button>
                             <button @click="docType = 'marksheet'" :class="docType === 'marksheet' ? 'bg-amber-500 text-slate-950 font-bold shadow' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'" class="px-3 py-2 rounded transition">📄 Marksheet</button>
@@ -194,7 +193,7 @@
                             </div>
                         </div>
 
-                        <!-- Special Marks/Subjects Editor (Only visible when Marksheet is active) -->
+                        <!-- Marksheet Subjects Editor -->
                         <div x-show="docType === 'marksheet'" class="border-t pt-4 space-y-3">
                             <div class="flex justify-between items-center">
                                 <h5 class="font-bold text-slate-800">📊 Subject-wise Marks Entry (Dynamic)</h5>
@@ -210,7 +209,7 @@
                             </template>
                         </div>
 
-                        <!-- Special Examination Schedule Editor (Only visible when Admit Card is active) -->
+                        <!-- Admit Card Schedule Editor -->
                         <div x-show="docType === 'admitCard'" class="border-t pt-4 space-y-3">
                             <div class="flex justify-between items-center">
                                 <h5 class="font-bold text-slate-800">🗓️ Examination Schedule Editor (Dynamic & Editable)</h5>
@@ -231,15 +230,14 @@
                     <div id="printable-certificate" class="bg-white border-4 border-double border-slate-800 rounded-2xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
                         
                         <!-- Premium Attractive Multi-Layer Watermark (Centered Background Crest) -->
-                        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-[0.04] pointer-events-none select-none space-y-2">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-[0.06] pointer-events-none select-none space-y-3">
                             <div class="text-9xl">🏛️</div>
                             <h1 class="text-4xl font-black uppercase tracking-widest text-center max-w-xl" x-text="settings.schoolName"></h1>
-                            <p class="text-xl font-bold uppercase tracking-widest">★ OFFICIAL DOCUMENT ★</p>
+                            <p class="text-xl font-bold uppercase tracking-widest">★ OFFICIAL VERIFIED DOCUMENT ★</p>
                         </div>
 
-                        <!-- 1. UNIQUE ADMIT CARD DESIGN -->
+                        <!-- 1. ADMIT CARD DESIGN -->
                         <div x-show="docType === 'admitCard'" class="space-y-6 relative z-10">
-                            <!-- School Name Centered Header -->
                             <div class="text-center border-b-2 border-slate-900 pb-4 space-y-1">
                                 <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-xs text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
@@ -261,7 +259,6 @@
                                         <p><strong class="text-slate-500 uppercase text-[10px] block">Date of Birth</strong> <span class="text-slate-900 font-bold" x-text="formData.dob"></span></p>
                                     </div>
                                 </div>
-                                <!-- Passport Size Student Photo Box (Strict Passport Proportion: ~35x45mm style) -->
                                 <div class="border-2 border-slate-400 p-1 flex items-center justify-center bg-white w-[100px] h-[125px] rounded shadow-inner overflow-hidden relative shrink-0">
                                     <template x-if="formData.studentPhoto">
                                         <img :src="formData.studentPhoto" class="w-full h-full object-cover rounded" alt="Student Passport Photo">
@@ -274,7 +271,6 @@
                                     </template>
                                 </div>
                             </div>
-                            <!-- Schedule Table -->
                             <div class="space-y-2">
                                 <h4 class="font-black text-xs text-slate-900 uppercase tracking-wide bg-amber-100 p-2 rounded border border-amber-300">🗓️ Examination Time Table & Schedule</h4>
                                 <table class="w-full text-xs border-collapse border border-slate-300">
@@ -298,9 +294,8 @@
                             </div>
                         </div>
 
-                        <!-- 2. UNIQUE MARKSHEET DESIGN -->
+                        <!-- 2. MARKSHEET DESIGN -->
                         <div x-show="docType === 'marksheet'" class="space-y-6 relative z-10">
-                            <!-- School Name Centered Header -->
                             <div class="text-center border-b-2 border-blue-900 pb-4 space-y-1">
                                 <span class="bg-blue-100 text-blue-900 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest">OFFICIAL BOARD REPORT CARD</span>
                                 <h2 class="text-2xl font-black text-blue-950 uppercase tracking-wider mt-1" x-text="settings.schoolName"></h2>
@@ -318,7 +313,6 @@
                                     <p><strong>Academic Session:</strong> <span class="font-bold text-blue-900" x-text="settings.academicSession"></span></p>
                                 </div>
                             </div>
-                            <!-- Marks Table -->
                             <table class="w-full text-xs border-collapse border border-slate-300 shadow-sm">
                                 <thead>
                                     <tr class="bg-blue-900 text-white">
@@ -348,9 +342,8 @@
                             </div>
                         </div>
 
-                        <!-- 3. UNIQUE BONAFIDE CERTIFICATE DESIGN -->
+                        <!-- 3. BONAFIDE CERTIFICATE DESIGN -->
                         <div x-show="docType === 'bonafide'" class="space-y-6 text-center py-8 px-6 bg-gradient-to-b from-amber-50/40 to-white rounded-2xl border-2 border-amber-300 relative z-10">
-                            <!-- School Name Centered Header -->
                             <div class="space-y-1 pb-4 border-b border-amber-200">
                                 <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
@@ -372,9 +365,8 @@
                             </div>
                         </div>
 
-                        <!-- 4. UNIQUE SCHOOL LEAVING / TC DESIGN -->
+                        <!-- 4. LEAVING CERTIFICATE DESIGN -->
                         <div x-show="docType === 'leaving'" class="space-y-6 text-center py-8 px-6 bg-slate-50 rounded-2xl border-2 border-slate-400 relative z-10">
-                            <!-- School Name Centered Header -->
                             <div class="space-y-1 pb-4 border-b border-slate-300">
                                 <h2 class="text-xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
@@ -394,11 +386,10 @@
                             </div>
                         </div>
 
-                        <!-- 5. UNIQUE EXTRA-CURRICULAR / EXCELLENCE CERTIFICATE DESIGN -->
+                        <!-- 5. EXTRA-CURRICULAR CERTIFICATE DESIGN -->
                         <div x-show="docType === 'extracurric'" class="space-y-6 text-center py-8 px-8 bg-gradient-to-tr from-amber-100 via-yellow-50 to-amber-50 rounded-2xl border-4 border-amber-500 shadow-xl relative z-10">
                             <div class="absolute top-4 right-6 text-3xl">🏆</div>
                             <div class="absolute top-4 left-6 text-3xl">🎖️</div>
-                            <!-- School Name Centered Header -->
                             <div class="space-y-1 pb-4 border-b border-amber-300">
                                 <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-amber-900 font-bold" x-text="settings.schoolLocation + ' | Excellence Wing'"></p>
@@ -420,7 +411,7 @@
                         <!-- Signatures Footer -->
                         <div class="flex justify-between items-end pt-10 text-xs px-4 relative z-10">
                             <div class="text-center space-y-1">
-                                <div class="font-black text-slate-900 text-sm" x-text="settings.directorName">Sanjay Kumar</div>
+                                <div class="font-black text-slate-900 text-sm" x-text="settings.directorName"></div>
                                 <div class="border-t-2 border-slate-800 pt-1 text-slate-600 font-bold uppercase tracking-wider">Director</div>
                             </div>
                             <div class="text-center bg-slate-100 px-6 py-2 rounded border border-slate-300">
@@ -428,20 +419,73 @@
                                 <span class="text-xs font-black text-slate-800" x-text="settings.schoolName"></span>
                             </div>
                             <div class="text-center space-y-1">
-                                <div class="font-black text-slate-900 text-sm" x-text="settings.principalName">Sakshi Kumari</div>
+                                <div class="font-black text-slate-900 text-sm" x-text="settings.principalName"></div>
                                 <div class="border-t-2 border-slate-800 pt-1 text-slate-600 font-bold uppercase tracking-wider">Principal</div>
                             </div>
                         </div>
 
                     </div>
 
-                    <!-- Print / Export Action Button -->
                     <div class="flex justify-end gap-3 pt-2">
                         <button @click="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-6 rounded text-xs transition shadow-md">
                             Print / Save PDF 🖨️
                         </button>
                     </div>
 
+                </div>
+            </div>
+
+            <!-- 15. PREMIUM SYSTEM SETTINGS & CONTROL HUB (FULL PAGE CONTROL) -->
+            <div x-show="currentTab === 'settings'" class="space-y-6 max-w-4xl">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-black text-slate-900">⚙️ Tab 15: Premium System Settings & Web Page Control Center</h3>
+                        <p class="text-xs text-slate-500">Yahan se aap poore ERP system, school ki details, header titles, aur official metadata ko live control aur customize kar sakte hain.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <div class="space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-black text-slate-900 uppercase tracking-wide border-b pb-2">🏫 School Profile & Identity</h4>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Official School Name</label>
+                                <input type="text" x-model="settings.schoolName" class="w-full border p-2.5 rounded bg-white font-bold text-slate-900">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">School Location / Address</label>
+                                <input type="text" x-model="settings.schoolLocation" class="w-full border p-2.5 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">UDISE Code / Registration ID</label>
+                                <input type="text" x-model="settings.udiseCode" class="w-full border p-2.5 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 bg-slate-50 p-5 rounded-xl border border-slate-200">
+                            <h4 class="font-black text-slate-900 uppercase tracking-wide border-b pb-2">👔 Management & Session Control</h4>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Director Name</label>
+                                <input type="text" x-model="settings.directorName" class="w-full border p-2.5 rounded bg-white font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Principal Name</label>
+                                <input type="text" x-model="settings.principalName" class="w-full border p-2.5 rounded bg-white font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Active Academic Session</label>
+                                <input type="text" x-model="settings.academicSession" class="w-full border p-2.5 rounded bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl flex justify-between items-center text-xs">
+                        <div>
+                            <p class="font-bold text-amber-900">⚡ Live Synchronization Active</p>
+                            <p class="text-amber-700">Yahan badle gaye sabhi naam turant poore portal, sidebar, headers, aur Tab 4 ke certificates par apply ho jayenge.</p>
+                        </div>
+                        <button @click="alert('Settings saved and synchronized successfully across all modules!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-6 py-2.5 rounded shadow transition">
+                            Save Changes 💾
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -458,7 +502,6 @@
             <div x-show="currentTab === 'schedule'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Timetable & Schedule</h3></div>
             <div x-show="currentTab === 'transport'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Transport & GPS</h3></div>
             <div x-show="currentTab === 'udise'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">UDISE+ Compliance Report</h3></div>
-            <div x-show="currentTab === 'settings'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">System Settings</h3></div>
 
         </main>
     </div>
@@ -470,11 +513,10 @@
                 loginRole: 'admin',
                 loginUser: '',
                 loginPass: '',
-                currentTab: 'academics',
+                currentTab: 'overview',
 
-                docType: 'admitCard', // admitCard, marksheet, bonafide, leaving, extracurric
+                docType: 'admitCard',
                 
-                // Complete Custom Data Entry Model
                 formData: {
                     studentName: 'Aarav Kumar',
                     fatherName: 'Mr. Rajesh Kumar',
@@ -485,7 +527,7 @@
                     examTitle: 'Annual Board Examination 2026-27',
                     certNo: 'JMS/CERT/2026/101',
                     customRemark: 'To the best of my knowledge and school records, their character & conduct has been exemplary.',
-                    studentPhoto: '', // Image URL storage
+                    studentPhoto: '',
                     subjects: [
                         { name: 'Mathematics', max: 100, obt: 92 },
                         { name: 'Science & Technology', max: 100, obt: 88 },
