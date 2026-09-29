@@ -126,7 +126,7 @@
                     <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800">📚 Tab 4: Premium Unique Academic Certificates & Admit Card Hub</h3>
-                            <p class="text-xs text-slate-500">Generate stunning documents with photo upload and editable schedules.</p>
+                            <p class="text-xs text-slate-500">Generate stunning documents with passport size photo and centered school header.</p>
                         </div>
                         <!-- Document Type Switcher -->
                         <div class="flex gap-2 flex-wrap text-xs">
@@ -237,17 +237,17 @@
 
                         <!-- 1. UNIQUE ADMIT CARD DESIGN -->
                         <div x-show="docType === 'admitCard'" class="space-y-6">
-                            <div class="flex justify-between items-center border-b-2 border-slate-900 pb-4">
-                                <div>
-                                    <h2 class="text-xl font-black text-slate-900 uppercase" x-text="settings.schoolName"></h2>
-                                    <p class="text-xs text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
-                                </div>
-                                <div class="bg-slate-900 text-amber-400 px-4 py-2 rounded-xl text-right font-bold text-xs uppercase shadow">
-                                    OFFICIAL ADMIT CARD<br><span class="text-white font-normal" x-text="formData.examTitle"></span>
+                            <!-- School Name Centered Header -->
+                            <div class="text-center border-b-2 border-slate-900 pb-4 space-y-1">
+                                <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
+                                <p class="text-xs text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
+                                <div class="inline-block mt-1 bg-slate-900 text-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
+                                    OFFICIAL ADMIT CARD — <span class="text-white font-normal" x-text="formData.examTitle"></span>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-3 gap-6 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
-                                <div class="col-span-2 space-y-2.5">
+
+                            <div class="flex justify-between items-center gap-6 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                <div class="flex-1 space-y-2.5">
                                     <p><strong class="text-slate-500 uppercase text-[10px] block">Student Full Name</strong> <span class="text-slate-900 font-extrabold text-base" x-text="formData.studentName"></span></p>
                                     <div class="grid grid-cols-2 gap-2">
                                         <p><strong class="text-slate-500 uppercase text-[10px] block">Father's Name</strong> <span class="text-slate-900 font-bold" x-text="formData.fatherName"></span></p>
@@ -259,15 +259,15 @@
                                         <p><strong class="text-slate-500 uppercase text-[10px] block">Date of Birth</strong> <span class="text-slate-900 font-bold" x-text="formData.dob"></span></p>
                                     </div>
                                 </div>
-                                <!-- Student Photo Box -->
-                                <div class="border-2 border-slate-300 p-1 flex items-center justify-center bg-white h-36 rounded-lg shadow-inner overflow-hidden relative">
+                                <!-- Passport Size Student Photo Box (Strict Passport Proportion: ~35x45mm style) -->
+                                <div class="border-2 border-slate-400 p-1 flex items-center justify-center bg-white w-[100px] h-[125px] rounded shadow-inner overflow-hidden relative shrink-0">
                                     <template x-if="formData.studentPhoto">
-                                        <img :src="formData.studentPhoto" class="w-full h-full object-cover rounded" alt="Student Photo">
+                                        <img :src="formData.studentPhoto" class="w-full h-full object-cover rounded" alt="Student Passport Photo">
                                     </template>
                                     <template x-if="!formData.studentPhoto">
-                                        <div class="text-slate-400 text-center text-[11px] flex flex-col items-center">
-                                            <span class="text-2xl mb-1">📷</span>
-                                            <span>No Photo Uploaded</span>
+                                        <div class="text-slate-400 text-center text-[10px] flex flex-col items-center justify-center">
+                                            <span class="text-lg mb-0.5">📷</span>
+                                            <span class="leading-tight">Passport Photo</span>
                                         </div>
                                     </template>
                                 </div>
@@ -298,9 +298,10 @@
 
                         <!-- 2. UNIQUE MARKSHEET DESIGN -->
                         <div x-show="docType === 'marksheet'" class="space-y-6">
+                            <!-- School Name Centered Header -->
                             <div class="text-center border-b-2 border-blue-900 pb-4 space-y-1">
                                 <span class="bg-blue-100 text-blue-900 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest">OFFICIAL BOARD REPORT CARD</span>
-                                <h2 class="text-2xl font-black text-blue-950 uppercase" x-text="settings.schoolName"></h2>
+                                <h2 class="text-2xl font-black text-blue-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-xs text-slate-600 font-bold" x-text="'Performance Evaluation: ' + formData.examTitle"></p>
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-xs bg-blue-50/60 p-4 rounded-xl border border-blue-200">
@@ -347,8 +348,13 @@
 
                         <!-- 3. UNIQUE BONAFIDE CERTIFICATE DESIGN -->
                         <div x-show="docType === 'bonafide'" class="space-y-6 text-center py-8 px-6 bg-gradient-to-b from-amber-50/40 to-white rounded-2xl border-2 border-amber-300">
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-amber-200">
+                                <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
+                                <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
+                            </div>
                             <div class="space-y-2">
-                                <div class="inline-block bg-amber-500 text-slate-955 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow">Official Document</div>
+                                <div class="inline-block bg-amber-500 text-slate-950 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow">Official Document</div>
                                 <h3 class="text-2xl font-black text-amber-950 uppercase tracking-wider">BONAFIDE STUDENT CERTIFICATE</h3>
                                 <p class="text-xs text-slate-500 font-semibold uppercase" x-text="'Certificate Reference No: ' + formData.certNo"></p>
                             </div>
@@ -366,6 +372,11 @@
 
                         <!-- 4. UNIQUE SCHOOL LEAVING / TC DESIGN -->
                         <div x-show="docType === 'leaving'" class="space-y-6 text-center py-8 px-6 bg-slate-50 rounded-2xl border-2 border-slate-400">
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-slate-300">
+                                <h2 class="text-xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
+                                <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
+                            </div>
                             <div class="space-y-2">
                                 <div class="inline-block bg-slate-900 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">TRANSFER RECORD</div>
                                 <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wider">SCHOOL LEAVING CERTIFICATE</h3>
@@ -385,6 +396,11 @@
                         <div x-show="docType === 'extracurric'" class="space-y-6 text-center py-8 px-8 bg-gradient-to-tr from-amber-100 via-yellow-50 to-amber-50 rounded-2xl border-4 border-amber-500 shadow-xl relative">
                             <div class="absolute top-4 right-6 text-3xl">🏆</div>
                             <div class="absolute top-4 left-6 text-3xl">🎖️</div>
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-amber-300">
+                                <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
+                                <p class="text-[11px] text-amber-900 font-bold" x-text="settings.schoolLocation + ' | Excellence Wing'"></p>
+                            </div>
                             <div class="space-y-2">
                                 <h3 class="text-2xl font-black text-amber-950 uppercase tracking-widest">CERTIFICATE OF EXCELLENCE</h3>
                                 <p class="text-xs text-amber-800 font-bold uppercase tracking-wide">Awarded for Outstanding Achievement in Co-Curricular Activities</p>
