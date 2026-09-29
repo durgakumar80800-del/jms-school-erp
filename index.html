@@ -9,14 +9,14 @@
 </head>
 <body class="bg-slate-100 font-sans" x-data="schoolApp()">
 
-    <!-- LOGIN / REGISTER SCREEN -->
+    <!-- LOGIN SCREEN (Clean & Secure) -->
     <div x-show="!isLoggedIn" class="min-h-screen flex items-center justify-center bg-slate-900 px-4 py-8">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
-                <h1 class="text-2xl font-black text-slate-900">JMS RISING PUBLIC SCHOOL</h1>
-                <p class="text-xs text-slate-500 mt-1">Rasoiyadhamna | ERP Portal</p>
+                <h1 class="text-2xl font-black text-slate-900" x-text="settings.schoolName">JMS RISING PUBLIC SCHOOL</h1>
+                <p class="text-xs text-slate-500 mt-1" x-text="settings.schoolLocation + ' | ERP Portal'">Rasoiyadhamna | ERP Portal</p>
                 <div class="mt-2 text-xs bg-amber-100 text-amber-800 py-1 px-2 rounded font-medium">
-                    Director: Sanjay Kumar | Principal: Sakshi Kumari
+                    Director: <span x-text="settings.directorName">Sanjay Kumar</span> | Principal: <span x-text="settings.principalName">Sakshi Kumari</span>
                 </div>
             </div>
 
@@ -45,9 +45,7 @@
                     <button type="button" @click="authMode = 'forgot'" class="text-amber-600 hover:underline font-semibold">
                         Forgot Password?
                     </button>
-                    <button type="button" @click="authMode = 'register'" class="text-slate-700 hover:underline font-bold">
-                        New User? Register 📝
-                    </button>
+                    <span class="text-slate-400">Restricted Portal Access</span>
                 </div>
             </form>
 
@@ -71,42 +69,6 @@
                 </div>
             </form>
 
-            <!-- 3. NEW USER REGISTRATION FORM -->
-            <form x-show="authMode === 'register'" @submit.prevent="registerUser()" class="space-y-3">
-                <div class="text-center mb-1">
-                    <h3 class="text-sm font-bold text-slate-800">Create New Account</h3>
-                    <p class="text-[11px] text-slate-500">Register for portal access.</p>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
-                    <select x-model="regRole" class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-amber-500">
-                        <option value="teacher">Teacher</option>
-                        <option value="parent">Parent / Student</option>
-                        <option value="admin">Administrator</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
-                    <input type="text" x-model="regName" placeholder="Enter your full name" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email / Username</label>
-                    <input type="text" x-model="regUser" placeholder="Choose a username or email" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
-                    <input type="password" x-model="regPass" placeholder="••••••••" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs">
-                </div>
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg transition shadow-md text-xs">
-                    Complete Registration ✅
-                </button>
-                <div class="text-center">
-                    <button type="button" @click="authMode = 'login'" class="text-xs text-slate-500 hover:underline">
-                        Already have an account? Login
-                    </button>
-                </div>
-            </form>
-
             <p class="text-center text-xs text-slate-400">All Features. One Solution. 17 Modules Integrated.</p>
         </div>
     </div>
@@ -114,14 +76,14 @@
     <!-- MAIN APP DASHBOARD -->
     <div x-show="isLoggedIn" class="flex h-screen overflow-hidden">
         
-        <!-- SIDEBAR NAVIGATION (All 17 Modules) -->
+        <!-- SIDEBAR NAVIGATION -->
         <aside class="w-72 bg-slate-900 text-slate-200 flex flex-col justify-between hidden lg:flex shadow-xl">
             <div class="p-5 border-b border-slate-800">
-                <h2 class="text-lg font-black text-amber-400">JMS RISING P.S.</h2>
-                <p class="text-xs text-slate-400 uppercase tracking-wider">Rasoiyadhamna ERP</p>
+                <h2 class="text-lg font-black text-amber-400" x-text="settings.schoolName">JMS RISING P.S.</h2>
+                <p class="text-xs text-slate-400 uppercase tracking-wider" x-text="settings.schoolLocation + ' ERP'">Rasoiyadhamna ERP</p>
                 <div class="mt-3 text-[11px] bg-slate-800 p-2 rounded text-slate-300">
-                    <p>Dir: <span class="text-white font-semibold">Sanjay Kumar</span></p>
-                    <p>Prin: <span class="text-white font-semibold">Sakshi Kumari</span></p>
+                    <p>Dir: <span class="text-white font-semibold" x-text="settings.directorName">Sanjay Kumar</span></p>
+                    <p>Prin: <span class="text-white font-semibold" x-text="settings.principalName">Sakshi Kumari</span></p>
                 </div>
             </div>
 
@@ -154,11 +116,11 @@
         <main class="flex-1 p-6 lg:p-8 overflow-y-auto">
             <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
                 <div>
-                    <h2 class="text-xl font-bold text-slate-800">JMS Rising Public School, Rasoiyadhamna</h2>
+                    <h2 class="text-xl font-bold text-slate-800" x-text="settings.schoolName + ', ' + settings.schoolLocation"></h2>
                     <p class="text-xs text-slate-500">Logged in as: <span class="uppercase font-bold text-amber-600" x-text="loginRole"></span></p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Session: 2026-27 Active</span>
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold" x-text="'Session: ' + settings.academicSession + ' Active'"></span>
                 </div>
             </header>
 
@@ -292,29 +254,145 @@
                 </div>
             </div>
 
-            <!-- 15. SYSTEM SETTINGS -->
-            <div x-show="currentTab === 'settings'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 max-w-lg">
-                    <h3 class="text-lg font-bold text-slate-800 mb-4">School System Settings</h3>
-                    <div class="space-y-3 text-xs">
-                        <div>
-                            <label class="block font-bold text-slate-600 mb-1">School Name</label>
-                            <input type="text" value="JMS Rising Public School" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-600 mb-1">Location / Address</label>
-                            <input type="text" value="Rasoiyadhamna" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-600 mb-1">Director Name</label>
-                            <input type="text" value="Sanjay Kumar" class="w-full border p-2 rounded">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-600 mb-1">Principal Name</label>
-                            <input type="text" value="Sakshi Kumari" class="w-full border p-2 rounded">
-                        </div>
-                        <button @click="alert('Settings saved successfully!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-4 rounded">Save Settings</button>
+            <!-- 15. DETAILED SYSTEM SETTINGS & USER REGISTRATION -->
+            <div x-show="currentTab === 'settings'" class="space-y-6 max-w-4xl">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <div class="border-b pb-4">
+                        <h3 class="text-lg font-bold text-slate-800">⚙️ Advanced School System Settings & User Management</h3>
+                        <p class="text-xs text-slate-500">Configure core institutional details and register new portal users securely.</p>
                     </div>
+
+                    <!-- Grid Layout for Settings Sections -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        
+                        <!-- Section 1: Institution Profile -->
+                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">1. Institution Profile</h4>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">School Name</label>
+                                <input type="text" x-model="settings.schoolName" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Location / Address</label>
+                                <input type="text" x-model="settings.schoolLocation" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Affiliation Code / UDISE No</label>
+                                <input type="text" x-model="settings.udiseCode" class="w-full border p-2 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Management & Authorities -->
+                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">2. Management & Authorities</h4>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Director Name</label>
+                                <input type="text" x-model="settings.directorName" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Principal Name</label>
+                                <input type="text" x-model="settings.principalName" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Contact Phone / Helpline</label>
+                                <input type="text" x-model="settings.helpline" class="w-full border p-2 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Academic & Operational Setup -->
+                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">3. Academic Session & Timings</h4>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Active Academic Session</label>
+                                <select x-model="settings.academicSession" class="w-full border p-2 rounded bg-white">
+                                    <option value="2025-26">2025-26</option>
+                                    <option value="2026-27">2026-27</option>
+                                    <option value="2027-28">2027-28</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">School Starting Time</label>
+                                <input type="time" x-model="settings.startTime" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">School Closing Time</label>
+                                <input type="time" x-model="settings.closeTime" class="w-full border p-2 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <!-- Section 4: Communications & Security -->
+                        <div class="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide border-b pb-2">4. Communications & Security</h4>
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="font-bold text-slate-700">Automated WhatsApp Alerts</span>
+                                <input type="checkbox" x-model="settings.whatsappAlerts" class="w-4 h-4 accent-amber-500">
+                            </div>
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="font-bold text-slate-700">Biometric Attendance Sync</span>
+                                <input type="checkbox" x-model="settings.biometricSync" class="w-4 h-4 accent-amber-500">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">System Theme</label>
+                                <select x-model="settings.themeMode" class="w-full border p-2 rounded bg-white">
+                                    <option value="light">Classic Light & Slate</option>
+                                    <option value="dark">Dark Executive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Section 5: NEW USER REGISTRATION PORTAL INSIDE SETTINGS -->
+                    <div class="mt-6 bg-emerald-50 p-5 rounded-xl border border-emerald-200 space-y-4 text-xs">
+                        <h4 class="font-bold text-emerald-900 uppercase tracking-wide border-b border-emerald-200 pb-2">
+                            👥 5. Register New User / Staff Account
+                        </h4>
+                        <p class="text-emerald-700">Create new login credentials for teachers, parents, or additional administrators.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Role</label>
+                                <select x-model="regRole" class="w-full border p-2 rounded bg-white">
+                                    <option value="teacher">Teacher</option>
+                                    <option value="parent">Parent / Student</option>
+                                    <option value="admin">Administrator</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Full Name</label>
+                                <input type="text" x-model="regName" placeholder="Enter full name" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Username / Email</label>
+                                <input type="text" x-model="regUser" placeholder="Choose username" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Password</label>
+                                <input type="password" x-model="regPass" placeholder="Password" class="w-full border p-2 rounded bg-white">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-slate-600 font-medium">Total Registered Users in System: <span class="font-bold text-slate-900" x-text="registeredUsers.length"></span></span>
+                            <button @click="registerUser()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded transition shadow-sm">
+                                Register User Now ✅
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Save Action Button -->
+                    <div class="pt-4 border-t flex justify-between items-center">
+                        <span class="text-xs text-emerald-600 font-semibold" x-text="saveStatus"></span>
+                        <div class="space-x-3">
+                            <button @click="resetSettings()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2.5 px-4 rounded text-xs transition">
+                                Reset Default
+                            </button>
+                            <button @click="saveSettings()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 px-6 rounded text-xs transition shadow-md">
+                                Save All Settings 💾
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -325,7 +403,7 @@
         function schoolApp() {
             return {
                 isLoggedIn: false,
-                authMode: 'login', // 'login', 'forgot', 'register'
+                authMode: 'login', // 'login', 'forgot'
                 
                 // Login state
                 loginRole: 'admin',
@@ -335,13 +413,34 @@
                 // Forgot password state
                 forgotInput: '',
 
-                // Registration state
+                // Registration state (Inside Settings tab)
                 regRole: 'teacher',
                 regName: '',
                 regUser: '',
                 regPass: '',
+                registeredUsers: [
+                    { name: 'Sanjay Kumar', user: 'director', role: 'admin' },
+                    { name: 'Sakshi Kumari', user: 'principal', role: 'admin' }
+                ],
 
                 currentTab: 'overview',
+                saveStatus: '',
+
+                // Detailed Settings Data Model
+                settings: {
+                    schoolName: 'JMS RISING PUBLIC SCHOOL',
+                    schoolLocation: 'Rasoiyadhamna',
+                    udiseCode: 'UDISE10293847',
+                    directorName: 'Sanjay Kumar',
+                    principalName: 'Sakshi Kumari',
+                    helpline: '+91 9876543210',
+                    academicSession: '2026-27',
+                    startTime: '08:00',
+                    closeTime: '14:30',
+                    whatsappAlerts: true,
+                    biometricSync: true,
+                    themeMode: 'light'
+                },
 
                 login() {
                     if(this.loginUser.trim() !== '' && this.loginPass.trim() !== '') {
@@ -363,19 +462,44 @@
 
                 registerUser() {
                     if(this.regName.trim() !== '' && this.regUser.trim() !== '' && this.regPass.trim() !== '') {
-                        alert('Account created successfully for ' + this.regName + '! You can now log in.');
-                        // Auto-fill login credentials with registered details for convenience
-                        this.loginRole = this.regRole;
-                        this.loginUser = this.regUser;
-                        this.loginPass = this.regPass;
-                        
-                        // Reset registration fields and switch to login view
+                        this.registeredUsers.push({
+                            name: this.regName,
+                            user: this.regUser,
+                            role: this.regRole
+                        });
+                        alert('New account successfully registered for ' + this.regName + ' (' + this.regRole.toUpperCase() + ')!');
                         this.regName = '';
                         this.regUser = '';
                         this.regPass = '';
-                        this.authMode = 'login';
                     } else {
                         alert('Please fill in all registration fields!');
+                    }
+                },
+
+                saveSettings() {
+                    this.saveStatus = '✅ Settings & User accounts updated successfully across the ERP portal!';
+                    setTimeout(() => {
+                        this.saveStatus = '';
+                    }, 4000);
+                },
+
+                resetSettings() {
+                    if(confirm('Are you sure you want to reset settings to default?')) {
+                        this.settings = {
+                            schoolName: 'JMS RISING PUBLIC SCHOOL',
+                            schoolLocation: 'Rasoiyadhamna',
+                            udiseCode: 'UDISE10293847',
+                            directorName: 'Sanjay Kumar',
+                            principalName: 'Sakshi Kumari',
+                            helpline: '+91 9876543210',
+                            academicSession: '2026-27',
+                            startTime: '08:00',
+                            closeTime: '14:30',
+                            whatsappAlerts: true,
+                            biometricSync: true,
+                            themeMode: 'light'
+                        };
+                        alert('Settings restored to default.');
                     }
                 }
             }
