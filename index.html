@@ -28,7 +28,7 @@
             </div>
 
             <!-- LOGIN FORM -->
-            <form x-show="authMode === 'login'" @submit.prevent="login()" class="space-y-4">
+            <form @submit.prevent="login()" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
                     <select x-model="loginRole" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500">
@@ -121,29 +121,13 @@
                 </div>
             </div>
 
-            <!-- 2. FEES & PAYMENTS -->
-            <div x-show="currentTab === 'fees'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Smart Fee Management & WhatsApp Billing</h3>
-                    <button @click="alert('Fee Invoice generated and sent via WhatsApp successfully!')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded text-xs">Send Free WhatsApp Invoice 📱</button>
-                </div>
-            </div>
-
-            <!-- 3. ADMINISTRATION -->
-            <div x-show="currentTab === 'administration'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Effortless Administration & Admissions CRM</h3>
-                    <button @click="alert('New Digital Inquiry saved in CRM!')" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2 px-4 rounded text-xs">Add Digital Inquiry 📋</button>
-                </div>
-            </div>
-
-            <!-- 4. ACADEMICS & DETAILED CERTIFICATE GENERATOR -->
+            <!-- 4. ACADEMICS & FULLY CUSTOMIZABLE CERTIFICATE HUB -->
             <div x-show="currentTab === 'academics'" class="space-y-6 max-w-6xl">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
                     <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800">📚 Advanced Academic & Certificate Generator Hub</h3>
-                            <p class="text-xs text-slate-500">Auto-generate or manually customize Admit Cards, Marksheets, Bonafide, Transfer, and Merit Certificates.</p>
+                            <h3 class="text-lg font-bold text-slate-800">📚 Advanced Academic & Custom Certificate Hub</h3>
+                            <p class="text-xs text-slate-500">Select certificate type, fill or edit any custom details manually, and print or save instantly.</p>
                         </div>
                         <!-- Document Type Switcher -->
                         <div class="flex gap-2 flex-wrap text-xs">
@@ -155,32 +139,45 @@
                         </div>
                     </div>
 
-                    <!-- Input Parameters Panel (Auto or Manual) -->
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Select Student</label>
-                            <select x-model="selectedStudent" class="w-full border p-2 rounded bg-white">
-                                <option value="Aarav Kumar">Aarav Kumar (Roll: 101, Class X)</option>
-                                <option value="Sneha Kumari">Sneha Kumari (Roll: 102, Class X)</option>
-                                <option value="Rohan Sharma">Rohan Sharma (Roll: 103, Class IX)</option>
-                                <option value="Priya Singh">Priya Singh (Roll: 104, Class VIII)</option>
-                            </select>
+                    <!-- CUSTOM EDIT INPUT PANEL (Yahan se user kuch bhi manually type karke enter kar sakta hai) -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4 text-xs">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <h4 class="font-bold text-slate-900 uppercase tracking-wide">✍️ Custom Data Input Panel (Live Editing)</h4>
+                            <span class="text-[11px] text-amber-700 bg-amber-100 px-2 py-0.5 rounded font-semibold">Any text can be modified below</span>
                         </div>
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Generation Mode</label>
-                            <select x-model="genMode" class="w-full border p-2 rounded bg-white">
-                                <option value="auto">⚡ Automatic (From DB Records)</option>
-                                <option value="manual">✍️ Manual Custom Edit</option>
-                            </select>
+
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Student Full Name</label>
+                                <input type="text" x-model="formData.studentName" class="w-full border p-2 rounded bg-white font-medium">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Father's Name</label>
+                                <input type="text" x-model="formData.fatherName" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Class & Section</label>
+                                <input type="text" x-model="formData.classSec" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Roll Number</label>
+                                <input type="text" x-model="formData.rollNo" class="w-full border p-2 rounded bg-white">
+                            </div>
                         </div>
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Exam / Session Title</label>
-                            <input type="text" x-model="docSession" class="w-full border p-2 rounded bg-white">
-                        </div>
-                        <div class="flex items-end">
-                            <button @click="generateDoc()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded transition shadow-sm">
-                                Render Document 🖨️
-                            </button>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Exam Title / Session</label>
+                                <input type="text" x-model="formData.examTitle" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Certificate / Ref Number</label>
+                                <input type="text" x-model="formData.certNo" class="w-full border p-2 rounded bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-700 mb-1">Achievement / Custom Remark</label>
+                                <input type="text" x-model="formData.customRemark" class="w-full border p-2 rounded bg-white">
+                            </div>
                         </div>
                     </div>
 
@@ -202,18 +199,18 @@
                         <!-- 1. ADMIT CARD TEMPLATE -->
                         <div x-show="docType === 'admitCard'" class="space-y-4">
                             <div class="text-center bg-slate-900 text-white py-1.5 rounded font-bold text-sm tracking-wider uppercase">
-                                EXAMINATION ADMIT CARD (<span x-text="docSession"></span>)
+                                EXAMINATION ADMIT CARD (<span x-text="formData.examTitle"></span>)
                             </div>
                             <div class="grid grid-cols-3 gap-4 text-xs pt-2">
                                 <div class="col-span-2 space-y-2">
-                                    <p><strong class="text-slate-700">Student Name:</strong> <span class="text-slate-900 font-bold" x-text="selectedStudent"></span></p>
-                                    <p><strong class="text-slate-700">Father's Name:</strong> <span class="text-slate-900" x-text="manualData.fatherName">Rajesh Kumar</span></p>
-                                    <p><strong class="text-slate-700">Class & Section:</strong> <span class="text-slate-900" x-text="manualData.classSec">Class X - Section A</span></p>
-                                    <p><strong class="text-slate-700">Roll Number:</strong> <span class="text-slate-900 font-bold" x-text="manualData.rollNo">101</span></p>
+                                    <p><strong class="text-slate-700">Student Name:</strong> <span class="text-slate-900 font-bold text-sm" x-text="formData.studentName"></span></p>
+                                    <p><strong class="text-slate-700">Father's Name:</strong> <span class="text-slate-900" x-text="formData.fatherName"></span></p>
+                                    <p><strong class="text-slate-700">Class & Section:</strong> <span class="text-slate-900" x-text="formData.classSec"></span></p>
+                                    <p><strong class="text-slate-700">Roll Number:</strong> <span class="text-slate-900 font-bold" x-text="formData.rollNo"></span></p>
                                     <p><strong class="text-slate-700">Exam Center:</strong> <span class="text-slate-900" x-text="settings.schoolName + ', ' + settings.schoolLocation"></span></p>
                                 </div>
                                 <div class="border border-slate-300 p-2 flex items-center justify-center bg-slate-50 text-slate-400 text-center text-[11px] h-32 rounded">
-                                    [ Student Photograph ]
+                                    [ Student Photo ]
                                 </div>
                             </div>
                             <!-- Exam Schedule Table -->
@@ -239,11 +236,11 @@
                         <!-- 2. MARKSHEET TEMPLATE -->
                         <div x-show="docType === 'marksheet'" class="space-y-4">
                             <div class="text-center bg-blue-900 text-white py-1.5 rounded font-bold text-sm tracking-wider uppercase">
-                                STATEMENT OF MARKS & PERFORMANCE REPORT (<span x-text="docSession"></span>)
+                                STATEMENT OF MARKS & PERFORMANCE REPORT (<span x-text="formData.examTitle"></span>)
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-3 rounded border border-slate-200">
-                                <div><p><strong>Student Name:</strong> <span x-text="selectedStudent"></span></p><p><strong>Roll No:</strong> <span x-text="manualData.rollNo">101</span></p></div>
-                                <div><p><strong>Class:</strong> <span x-text="manualData.classSec">Class X</span></p><p><strong>Academic Session:</strong> <span x-text="settings.academicSession"></span></p></div>
+                                <div><p><strong>Student Name:</strong> <span class="font-bold" x-text="formData.studentName"></span></p><p><strong>Roll No:</strong> <span x-text="formData.rollNo"></span></p></div>
+                                <div><p><strong>Class:</strong> <span x-text="formData.classSec"></span></p><p><strong>Session:</strong> <span x-text="settings.academicSession"></span></p></div>
                             </div>
                             <!-- Marks Table -->
                             <table class="w-full text-xs border-collapse border border-slate-300">
@@ -270,12 +267,12 @@
                             <div class="inline-block border-b-2 border-amber-500 pb-1">
                                 <h3 class="text-lg font-bold text-slate-800 uppercase tracking-widest">BONAFIDE STUDENT CERTIFICATE</h3>
                             </div>
-                            <p class="text-xs text-slate-500 uppercase">Certificate No: JMS/BON/2026/094</p>
+                            <p class="text-xs text-slate-500 uppercase" x-text="'Certificate No: ' + formData.certNo"></p>
                             
                             <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
-                                This is to certify that <strong class="text-slate-900 text-base underline" x-text="selectedStudent"></strong>, son/daughter of <strong class="text-slate-900" x-text="manualData.fatherName">Mr. Rajesh Kumar</strong>, is a bonafide regular student of this institution studying in <strong class="text-slate-900" x-text="manualData.classSec">Class X</strong> under Roll Number <strong class="text-slate-900" x-text="manualData.rollNo">101</strong> for the academic session <span x-text="settings.academicSession"></span>. 
+                                This is to certify that <strong class="text-slate-900 text-base underline" x-text="formData.studentName"></strong>, son/daughter of <strong class="text-slate-900" x-text="formData.fatherName"></strong>, is a bonafide regular student of this institution studying in <strong class="text-slate-900" x-text="formData.classSec"></strong> under Roll Number <strong class="text-slate-900" x-text="formData.rollNo"></strong> for the academic session <span x-text="settings.academicSession"></span>. 
                                 <br><br>
-                                To the best of my knowledge and school records, their date of birth is <strong class="text-slate-900">15-Aug-2010</strong> and their character & conduct has been found to be exemplary.
+                                <span x-text="formData.customRemark">To the best of my knowledge and school records, their character & conduct has been exemplary.</span>
                             </p>
                         </div>
 
@@ -284,10 +281,12 @@
                             <div class="inline-block border-b-2 border-slate-800 pb-1">
                                 <h3 class="text-lg font-bold text-slate-800 uppercase tracking-widest">SCHOOL LEAVING / TRANSFER CERTIFICATE</h3>
                             </div>
-                            <p class="text-xs text-slate-500 uppercase">TC Register No: 1422 | UDISE: <span x-text="settings.udiseCode"></span></p>
+                            <p class="text-xs text-slate-500 uppercase" x-text="'TC Register No: ' + formData.certNo + ' | UDISE: ' + settings.udiseCode"></p>
                             
                             <p class="text-sm text-slate-700 leading-relaxed px-8 text-justify">
-                                This is to certify that <strong class="text-slate-900 text-base" x-text="selectedStudent"></strong> has completed their studies at <strong class="text-slate-900" x-text="settings.schoolName"></strong>. During their stay in school, they successfully cleared all school dues and exhibited good moral character. We wish them success in all their future endeavors.
+                                This is to certify that <strong class="text-slate-900 text-base" x-text="formData.studentName"></strong>, child of <strong class="text-slate-900" x-text="formData.fatherName"></strong>, has completed their studies in <strong class="text-slate-900" x-text="formData.classSec"></strong> at <strong class="text-slate-900" x-text="settings.schoolName"></strong>. 
+                                <br><br>
+                                <span x-text="formData.customRemark">During their stay, they cleared all school dues and exhibited good moral character. We wish them grand success.</span>
                             </p>
                         </div>
 
@@ -297,9 +296,9 @@
                                 <h3 class="text-lg font-bold text-amber-900 uppercase tracking-widest">CERTIFICATE OF EXCELLENCE</h3>
                             </div>
                             <p class="text-xs text-slate-600 font-medium">This certificate is proudly presented to</p>
-                            <h2 class="text-2xl font-black text-slate-900 underline" x-text="selectedStudent"></h2>
-                            <p class="text-xs text-slate-700 max-w-lg mx-auto leading-relaxed">
-                                For outstanding performance and securing <strong>1st Position</strong> in the Inter-School Science Quiz & Cultural Fest organized during the academic session <span x-text="settings.academicSession"></span>.
+                            <h2 class="text-2xl font-black text-slate-900 underline" x-text="formData.studentName"></h2>
+                            <p class="text-xs text-slate-700 max-w-lg mx-auto leading-relaxed" x-text="formData.customRemark">
+                                For outstanding performance and securing top honors in school cultural and sports activities during session 2026-27.
                             </p>
                         </div>
 
@@ -327,14 +326,10 @@
                 </div>
             </div>
 
-            <!-- 5. TRACKING -->
-            <div x-show="currentTab === 'tracking'" class="space-y-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">Real-Time Tracking & Attendance Alerts</h3>
-                </div>
-            </div>
-
-            <!-- 6-15 Other Tabs Stubs -->
+            <!-- Other Tabs Stubs -->
+            <div x-show="currentTab === 'fees'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Fees Management</h3></div>
+            <div x-show="currentTab === 'administration'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Administration Hub</h3></div>
+            <div x-show="currentTab === 'tracking'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Real-Time Tracking</h3></div>
             <div x-show="currentTab === 'communication'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Broadcasts & Circulars</h3></div>
             <div x-show="currentTab === 'hr'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">Staff Payroll</h3></div>
             <div x-show="currentTab === 'people'" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200"><h3 class="text-lg font-bold">People & Access</h3></div>
@@ -353,22 +348,23 @@
         function schoolApp() {
             return {
                 isLoggedIn: false,
-                authMode: 'login',
                 loginRole: 'admin',
                 loginUser: '',
                 loginPass: '',
                 currentTab: 'academics',
 
-                // Certificate / Academic Hub State
+                // Certificate Hub State
                 docType: 'admitCard', // admitCard, marksheet, bonafide, leaving, extracurric
-                selectedStudent: 'Aarav Kumar',
-                genMode: 'auto',
-                docSession: 'Annual Examination 2026-27',
                 
-                manualData: {
+                // Live Custom Editable Data Model
+                formData: {
+                    studentName: 'Aarav Kumar',
                     fatherName: 'Mr. Rajesh Kumar',
                     classSec: 'Class X - Section A',
-                    rollNo: '101'
+                    rollNo: '101',
+                    examTitle: 'Annual Examination 2026-27',
+                    certNo: 'JMS/CERT/2026/101',
+                    customRemark: 'To the best of my knowledge and school records, their character & conduct has been exemplary.'
                 },
 
                 settings: {
@@ -386,14 +382,6 @@
                         this.isLoggedIn = true;
                     } else {
                         alert('Please enter username and password!');
-                    }
-                },
-
-                generateDoc() {
-                    if(this.genMode === 'auto') {
-                        alert('✨ Automatically fetched records for ' + this.selectedStudent + ' and rendered ' + this.docType.toUpperCase() + ' successfully!');
-                    } else {
-                        alert('✍️ Rendered document in Manual Edit mode for ' + this.selectedStudent + '!');
                     }
                 }
             }
