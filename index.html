@@ -1,175 +1,307 @@
-They are currently studying in <strong class="text-slate-900" x-text="formData.classSec"></strong> during the academic session <strong class="text-slate-900" x-text="settings.academicSession"></strong> with good moral character and satisfactory academic progress.
-                                </p>
-                            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One School Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans antialiased">
 
-                            <div class="flex justify-between items-end pt-6 text-xs px-4">
-                                <div class="text-left space-y-1">
-                                    <p class="font-bold text-slate-700">Date: <span class="font-normal" x-text="new Date().toLocaleDateString()"></span></p>
-                                    <p class="font-bold text-slate-700">Place: <span class="font-normal" x-text="settings.schoolLocation"></span></p>
-                                </div>
-                                <div class="text-center space-y-2">
-                                    <div class="h-12 border-b border-dashed border-slate-400 w-36 flex items-end justify-center pb-1">
-                                        <span class="font-serif italic text-slate-700 font-bold text-sm" x-text="settings.principalName"></span>
-                                    </div>
-                                    <p class="font-black text-slate-900 uppercase tracking-wider">Principal Signature & Stamp</p>
-                                </div>
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col hidden md:flex shadow-xl">
+            <div class="p-5 border-b border-slate-800 flex items-center space-x-3">
+                <i class="fa-solid fa-graduation-cap text-indigo-400 text-2xl"></i>
+                <span class="text-white font-bold text-lg tracking-wider">EduPulse ERP</span>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-4 px-3 space-y-1 text-sm">
+                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Modules & Features</p>
+                
+                <a href="#" onclick="switchTab('overview')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-indigo-600 text-white transition">
+                    <i class="fa-solid fa-chart-pie w-5"></i><span>Overview (Dashboard)</span>
+                </a>
+                <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-comments w-5"></i><span>Communication & WhatsApp</span>
+                </a>
+                <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-wallet w-5"></i><span>Fees & Payments</span>
+                </a>
+                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-file-lines w-5"></i><span>Marksheets & Exams</span>
+                </a>
+                <a href="#" onclick="switchTab('people')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-users w-5"></i><span>People & Access (CRM)</span>
+                </a>
+                <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-book-open w-5"></i><span>Class & Schedule</span>
+                </a>
+                <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-boxes-stacked w-5"></i><span>Operations & Inventory</span>
+                </a>
+                <a href="#" onclick="switchTab('hr')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-id-badge w-5"></i><span>Staff Payroll & HR</span>
+                </a>
+                <a href="#" onclick="switchTab('transport')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-bus w-5"></i><span>Transport & GPS</span>
+                </a>
+                <a href="#" onclick="switchTab('reports')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-chart-line w-5"></i><span>Reports & Analytics</span>
+                </a>
+                <a href="#" onclick="switchTab('udise')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-file-export w-5"></i><span>UDISE+ Report</span>
+                </a>
+                <a href="#" onclick="switchTab('settings')" class="nav-link flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-white transition">
+                    <i class="fa-solid fa-gear w-5"></i><span>System Settings</span>
+                </a>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+                All Features. One Solution.
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Top Navbar -->
+            <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6 z-10">
+                <div class="flex items-center space-x-4">
+                    <button class="md:hidden text-slate-600 focus:outline-none"><i class="fa-solid fa-bars text-xl"></i></button>
+                    <h1 class="text-xl font-bold text-slate-800" id="current-title">Dashboard Overview</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="relative">
+                        <i class="fa-solid fa-bell text-slate-600 text-lg cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center">3</span>
+                    </span>
+                    <div class="flex items-center space-x-2 border-l pl-4 border-slate-200">
+                        <div class="w-9 h-9 bg-indigo-600 text-white rounded-full flex items-center font-bold justify-center">A</div>
+                        <span class="text-sm font-medium text-slate-700 hidden sm:inline">Admin User</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Views Container -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                
+                <!-- 1. OVERVIEW TAB -->
+                <div id="tab-overview" class="tab-content space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">Total Students</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">2,450</h3>
                             </div>
+                            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-user-graduate"></i></div>
                         </div>
-
-                        <!-- 4. SCHOOL LEAVING / TRANSFER CERTIFICATE (TC) DESIGN -->
-                        <div x-show="docType === 'leaving'" class="space-y-6 py-6 px-6 bg-white rounded-2xl border-2 border-slate-900 relative z-10">
-                            <div class="text-center border-b-2 border-slate-900 pb-4 space-y-1">
-                                <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
-                                <p class="text-xs text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE Code: ' + settings.udiseCode"></p>
-                                <div class="inline-block mt-2 bg-slate-900 text-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow">
-                                    TRANSFER / SCHOOL LEAVING CERTIFICATE
-                                </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">Total Staff</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">140</h3>
                             </div>
-
-                            <div class="flex justify-between text-xs bg-slate-50 p-3 rounded-lg border border-slate-300">
-                                <p><strong>TC Serial No:</strong> <span class="font-bold text-slate-900" x-text="formData.certNo"></span></p>
-                                <p><strong>Admission No:</strong> <span class="font-bold text-slate-900">JMS/2023/849</span></p>
-                                <p><strong>Date of Issue:</strong> <span class="font-bold text-slate-900" x-text="new Date().toLocaleDateString()"></span></p>
-                            </div>
-
-                            <div class="space-y-3 text-xs text-slate-800">
-                                <div class="grid grid-cols-2 gap-4 border-b pb-2">
-                                    <p><strong>1. Name of Pupil:</strong> <span class="font-bold text-slate-900 text-sm" x-text="formData.studentName"></span></p>
-                                    <p><strong>2. Mother's / Guardian's Name:</strong> <span class="font-semibold" x-text="formData.motherName"></span></p>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4 border-b pb-2">
-                                    <p><strong>3. Father's Name:</strong> <span class="font-semibold" x-text="formData.fatherName"></span></p>
-                                    <p><strong>4. Date of Birth (in figures & words):</strong> <span class="font-semibold" x-text="formData.dob"></span></p>
-                                </div>
-                                <div class="grid-cols-2 gap-4 border-b pb-2 grid">
-                                    <p><strong>5. Nationality:</strong> <span class="font-semibold">Indian</span></p>
-                                    <p><strong>6. Class in which pupil studied:</strong> <span class="font-semibold" x-text="formData.classSec"></span></p>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4 border-b pb-2">
-                                    <p><strong>7. School / Board Annual Examination last taken:</strong> <span class="font-semibold" x-text="formData.examTitle"></span></p>
-                                    <p><strong>8. Whether qualified for promotion:</strong> <span class="font-bold text-emerald-700">YES — Promoted to higher class</span></p>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4 pb-2">
-                                    <p><strong>9. General Conduct & Behavior:</strong> <span class="font-semibold text-emerald-800">Very Good / Exemplary</span></p>
-                                    <p><strong>10. Reason for leaving school:</strong> <span class="font-semibold">Parent Relocation / Higher Studies</span></p>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-between items-end pt-8 text-xs">
-                                <div class="text-center space-y-1">
-                                    <div class="h-10 border-b border-slate-400 w-32"></div>
-                                    <p class="font-bold text-slate-700">Checked By</p>
-                                </div>
-                                <div class="text-center space-y-1">
-                                    <div class="h-10 border-b border-slate-400 w-32"></div>
-                                    <p class="font-bold text-slate-700">Clerk / Office Seal</p>
-                                </div>
-                                <div class="text-center space-y-1">
-                                    <div class="h-10 border-b border-slate-400 w-32 flex items-end justify-center pb-1">
-                                        <span class="font-serif italic text-slate-700 font-bold" x-text="settings.principalName"></span>
-                                    </div>
-                                    <p class="font-bold text-slate-900 uppercase">Principal Signature</p>
-                                </div>
-                            </div>
+                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
                         </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">Fee Collected (Month)</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">₹18,40,000</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-slate-500 font-medium">Today's Attendance</p>
+                                <h3 class="text-2xl font-bold text-slate-800 mt-1">94.2%</h3>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-clipboard-user"></i></div>
+                        </div>
+                    </div>
 
-                        <!-- BOTTOM PRINT / EXPORT ACTION BAR -->
-                        <div class="pt-4 border-t flex justify-between items-center relative z-10">
-                            <span class="text-xs text-slate-500">💡 Tip: Logos omitted with clean multi-layered professional watermark layout.</span>
-                            <button @click="window.print()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold px-6 py-2.5 rounded-lg text-xs shadow-lg transition flex items-center gap-2">
-                                🖨️ Print / Save Official PDF Document
-                            </button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Quick Module Shortcuts</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                            <button onclick="switchTab('fees')" class="p-4 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl border border-slate-200 transition"><i class="fa-solid fa-wallet text-2xl mb-2"></i><p class="font-semibold text-sm">Fees & Cash Counter</p></button>
+                            <button onclick="switchTab('communication')" class="p-4 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl border border-slate-200 transition"><i class="fa-brands fa-whatsapp text-2xl mb-2"></i><p class="font-semibold text-sm">WhatsApp Broadcast</p></button>
+                            <button onclick="switchTab('marksheet')" class="p-4 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl border border-slate-200 transition"><i class="fa-solid fa-file-lines text-2xl mb-2"></i><p class="font-semibold text-sm">Marks Entry & Report</p></button>
+                            <button onclick="switchTab('academics')" class="p-4 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl border border-slate-200 transition"><i class="fa-solid fa-calendar-days text-2xl mb-2"></i><p class="font-semibold text-sm">Smart Timetable</p></button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </main>
+                <!-- 2. FEES & PAYMENTS TAB -->
+                <div id="tab-fees" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Smart Fee Management & Cash Counter</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-lg">
+                                <span class="text-xs text-indigo-600 font-bold uppercase">Online Payments</span>
+                                <p class="text-slate-700 text-sm mt-1">UPI, Net Banking & Card Gateway active with automatic reconciliation.</p>
+                            </div>
+                            <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-lg">
+                                <span class="text-xs text-emerald-600 font-bold uppercase">WhatsApp Invoicing</span>
+                                <p class="text-slate-700 text-sm mt-1">1 Free Invoice per student per month sent directly to WhatsApp.</p>
+                            </div>
+                            <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
+                                <span class="text-xs text-amber-600 font-bold uppercase">Cash Counter</span>
+                                <p class="text-slate-700 text-sm mt-1">Instant digital receipt generation for physical cash deposits.</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Create Fee Structure</button>
+                            <button class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 transition">View Invoices</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. COMMUNICATION TAB -->
+                <div id="tab-communication" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Communication & WhatsApp Integration</h3>
+                        <div class="space-y-4 max-w-xl">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Broadcast Type</label>
+                                <select class="w-full border border-slate-300 p-2.5 rounded-lg text-sm">
+                                    <option>Instant Announcement</option>
+                                    <option>Circular / Notice</option>
+                                    <option>Fee Due Reminder</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Message Content</label>
+                                <textarea rows="4" class="w-full border border-slate-300 p-2.5 rounded-lg text-sm" placeholder="Type your broadcast message here..."></textarea>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="checkbox" id="whatsapp" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="whatsapp" class="text-sm text-slate-700">Send copy via WhatsApp Integration</label>
+                            </div>
+                            <button class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Broadcast Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. MARKSHEET & EXAMS TAB -->
+                <div id="tab-marksheet" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Examination & Marksheets</h3>
+                        <p class="text-slate-600 text-sm mb-4">Manage subjects, enter automated marks, calculate ranks, and generate structured digital report cards with parent visibility control.</p>
+                        <div class="flex space-x-3">
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Marks Entry Panel</button>
+                            <button class="bg-slate-100 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold">Generate Marksheets</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. PEOPLE & ACCESS TAB -->
+                <div id="tab-people" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">People & Access Control (CRM)</h3>
+                        <p class="text-slate-600 text-sm mb-4">Manage students records, Admission CRM inquiries, Visitor logs, alumni network, and staff role-based access tokens.</p>
+                    </div>
+                </div>
+
+                <!-- 6. ACADEMICS & SCHEDULE TAB -->
+                <div id="tab-academics" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Class, Schedule & Attendance</h3>
+                        <p class="text-slate-600 text-sm mb-4">Smart timetables, substitution management, homework tracking, student/staff ID card generation, and automated attendance alerts.</p>
+                    </div>
+                </div>
+
+                <!-- 7. OPERATIONS TAB -->
+                <div id="tab-operations" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Operations & Store Management</h3>
+                        <p class="text-slate-600 text-sm mb-4">Library book circulation, inventory & store supplies tracking, hostel operations, and school asset management.</p>
+                    </div>
+                </div>
+
+                <!-- 8. HR & PAYROLL TAB -->
+                <div id="tab-hr" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Staff Payroll & HR Operations</h3>
+                        <p class="text-slate-600 text-sm mb-4">Automated salary slips, staff attendance & leave tracking, performance appraisals, and compliant HR reporting.</p>
+                    </div>
+                </div>
+
+                <!-- 9. TRANSPORT TAB -->
+                <div id="tab-transport" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Transport & GPS Tracking</h3>
+                        <p class="text-slate-600 text-sm mb-4">Manage bus routes, stops, vehicle tracking, and real-time safety alerts for parents and school authorities.</p>
+                    </div>
+                </div>
+
+                <!-- 10. REPORTS TAB -->
+                <div id="tab-reports" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Detailed Analytics & Reports</h3>
+                        <p class="text-slate-600 text-sm mb-4">Comprehensive administrative data reports, performance analytics, and financial statements.</p>
+                    </div>
+                </div>
+
+                <!-- 11. UDISE+ REPORT TAB -->
+                <div id="tab-udise" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">UDISE+ Report Generation</h3>
+                        <p class="text-slate-600 text-sm mb-4">Instantly compile and export compliance-ready UDISE+ reports directly from system data.</p>
+                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Export UDISE+ Report</button>
+                    </div>
+                </div>
+
+                <!-- 12. SYSTEM SETTINGS TAB -->
+                <div id="tab-settings" class="tab-content hidden space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">System Settings</h3>
+                        <p class="text-slate-600 text-sm mb-4">Configure school profile, multi-device access parameters, and gateway integrations.</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
     </div>
 
-    <!-- ALPINE JS CONTROLLER -->
+    <!-- JavaScript for Tab Switching -->
     <script>
-        function schoolApp() {
-            return {
-                isLoggedIn: true,
-                loginRole: 'admin',
-                loginUser: 'admin',
-                loginPass: '••••••••',
-                currentTab: 'academics',
-                docType: 'admitCard',
-                
-                settings: {
-                    schoolName: 'JMS RISING PUBLIC SCHOOL',
-                    schoolLocation: 'Rasoiyadhamna',
-                    udiseCode: '20130405802',
-                    directorName: 'Sanjay Kumar',
-                    principalName: 'Sakshi Kumari',
-                    academicSession: '2026-2027'
-                },
+        function switchTab(tabId) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.add('hidden'));
 
-                formData: {
-                    studentName: 'Aarav Kumar',
-                    fatherName: 'Rajesh Kumar',
-                    motherName: 'Sunita Devi',
-                    dob: '15-August-2012',
-                    classSec: 'Class 8 - Section A',
-                    rollNo: '104',
-                    examTitle: 'Half Yearly Examination 2026',
-                    certNo: 'JMS/TC/2026/492',
-                    studentPhoto: '',
-                    customRemark: 'Outstanding all-round performance in academics and discipline.',
-                    subjects: [
-                        { name: 'English Language & Lit', max: 100, obt: 88 },
-                        { name: 'Mathematics', max: 100, obt: 92 },
-                        { name: 'Science & Technology', max: 100, obt: 85 },
-                        { name: 'Social Science', max: 100, obt: 90 },
-                        { name: 'Hindi Core', max: 100, obt: 82 }
-                    ],
-                    examSchedule: [
-                        { date: '12 Nov 2026', subject: 'Mathematics', timing: '09:00 AM - 12:00 PM' },
-                        { date: '14 Nov 2026', subject: 'Science & Technology', timing: '09:00 AM - 12:00 PM' },
-                        { date: '16 Nov 2026', subject: 'English Language & Lit', timing: '09:00 AM - 12:00 PM' },
-                        { date: '18 Nov 2026', subject: 'Social Science', timing: '09:00 AM - 12:00 PM' },
-                        { date: '20 Nov 2026', subject: 'Hindi Core', timing: '09:00 AM - 12:00 PM' }
-                    ]
-                },
+            // Show selected tab
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
 
-                login() {
-                    this.isLoggedIn = true;
-                },
+            // Update active state in sidebar
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                link.classList.remove('bg-indigo-600', 'text-white');
+                link.classList.add('hover:bg-slate-800', 'hover:text-white');
+            });
 
-                handleImageUpload(event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            this.formData.studentPhoto = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                },
+            event.currentTarget.classList.remove('hover:bg-slate-800', 'hover:text-white');
+            event.currentTarget.classList.add('bg-indigo-600', 'text-white');
 
-                addSubject() {
-                    this.formData.subjects.push({ name: 'New Subject', max: 100, obt: 75 });
-                },
-
-                addScheduleExam() {
-                    this.formData.examSchedule.push({ date: '22 Nov 2026', subject: 'Computer Science', timing: '09:00 AM - 11:00 AM' });
-                },
-
-                get totalMaxMarks() {
-                    return this.formData.subjects.reduce((sum, sub) => sum + Number(sub.max || 0), 0);
-                },
-
-                get totalObtMarks() {
-                    return this.formData.subjects.reduce((sum, sub) => sum + Number(sub.obt || 0), 0);
-                },
-
-                get totalPercentage() {
-                    if (this.totalMaxMarks === 0) return 0;
-                    return ((this.totalObtMarks / this.totalMaxMarks) * 100).toFixed(2);
-                }
-            }
+            // Update header title
+            const titles = {
+                'overview': 'Dashboard Overview',
+                'communication': 'Communication & WhatsApp',
+                'fees': 'Fees & Payments System',
+                'marksheet': 'Marksheets & Examinations',
+                'people': 'People, CRM & Access Control',
+                'academics': 'Class, Schedule & Attendance',
+                'operations': 'Operations, Library & Inventory',
+                'hr': 'Staff Payroll & HR',
+                'transport': 'Transport & GPS Safety',
+                'reports': 'Reports & Analytics',
+                'udise': 'UDISE+ Report',
+                'settings': 'System Settings'
+            };
+            document.getElementById('current-title').innerText = titles[tabId] || 'Dashboard';
         }
     </script>
 </body>
