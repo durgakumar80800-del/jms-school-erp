@@ -20,7 +20,8 @@
                 </div>
             </div>
 
-            <form @submit.prevent="login()" class="space-y-4">
+            <!-- NORMAL LOGIN FORM -->
+            <form x-show="!showForgot" @submit.prevent="login()" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Select Role</label>
                     <select x-model="loginRole" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-amber-500">
@@ -40,7 +41,33 @@
                 <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-lg transition shadow-md">
                     Secure Login 🚀
                 </button>
+                <div class="text-right">
+                    <button type="button" @click="showForgot = true" class="text-xs text-amber-600 hover:underline font-semibold">
+                        Forgot Username or Password?
+                    </button>
+                </div>
             </form>
+
+            <!-- FORGOT PASSWORD FORM -->
+            <form x-show="showForgot" @submit.prevent="recoverPassword()" class="space-y-4">
+                <div class="text-center mb-2">
+                    <h3 class="text-sm font-bold text-slate-800">Password Recovery</h3>
+                    <p class="text-[11px] text-slate-500">Enter your registered email or phone to reset credentials.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Registered Email / Phone</label>
+                    <input type="text" x-model="forgotInput" placeholder="Enter email or mobile number" required class="w-full border border-slate-300 rounded-lg p-3 text-sm">
+                </div>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-lg transition shadow-md text-xs">
+                    Send Reset Instructions 📩
+                </button>
+                <div class="text-center">
+                    <button type="button" @click="showForgot = false" class="text-xs text-slate-500 hover:underline">
+                        Back to Login
+                    </button>
+                </div>
+            </form>
+
             <p class="text-center text-xs text-slate-400">All Features. One Solution. 17 Modules Integrated.</p>
         </div>
     </div>
@@ -262,12 +289,23 @@
                 loginRole: 'admin',
                 loginUser: '',
                 loginPass: '',
+                showForgot: false,
+                forgotInput: '',
                 currentTab: 'overview',
                 login() {
                     if(this.loginUser.trim() !== '' && this.loginPass.trim() !== '') {
                         this.isLoggedIn = true;
                     } else {
                         alert('Please enter username and password!');
+                    }
+                },
+                recoverPassword() {
+                    if(this.forgotInput.trim() !== '') {
+                        alert('Password reset instructions have been sent to ' + this.forgotInput + '. Please check your phone/email.');
+                        this.forgotInput = '';
+                        this.showForgot = false;
+                    } else {
+                        alert('Please enter your registered email or phone number.');
                     }
                 }
             }
