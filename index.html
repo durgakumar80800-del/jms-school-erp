@@ -183,13 +183,13 @@
                     </div>
                 </div>
 
-                <!-- 4. CERTIFICATES & MARKSHEETS (PREMIUM WHITE & GOLD STUDIO) -->
+                <!-- 4. CERTIFICATES & MARKSHEETS (PREMIUM WHITE & GOLD STUDIO WITH CIRCULAR SCHOOL LOGO SECTION) -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 gap-4">
                             <div>
                                 <h3 class="text-lg font-bold text-slate-800">Premium White & Gold Certificate Studio</h3>
-                                <p class="text-xs text-slate-500">Customize all fields, manage subjects, exam schedules, and print professional white-background certificates</p>
+                                <p class="text-xs text-slate-500">Manage school logo, customize all fields, subjects, and print professional white-background certificates</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="switchDocType('admit')" class="doc-btn px-3 py-1.5 bg-amber-700 text-white rounded-lg text-xs font-bold transition shadow-sm">Admit Card</button>
@@ -203,13 +203,13 @@
                         <!-- Manual Input Controls Form -->
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             <div class="bg-slate-50 p-4 rounded-xl border space-y-3 lg:col-span-1 max-h-[620px] overflow-y-auto">
-                                <h4 class="font-bold text-xs uppercase text-slate-700 tracking-wider">Master Personal & Academic Data</h4>
+                                <h4 class="font-bold text-xs uppercase text-slate-700 tracking-wider">Master School & Student Data</h4>
                                 
-                                <!-- SCHOOL LOGO UPLOAD SECTION (Circular Section) -->
-                                <div class="bg-white p-3 rounded-lg border border-dashed border-amber-400 text-center space-y-2">
-                                    <label class="block text-xs font-bold text-slate-700 uppercase">School Logo (Global)</label>
-                                    <div class="w-20 h-20 mx-auto rounded-full border-2 border-amber-600 overflow-hidden bg-slate-50 flex items-center justify-center shadow-inner">
-                                        <img id="form-school-logo-preview" src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover">
+                                <!-- Circular School Logo Upload Section -->
+                                <div class="bg-white p-3 rounded-lg border text-center space-y-2">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase">School Logo Upload (Circular Space)</label>
+                                    <div class="w-20 h-20 mx-auto rounded-full border-2 border-dashed border-amber-600 overflow-hidden bg-slate-100 flex items-center justify-center shadow-inner">
+                                        <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-preview">
                                     </div>
                                     <input type="file" id="school-logo-file" accept="image/*" onchange="handleSchoolLogoUpload(event)" class="w-full border p-1 rounded text-[11px] bg-white file:mr-2 file:py-0.5 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
                                 </div>
@@ -276,9 +276,9 @@
 
                                     <!-- School Header (Landscape with Uploaded Circular Logo & Centered School Name) -->
                                     <div class="border-b-2 border-amber-600 pb-3 relative z-10 flex justify-between items-center">
-                                        <!-- Circular School Logo Preview on Left -->
+                                        <!-- Circular School Logo on Left -->
                                         <div class="w-16 h-16 rounded-full border-2 border-amber-600 overflow-hidden bg-white shadow-sm flex items-center justify-center flex-shrink-0">
-                                            <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-preview">
+                                            <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-img-preview">
                                         </div>
 
                                         <!-- Centered School Name & Address -->
@@ -375,42 +375,51 @@
                     </div>
                 </div>
 
-                <!-- 9. TRANSPORT & GPS -->
-                <div id="tab-transport" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Transport & GPS Tracking</h3>
-                        <p class="text-sm text-slate-600">Bus routes, live GPS location tracking, and vehicle maintenance status.</p>
-                    </div>
-                </div>
+                <!-- Remaining Tabs Placeholder/Closing structure -->
+                <div id="tab-transport" class="tab-content hidden space-y-6"></div>
+                <div id="tab-reports" class="tab-content hidden space-y-6"></div>
+                <div id="tab-udise" class="tab-content hidden space-y-6"></div>
+                <div id="tab-settings" class="tab-content hidden space-y-6"></div>
 
             </main>
         </div>
     </div>
 
-    <!-- JavaScript Handling Logo Upload Preview -->
     <script>
+        // School Logo Upload Handler Function
         function handleSchoolLogoUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Update form preview circle
-                    document.getElementById('form-school-logo-preview').src = e.target.result;
-                    // Update live certificate preview logo
                     document.getElementById('school-logo-preview').src = e.target.result;
+                    document.getElementById('school-logo-img-preview').src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         }
 
-        // Dummy helper functions for tab switching and previews to maintain code integrity
+        // Student Photo Upload Handler
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-img').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Basic Tab Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.querySelectorAll('aside a').forEach(el => el.classList.remove('bg-indigo-600', 'text-white'));
         }
 
-        function handleLogin(e) {
-            e.preventDefault();
+        function handleLogin(event) {
+            event.preventDefault();
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('main-app').classList.remove('hidden');
         }
@@ -420,23 +429,13 @@
             document.getElementById('login-screen').classList.remove('hidden');
         }
 
-        function updateDocumentPreview() {
-            // Placeholder for live preview text binding
-        }
-
+        // Placeholder functions for studio updates
         function switchDocType(type) {
-            // Placeholder for switching document templates
+            // Document type switcher logic
         }
 
-        function handleImageUpload(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    document.getElementById('preview-img').src = evt.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
+        function updateDocumentPreview() {
+            // Update preview live
         }
     </script>
 </body>
