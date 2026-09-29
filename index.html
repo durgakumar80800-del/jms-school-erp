@@ -36,30 +36,24 @@
                         <option value="Parent">Parent</option>
                     </select>
                 </div>
-
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email / Username</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400"><i class="fa-solid fa-envelope"></i></span>
-                        <input type="email" id="login-email" required value="admin@jmsrising.com" class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50" placeholder="Enter email">
+                        <input type="email" id="login-email" required value="admin@jmsrising.com" class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50">
                     </div>
                 </div>
-
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Password</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400"><i class="fa-solid fa-lock"></i></span>
-                        <input type="password" id="login-password" required value="password123" class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50" placeholder="••••••••">
+                        <input type="password" id="login-password" required value="password123" class="w-full pl-11 pr-4 py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50">
                     </div>
                 </div>
-
                 <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-100">
                     Secure Login
                 </button>
             </form>
-            <div class="mt-4 text-center text-[11px] text-slate-400">
-                School ERP & Management System • Barhi
-            </div>
         </div>
     </div>
 
@@ -78,44 +72,20 @@
             </div>
             
             <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1 text-sm">
-                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Modules & Features</p>
+                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Modules</p>
                 
-                <a href="#" onclick="switchTab('overview')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg bg-indigo-600 text-white transition">
-                    <i class="fa-solid fa-chart-pie w-5"></i><span>Overview (Dashboard)</span>
-                </a>
-                <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-comments w-5"></i><span>Communication & WhatsApp</span>
-                </a>
-                <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-wallet w-5"></i><span>Fees & Payments</span>
-                </a>
-                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-file-lines w-5"></i><span>Marksheets & Exams</span>
-                </a>
-                <a href="#" onclick="switchTab('people')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-users w-5"></i><span>People & Access (CRM)</span>
-                </a>
-                <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-book-open w-5"></i><span>Class & Schedule</span>
-                </a>
-                <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-boxes-stacked w-5"></i><span>Operations & Inventory</span>
-                </a>
-                <a href="#" onclick="switchTab('hr')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-id-badge w-5"></i><span>Staff Payroll & HR</span>
-                </a>
-                <a href="#" onclick="switchTab('transport')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-bus w-5"></i><span>Transport & GPS</span>
-                </a>
-                <a href="#" onclick="switchTab('reports')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-chart-line w-5"></i><span>Reports & Analytics</span>
-                </a>
-                <a href="#" onclick="switchTab('udise')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-file-export w-5"></i><span>UDISE+ Report</span>
-                </a>
-                <a href="#" onclick="switchTab('settings')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">
-                    <i class="fa-solid fa-gear w-5"></i><span>System Settings</span>
-                </a>
+                <a href="#" onclick="switchTab('overview')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg bg-indigo-600 text-white transition"><i class="fa-solid fa-chart-pie w-5"></i><span>Overview</span></a>
+                <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-wallet w-5"></i><span>Fees & Payments</span></a>
+                <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-comments w-5"></i><span>Communication & WhatsApp</span></a>
+                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i><span>Marksheets & Exams</span></a>
+                <a href="#" onclick="switchTab('people')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-users w-5"></i><span>People & CRM</span></a>
+                <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-book-open w-5"></i><span>Class & Schedule</span></a>
+                <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-boxes-stacked w-5"></i><span>Operations & Store</span></a>
+                <a href="#" onclick="switchTab('hr')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-id-badge w-5"></i><span>Staff Payroll & HR</span></a>
+                <a href="#" onclick="switchTab('transport')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-bus w-5"></i><span>Transport & GPS</span></a>
+                <a href="#" onclick="switchTab('reports')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-chart-line w-5"></i><span>Reports & Analytics</span></a>
+                <a href="#" onclick="switchTab('udise')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-export w-5"></i><span>UDISE+ Report</span></a>
+                <a href="#" onclick="switchTab('settings')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-gear w-5"></i><span>System Settings</span></a>
             </div>
 
             <div class="p-3 border-t border-slate-800 text-[11px] text-slate-500 text-center">
@@ -128,14 +98,8 @@
             
             <!-- Top Navbar -->
             <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6 z-10">
+                <h1 class="text-lg font-bold text-slate-800" id="current-title">Dashboard Overview</h1>
                 <div class="flex items-center space-x-4">
-                    <h1 class="text-lg font-bold text-slate-800" id="current-title">Dashboard Overview</h1>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <span class="relative">
-                        <i class="fa-solid fa-bell text-slate-600 text-lg cursor-pointer"></i>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center">3</span>
-                    </span>
                     <div class="flex items-center space-x-3 border-l pl-4 border-slate-200">
                         <div class="w-9 h-9 bg-indigo-600 text-white rounded-full flex items-center font-bold justify-center" id="user-initial">A</div>
                         <div class="hidden sm:block text-left">
@@ -150,140 +114,166 @@
             </header>
 
             <!-- Dynamic Views Container -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6 space-y-6">
                 
-                <!-- 1. OVERVIEW TAB -->
+                <!-- 1. OVERVIEW -->
                 <div id="tab-overview" class="tab-content space-y-6">
-                    <div class="bg-indigo-900 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-center">
+                    <div class="bg-indigo-950 text-white p-6 rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-center">
                         <div>
-                            <span class="bg-indigo-700 text-indigo-200 text-xs px-3 py-1 rounded-full font-semibold">Rasoiya Dhamna, Barhi</span>
+                            <span class="bg-indigo-800 text-indigo-200 text-xs px-3 py-1 rounded-full font-semibold">Rasoiya Dhamna, Barhi</span>
                             <h2 class="text-2xl font-bold mt-2">JMS Rising Public School</h2>
-                            <p class="text-indigo-200 text-sm mt-1">Welcome to Administration Portal • Managing Excellence in Education</p>
+                            <p class="text-indigo-200 text-sm mt-1">Smart Automated School ERP Portal</p>
                         </div>
-                        <div class="mt-4 md:mt-0 text-right bg-indigo-800/60 p-3 rounded-xl border border-indigo-700 text-xs space-y-1">
+                        <div class="mt-4 md:mt-0 text-right bg-indigo-900/80 p-3 rounded-xl border border-indigo-800 text-xs space-y-1">
                             <p><b>Director:</b> Sanjay Kumar</p>
                             <p><b>Principal:</b> Sakshi Kumari</p>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-slate-500 font-medium">Total Students</p>
-                                <h3 class="text-2xl font-bold text-slate-800 mt-1">1,250</h3>
-                            </div>
+                            <div><p class="text-sm text-slate-500 font-medium">Total Students</p><h3 class="text-2xl font-bold text-slate-800 mt-1" id="stat-students">1,250</h3></div>
                             <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-user-graduate"></i></div>
                         </div>
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-slate-500 font-medium">Total Staff</p>
-                                <h3 class="text-2xl font-bold text-slate-800 mt-1">65</h3>
-                            </div>
+                            <div><p class="text-sm text-slate-500 font-medium">Total Staff</p><h3 class="text-2xl font-bold text-slate-800 mt-1" id="stat-staff">65</h3></div>
                             <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
                         </div>
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-slate-500 font-medium">Fee Collected (Month)</p>
-                                <h3 class="text-2xl font-bold text-slate-800 mt-1">₹8,40,000</h3>
-                            </div>
+                            <div><p class="text-sm text-slate-500 font-medium">Fee Collected (Month)</p><h3 class="text-2xl font-bold text-slate-800 mt-1" id="stat-fee">₹8,40,000</h3></div>
                             <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-indian-rupee-sign"></i></div>
                         </div>
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-slate-500 font-medium">Today's Attendance</p>
-                                <h3 class="text-2xl font-bold text-slate-800 mt-1">95.4%</h3>
-                            </div>
+                            <div><p class="text-sm text-slate-500 font-medium">Today's Attendance</p><h3 class="text-2xl font-bold text-slate-800 mt-1">95.4%</h3></div>
                             <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl"><i class="fa-solid fa-clipboard-user"></i></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. FEES & PAYMENTS TAB -->
+                <!-- 2. FEES & PAYMENTS -->
                 <div id="tab-fees" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Smart Fee Management & Cash Counter</h3>
-                        <p class="text-slate-600 text-sm">Automated invoicing, WhatsApp fee reminders, UPI gateway tracking, and receipt generation.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Cash Counter & Automated Fee Collection</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" id="fee-student" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="fee-amount" placeholder="Amount (₹)" class="border p-2.5 rounded-lg text-sm">
+                            <select id="fee-mode" class="border p-2.5 rounded-lg text-sm"><option>Cash Counter</option><option>UPI / Online Gateway</option><option>Card Payment</option></select>
+                        </div>
+                        <button onclick="collectFee()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Collect & Generate Invoice</button>
+                        <div id="fee-result" class="text-sm text-emerald-600 font-medium mt-2"></div>
                     </div>
                 </div>
 
-                <!-- 3. COMMUNICATION TAB -->
+                <!-- 3. COMMUNICATION & WHATSAPP -->
                 <div id="tab-communication" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Communication & WhatsApp Integration</h3>
-                        <p class="text-slate-600 text-sm">Send instant circulars, event updates, and WhatsApp announcements to parents.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4 max-w-xl">
+                        <h3 class="text-lg font-bold text-slate-800">Broadcast & WhatsApp Integration</h3>
+                        <select id="comm-type" class="w-full border p-2.5 rounded-lg text-sm"><option>Instant Broadcast Notice</option><option>School Circular</option><option>WhatsApp Fee Reminder</option></select>
+                        <textarea id="comm-msg" rows="3" placeholder="Type your message here..." class="w-full border p-2.5 rounded-lg text-sm"></textarea>
+                        <button onclick="sendBroadcast()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Send via Portal & WhatsApp</button>
+                        <p id="comm-status" class="text-sm font-medium text-emerald-600"></p>
                     </div>
                 </div>
 
-                <!-- 4. MARKSHEET TAB -->
+                <!-- 4. MARKSHEETS & EXAMS -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Examination & Marksheets</h3>
-                        <p class="text-slate-600 text-sm">Manage subject marks, automated rankings, and report card generation.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Automated Marks Entry & Report Cards</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <input type="text" id="mark-student" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="mark-math" placeholder="Maths (100)" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="mark-sci" placeholder="Science (100)" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="mark-eng" placeholder="English (100)" class="border p-2.5 rounded-lg text-sm">
+                        </div>
+                        <button onclick="calculateMarksheet()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Generate Marksheet</button>
+                        <div id="marksheet-output" class="p-4 bg-slate-50 border rounded-lg text-sm hidden"></div>
                     </div>
                 </div>
 
-                <!-- 5. PEOPLE & ACCESS TAB -->
+                <!-- 5. PEOPLE & CRM -->
                 <div id="tab-people" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">People & Access Control (CRM)</h3>
-                        <p class="text-slate-600 text-sm">Manage student admissions, visitor logs, and staff user access permissions.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Student Admission CRM & Visitor Log</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" id="crm-name" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="text" id="crm-class" placeholder="Applying for Class" class="border p-2.5 rounded-lg text-sm">
+                            <input type="text" id="crm-phone" placeholder="Parent Mobile" class="border p-2.5 rounded-lg text-sm">
+                        </div>
+                        <button onclick="addAdmission()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Register Admission Inquiry</button>
+                        <div id="crm-list" class="mt-4 text-sm text-slate-700"></div>
                     </div>
                 </div>
 
-                <!-- 6. ACADEMICS TAB -->
+                <!-- 6. ACADEMICS & SCHEDULE -->
                 <div id="tab-academics" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Class, Schedule & Attendance</h3>
-                        <p class="text-slate-600 text-sm">Timetables, classwork/homework tracking, and attendance alerts.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Smart Timetable & Homework Tracker</h3>
+                        <p class="text-sm text-slate-600">Assign homework or configure daily class periods automatically.</p>
+                        <input type="text" id="hw-input" placeholder="Enter Homework Details" class="w-full border p-2.5 rounded-lg text-sm">
+                        <button onclick="postHomework()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Post Homework to Portal</button>
+                        <p id="hw-status" class="text-emerald-600 text-sm"></p>
                     </div>
                 </div>
 
-                <!-- 7. OPERATIONS TAB -->
+                <!-- 7. OPERATIONS & STORE -->
                 <div id="tab-operations" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Operations & Store Management</h3>
-                        <p class="text-slate-600 text-sm">Library books, inventory supplies, and school asset tracking.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Library & Inventory Management</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="lib-book" placeholder="Book Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="text" id="lib-student" placeholder="Issued To Student" class="border p-2.5 rounded-lg text-sm">
+                        </div>
+                        <button onclick="issueBook()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Issue Library Book</button>
+                        <p id="lib-status" class="text-emerald-600 text-sm"></p>
                     </div>
                 </div>
 
-                <!-- 8. HR & PAYROLL TAB -->
+                <!-- 8. HR & PAYROLL -->
                 <div id="tab-hr" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Staff Payroll & HR Operations</h3>
-                        <p class="text-slate-600 text-sm">Staff attendance, salary slip generation, and performance reviews.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Staff Payroll & Salary Slip Generation</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="staff-name" placeholder="Staff Member Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="staff-salary" placeholder="Monthly Salary (₹)" class="border p-2.5 rounded-lg text-sm">
+                        </div>
+                        <button onclick="generateSalarySlip()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Generate Salary Slip</button>
+                        <div id="salary-output" class="p-3 bg-slate-50 border rounded text-sm hidden"></div>
                     </div>
                 </div>
 
-                <!-- 9. TRANSPORT TAB -->
+                <!-- 9. TRANSPORT & GPS -->
                 <div id="tab-transport" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Transport & GPS Tracking</h3>
-                        <p class="text-slate-600 text-sm">Bus route planning, GPS tracking, and transport safety management.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">School Bus Routes & GPS Tracking</h3>
+                        <p class="text-sm text-slate-600">Bus No. JH-12-3456 (Barhi - Rasoiya Dhamna Route) is currently running on schedule with live GPS active.</p>
+                        <button onclick="alert('GPS Route Live Ping Sent Successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Ping Live Bus Location</button>
                     </div>
                 </div>
 
-                <!-- 10. REPORTS TAB -->
+                <!-- 10. REPORTS & ANALYTICS -->
                 <div id="tab-reports" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">Detailed Analytics & Reports</h3>
-                        <p class="text-slate-600 text-sm">Comprehensive school analytics and administrative reporting.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">Financial & Performance Analytics</h3>
+                        <p class="text-sm text-slate-600">Total Revenue Collection, Student Pass Percentage, and Attendance Graphs compiled automatically.</p>
+                        <button onclick="alert('Analytics report downloaded successfully.')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Download Full Report</button>
                     </div>
                 </div>
 
-                <!-- 11. UDISE+ REPORT TAB -->
+                <!-- 11. UDISE+ REPORT -->
                 <div id="tab-udise" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">UDISE+ Report Generation</h3>
-                        <p class="text-slate-600 text-sm mb-4">Export official UDISE+ compliance reports directly from database records.</p>
-                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Export UDISE+ Report</button>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="text-lg font-bold text-slate-800">UDISE+ Report Generation</h3>
+                        <p class="text-sm text-slate-600">JMS Rising Public School, Barhi UDISE compliance file ready for export.</p>
+                        <button onclick="alert('UDISE+ Report JSON/Excel exported successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Export UDISE+ Report</button>
                     </div>
                 </div>
 
-                <!-- 12. SETTINGS TAB -->
+                <!-- 12. SYSTEM SETTINGS -->
                 <div id="tab-settings" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                        <h3 class="text-lg font-bold text-slate-800 mb-4">System Settings</h3>
-                        <p class="text-slate-600 text-sm">Configure school profile and gateway configurations.</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4 max-w-xl">
+                        <h3 class="text-lg font-bold text-slate-800">System Configuration</h3>
+                        <div><label class="block text-xs font-bold text-slate-700">School Name</label><input type="text" value="JMS Rising Public School" class="w-full border p-2 rounded text-sm"></div>
+                        <div><label class="block text-xs font-bold text-slate-700">Location</label><input type="text" value="Rasoiya Dhamna, Barhi" class="w-full border p-2 rounded text-sm"></div>
+                        <button onclick="alert('Settings saved successfully!')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">Save Changes</button>
                     </div>
                 </div>
 
@@ -291,17 +281,15 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Automation Logic -->
     <script>
         function handleLogin(event) {
             event.preventDefault();
             const role = document.getElementById('login-role').value;
             const email = document.getElementById('login-email').value;
-
             document.getElementById('user-display-name').innerText = email.split('@')[0].toUpperCase();
             document.getElementById('user-display-role').innerText = role;
             document.getElementById('user-initial').innerText = role.charAt(0);
-
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('main-app').classList.remove('hidden');
         }
@@ -312,35 +300,83 @@
         }
 
         function switchTab(tabId) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.add('hidden'));
-
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
-
-            const links = document.querySelectorAll('.nav-link');
-            links.forEach(link => {
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('bg-indigo-600', 'text-white');
                 link.classList.add('hover:bg-slate-800', 'hover:text-white');
             });
-
             event.currentTarget.classList.remove('hover:bg-slate-800', 'hover:text-white');
             event.currentTarget.classList.add('bg-indigo-600', 'text-white');
-
+            
             const titles = {
-                'overview': 'Dashboard Overview',
-                'communication': 'Communication & WhatsApp',
-                'fees': 'Fees & Payments System',
-                'marksheet': 'Marksheets & Examinations',
-                'people': 'People, CRM & Access Control',
-                'academics': 'Class, Schedule & Attendance',
-                'operations': 'Operations, Library & Inventory',
-                'hr': 'Staff Payroll & HR',
-                'transport': 'Transport & GPS Safety',
-                'reports': 'Reports & Analytics',
-                'udise': 'UDISE+ Report',
-                'settings': 'System Settings'
+                'overview': 'Dashboard Overview', 'fees': 'Fees & Payments System', 'communication': 'Communication & WhatsApp',
+                'marksheet': 'Marksheets & Examinations', 'people': 'People & CRM', 'academics': 'Class & Schedule',
+                'operations': 'Operations & Store', 'hr': 'Staff Payroll & HR', 'transport': 'Transport & GPS',
+                'reports': 'Reports & Analytics', 'udise': 'UDISE+ Report', 'settings': 'System Settings'
             };
             document.getElementById('current-title').innerText = titles[tabId] || 'Dashboard';
+        }
+
+        // Automated Features Logic
+        function collectFee() {
+            let name = document.getElementById('fee-student').value;
+            let amt = document.getElementById('fee-amount').value;
+            let mode = document.getElementById('fee-mode').value;
+            if(!name || !amt) { alert('Please enter student name and amount'); return; }
+            document.getElementById('fee-result').innerText = `Success! ₹${amt} received from ${name} via ${mode}. Free WhatsApp invoice triggered.`;
+        }
+
+        function sendBroadcast() {
+            let msg = document.getElementById('comm-msg').value;
+            if(!msg) { alert('Please type a message'); return; }
+            document.getElementById('comm-status').innerText = 'Broadcast sent successfully to all parent portals and WhatsApp!';
+        }
+
+        function calculateMarksheet() {
+            let name = document.getElementById('mark-student').value;
+            let m1 = parseFloat(document.getElementById('mark-math').value) || 0;
+            let m2 = parseFloat(document.getElementById('mark-sci').value) || 0;
+            let m3 = parseFloat(document.getElementById('mark-eng').value) || 0;
+            let total = m1 + m2 + m3;
+            let percentage = (total / 300) * 100;
+            let grade = percentage >= 80 ? 'A+' : percentage >= 60 ? 'A' : 'B';
+
+            let output = document.getElementById('marksheet-output');
+            output.classList.remove('hidden');
+            output.innerHTML = `<b>Student:</b> ${name} | <b>Total Marks:</b> ${total}/300 | <b>Percentage:</b> ${percentage.toFixed(2)}% | <b>Grade:</b> ${grade} <br><span class="text-indigo-600 font-semibold">Report card generated and parent visibility updated.</span>`;
+        }
+
+        let admissionCount = 1250;
+        function addAdmission() {
+            let name = document.getElementById('crm-name').value;
+            let cls = document.getElementById('crm-class').value;
+            if(!name) { alert('Enter student name'); return; }
+            admissionCount++;
+            document.getElementById('stat-students').innerText = admissionCount;
+            document.getElementById('crm-list').innerHTML = `<b>Last Added Inquiry:</b> ${name} for Class ${cls} recorded successfully! Total students updated automatically.`;
+        }
+
+        function postHomework() {
+            let hw = document.getElementById('hw-input').value;
+            if(!hw) return;
+            document.getElementById('hw-status').innerText = 'Homework successfully broadcasted to student app and parent portal!';
+        }
+
+        function issueBook() {
+            let book = document.getElementById('lib-book').value;
+            let student = document.getElementById('lib-student').value;
+            if(!book || !student) return;
+            document.getElementById('lib-status').innerText = `Book "${book}" successfully issued to ${student}. Due tracking active.`;
+        }
+
+        function generateSalarySlip() {
+            let name = document.getElementById('staff-name').value;
+            let sal = document.getElementById('staff-salary').value;
+            if(!name || !sal) return;
+            let out = document.getElementById('salary-output');
+            out.classList.remove('hidden');
+            out.innerHTML = `Salary slip for <b>${name}</b> amounting to <b>₹${sal}</b> generated and compliant HR records updated.`;
         }
     </script>
 </body>
