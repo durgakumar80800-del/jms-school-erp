@@ -126,7 +126,7 @@
                     <div class="border-b pb-4 flex justify-between items-center flex-wrap gap-4">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800">📚 Tab 4: Premium Unique Academic Certificates & Admit Card Hub</h3>
-                            <p class="text-xs text-slate-500">Generate stunning documents with school logo, passport size photo and centered header.</p>
+                            <p class="text-xs text-slate-500">Generate clean documents with centered headers, passport photos, and a premium watermark.</p>
                         </div>
                         <!-- Document Type Switcher -->
                         <div class="flex gap-2 flex-wrap text-xs">
@@ -230,18 +230,17 @@
                     <!-- LIVE UNIQUE & PREMIUM PREVIEW CONTAINER -->
                     <div id="printable-certificate" class="bg-white border-4 border-double border-slate-800 rounded-2xl p-8 shadow-2xl space-y-6 relative overflow-hidden">
                         
-                        <!-- Watermark -->
-                        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
-                            <h1 class="text-7xl font-black uppercase tracking-widest text-slate-900" x-text="settings.schoolName"></h1>
+                        <!-- Premium Attractive Multi-Layer Watermark (Centered Background Crest) -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center opacity-[0.04] pointer-events-none select-none space-y-2">
+                            <div class="text-9xl">🏛️</div>
+                            <h1 class="text-4xl font-black uppercase tracking-widest text-center max-w-xl" x-text="settings.schoolName"></h1>
+                            <p class="text-xl font-bold uppercase tracking-widest">★ OFFICIAL DOCUMENT ★</p>
                         </div>
 
                         <!-- 1. UNIQUE ADMIT CARD DESIGN -->
-                        <div x-show="docType === 'admitCard'" class="space-y-6">
-                            <!-- School Logo & Centered Header -->
-                            <div class="text-center border-b-2 border-slate-900 pb-4 space-y-2">
-                                <div class="flex justify-center">
-                                    <img src="https://i.ibb.co/68H8w82/school-logo.png" style="mix-blend-mode: multiply;" class="w-20 h-20 object-contain drop-shadow" alt="School Logo" @error="$el.src='https://raw.githubusercontent.com/username/repo/main/logo.png'">
-                                </div>
+                        <div x-show="docType === 'admitCard'" class="space-y-6 relative z-10">
+                            <!-- School Name Centered Header -->
+                            <div class="text-center border-b-2 border-slate-900 pb-4 space-y-1">
                                 <h2 class="text-2xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-xs text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
                                 <div class="inline-block mt-1 bg-slate-900 text-amber-400 px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
@@ -300,14 +299,11 @@
                         </div>
 
                         <!-- 2. UNIQUE MARKSHEET DESIGN -->
-                        <div x-show="docType === 'marksheet'" class="space-y-6">
-                            <!-- School Logo & Centered Header -->
-                            <div class="text-center border-b-2 border-blue-900 pb-4 space-y-2">
-                                <div class="flex justify-center">
-                                    <img src="https://i.ibb.co/68H8w82/school-logo.png" style="mix-blend-mode: multiply;" class="w-20 h-20 object-contain drop-shadow" alt="School Logo">
-                                </div>
+                        <div x-show="docType === 'marksheet'" class="space-y-6 relative z-10">
+                            <!-- School Name Centered Header -->
+                            <div class="text-center border-b-2 border-blue-900 pb-4 space-y-1">
                                 <span class="bg-blue-100 text-blue-900 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-widest">OFFICIAL BOARD REPORT CARD</span>
-                                <h2 class="text-2xl font-black text-blue-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
+                                <h2 class="text-2xl font-black text-blue-950 uppercase tracking-wider mt-1" x-text="settings.schoolName"></h2>
                                 <p class="text-xs text-slate-600 font-bold" x-text="'Performance Evaluation: ' + formData.examTitle"></p>
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-xs bg-blue-50/60 p-4 rounded-xl border border-blue-200">
@@ -353,12 +349,9 @@
                         </div>
 
                         <!-- 3. UNIQUE BONAFIDE CERTIFICATE DESIGN -->
-                        <div x-show="docType === 'bonafide'" class="space-y-6 text-center py-8 px-6 bg-gradient-to-b from-amber-50/40 to-white rounded-2xl border-2 border-amber-300">
-                            <!-- School Logo & Centered Header -->
-                            <div class="space-y-2 pb-4 border-b border-amber-200">
-                                <div class="flex justify-center">
-                                    <img src="https://i.ibb.co/68H8w82/school-logo.png" style="mix-blend-mode: multiply;" class="w-20 h-20 object-contain drop-shadow" alt="School Logo">
-                                </div>
+                        <div x-show="docType === 'bonafide'" class="space-y-6 text-center py-8 px-6 bg-gradient-to-b from-amber-50/40 to-white rounded-2xl border-2 border-amber-300 relative z-10">
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-amber-200">
                                 <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
                             </div>
@@ -380,12 +373,9 @@
                         </div>
 
                         <!-- 4. UNIQUE SCHOOL LEAVING / TC DESIGN -->
-                        <div x-show="docType === 'leaving'" class="space-y-6 text-center py-8 px-6 bg-slate-50 rounded-2xl border-2 border-slate-400">
-                            <!-- School Logo & Centered Header -->
-                            <div class="space-y-2 pb-4 border-b border-slate-300">
-                                <div class="flex justify-center">
-                                    <img src="https://i.ibb.co/68H8w82/school-logo.png" style="mix-blend-mode: multiply;" class="w-20 h-20 object-contain drop-shadow" alt="School Logo">
-                                </div>
+                        <div x-show="docType === 'leaving'" class="space-y-6 text-center py-8 px-6 bg-slate-50 rounded-2xl border-2 border-slate-400 relative z-10">
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-slate-300">
                                 <h2 class="text-xl font-black text-slate-900 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-slate-600 font-bold" x-text="settings.schoolLocation + ' | UDISE: ' + settings.udiseCode"></p>
                             </div>
@@ -405,14 +395,11 @@
                         </div>
 
                         <!-- 5. UNIQUE EXTRA-CURRICULAR / EXCELLENCE CERTIFICATE DESIGN -->
-                        <div x-show="docType === 'extracurric'" class="space-y-6 text-center py-8 px-8 bg-gradient-to-tr from-amber-100 via-yellow-50 to-amber-50 rounded-2xl border-4 border-amber-500 shadow-xl relative">
+                        <div x-show="docType === 'extracurric'" class="space-y-6 text-center py-8 px-8 bg-gradient-to-tr from-amber-100 via-yellow-50 to-amber-50 rounded-2xl border-4 border-amber-500 shadow-xl relative z-10">
                             <div class="absolute top-4 right-6 text-3xl">🏆</div>
                             <div class="absolute top-4 left-6 text-3xl">🎖️</div>
-                            <!-- School Logo & Centered Header -->
-                            <div class="space-y-2 pb-4 border-b border-amber-300">
-                                <div class="flex justify-center">
-                                    <img src="https://i.ibb.co/68H8w82/school-logo.png" style="mix-blend-mode: multiply;" class="w-20 h-20 object-contain drop-shadow" alt="School Logo">
-                                </div>
+                            <!-- School Name Centered Header -->
+                            <div class="space-y-1 pb-4 border-b border-amber-300">
                                 <h2 class="text-xl font-black text-amber-950 uppercase tracking-wider" x-text="settings.schoolName"></h2>
                                 <p class="text-[11px] text-amber-900 font-bold" x-text="settings.schoolLocation + ' | Excellence Wing'"></p>
                             </div>
@@ -431,7 +418,7 @@
                         </div>
 
                         <!-- Signatures Footer -->
-                        <div class="flex justify-between items-end pt-10 text-xs px-4">
+                        <div class="flex justify-between items-end pt-10 text-xs px-4 relative z-10">
                             <div class="text-center space-y-1">
                                 <div class="font-black text-slate-900 text-sm" x-text="settings.directorName">Sanjay Kumar</div>
                                 <div class="border-t-2 border-slate-800 pt-1 text-slate-600 font-bold uppercase tracking-wider">Director</div>
