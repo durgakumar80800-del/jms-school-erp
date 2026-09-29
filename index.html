@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JMS Rising Public School - Advanced School ERP</title>
+    <title>JMS Rising Public School - ERP Portal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #printable-document, #printable-document * { visibility: visible; }
+            #printable-document { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
 </head>
 <body class="bg-slate-100 font-sans antialiased">
 
@@ -72,12 +79,12 @@
             </div>
             
             <div class="flex-1 overflow-y-auto py-3 px-3 space-y-1 text-sm">
-                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Detailed Modules</p>
+                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Modules</p>
                 
                 <a href="#" onclick="switchTab('overview')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg bg-indigo-600 text-white transition"><i class="fa-solid fa-chart-pie w-5"></i><span>Overview</span></a>
                 <a href="#" onclick="switchTab('fees')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-wallet w-5"></i><span>Fee Management</span></a>
                 <a href="#" onclick="switchTab('communication')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-comments w-5"></i><span>WhatsApp & Broadcast</span></a>
-                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i><span>Exams & Marksheets</span></a>
+                <a href="#" onclick="switchTab('marksheet')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i><span>Certificates & Marksheet</span></a>
                 <a href="#" onclick="switchTab('people')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-users w-5"></i><span>People & CRM</span></a>
                 <a href="#" onclick="switchTab('academics')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-book-open w-5"></i><span>Class & Timetable</span></a>
                 <a href="#" onclick="switchTab('operations')" class="nav-link flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition"><i class="fa-solid fa-boxes-stacked w-5"></i><span>Library & Inventory</span></a>
@@ -160,20 +167,6 @@
                             <div><label class="block text-xs font-semibold text-slate-600 mb-1">Payment Mode</label><select id="fee-mode" class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Cash Counter</option><option>UPI / Online Gateway</option><option>Card Payment</option></select></div>
                         </div>
                         <button onclick="collectFee()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Record Payment & Send Free WhatsApp Invoice</button>
-                        
-                        <div class="mt-6 border-t pt-4">
-                            <h4 class="font-semibold text-sm text-slate-700 mb-3">Recent Transactions</h4>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-sm" id="fee-table">
-                                    <thead class="bg-slate-50 text-slate-600 border-b">
-                                        <tr><th class="p-3">Receipt No</th><th class="p-3">Student Name</th><th class="p-3">Class</th><th class="p-3">Amount</th><th class="p-3">Mode</th><th class="p-3">Status</th></tr>
-                                    </thead>
-                                    <tbody class="divide-y">
-                                        <tr><td class="p-3">#RCP-101</td><td class="p-3">Aman Verma</td><td class="p-3">Class 10</td><td class="p-3">₹3,000</td><td class="p-3">UPI</td><td class="p-3 text-emerald-600 font-medium">Paid & Sent</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -181,49 +174,128 @@
                 <div id="tab-communication" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
                         <h3 class="text-lg font-bold text-slate-800 border-b pb-3">WhatsApp Integration & Broadcast Hub</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="space-y-4">
-                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Broadcast Type</label><select id="comm-type" class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Instant Announcement</option><option>School Circular</option><option>Fee Due Reminder</option><option>Event Notice</option></select></div>
-                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Target Audience</label><select class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>All Parents & Guardians</option><option>Staff & Teachers Only</option><option>Specific Class</option></select></div>
-                                <div><label class="block text-xs font-semibold text-slate-600 mb-1">Message Content</label><textarea id="comm-msg" rows="4" placeholder="Type your message here..." class="w-full border p-2.5 rounded-lg text-sm"></textarea></div>
-                                <button onclick="sendBroadcast()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Broadcast via SMS & WhatsApp API</button>
-                            </div>
-                            <div class="bg-slate-50 p-4 rounded-xl border flex flex-col justify-between">
-                                <div>
-                                    <h4 class="font-bold text-sm text-slate-700 mb-2">WhatsApp Integration Status</h4>
-                                    <p class="text-xs text-slate-500 mb-4">Official API gateway connected. 1 Free WhatsApp invoice included per student/month.</p>
-                                    <div id="comm-log" class="text-xs text-emerald-600 font-medium space-y-1"></div>
-                                </div>
-                                <div class="text-[11px] text-slate-400 border-t pt-2">JMS Rising Public School Notification Gateway Active</div>
-                            </div>
+                        <div class="space-y-4 max-w-xl">
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Broadcast Type</label><select id="comm-type" class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Instant Announcement</option><option>School Circular</option><option>Fee Due Reminder</option></select></div>
+                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Message Content</label><textarea id="comm-msg" rows="4" placeholder="Type message..." class="w-full border p-2.5 rounded-lg text-sm"></textarea></div>
+                            <button onclick="sendBroadcast()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Broadcast via WhatsApp API</button>
+                            <p id="comm-log" class="text-xs text-emerald-600 font-medium"></p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. MARKSHEETS & EXAMS -->
+                <!-- 4. CERTIFICATES & MARKSHEETS (ADVANCED STUDIO) -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Examination, Marks Entry & Report Card Generator</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Student Name</label><input type="text" id="mark-student" placeholder="Student Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Maths (100)</label><input type="number" id="mark-math" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Science (100)</label><input type="number" id="mark-sci" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">English (100)</label><input type="number" id="mark-eng" placeholder="Marks" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div class="flex items-end"><button onclick="calculateMarksheet()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">Generate</button></div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 gap-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-800">Student Document & Certification Studio</h3>
+                                <p class="text-xs text-slate-500">Design, Enter Data Manually, Attach Photos, and Print Official School Documents</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="switchDocType('admit')" class="doc-btn px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-bold transition">Admit Card</button>
+                                <button onclick="switchDocType('marksheet')" class="doc-btn px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">Marksheet</button>
+                                <button onclick="switchDocType('original')" class="doc-btn px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">Passing Cert.</button>
+                                <button onclick="switchDocType('bonafide')" class="doc-btn px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">Bonafide</button>
+                                <button onclick="switchDocType('extracurr')" class="doc-btn px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">Extra-Curricular</button>
+                            </div>
                         </div>
-                        <div id="marksheet-output" class="p-4 bg-slate-50 border rounded-xl text-sm hidden space-y-2"></div>
+
+                        <!-- Manual Input Controls Form -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <div class="bg-slate-50 p-4 rounded-xl border space-y-3 lg:col-span-1">
+                                <h4 class="font-bold text-xs uppercase text-slate-700 tracking-wider">Manual Data & Photo Input</h4>
+                                
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Student Full Name</label>
+                                    <input type="text" id="doc-name" value="Ankit Kumar Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Father's Name</label>
+                                    <input type="text" id="doc-father" value="Rajesh Sharma" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Class & Roll</label>
+                                        <input type="text" id="doc-class" value="Class 10th (Roll: 12)" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Registration No</label>
+                                        <input type="text" id="doc-reg" value="JMS/2026/894" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Student Photo (Image URL or Upload)</label>
+                                    <input type="text" id="doc-photo" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" placeholder="Paste image URL here" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                </div>
+
+                                <!-- Dynamic Dynamic Fields depending on type -->
+                                <div id="dynamic-inputs" class="space-y-3 pt-2 border-t">
+                                    <!-- Injected via JS -->
+                                </div>
+
+                                <button onclick="window.print()" class="w-full bg-emerald-600 text-white font-semibold py-2.5 rounded-lg text-sm shadow hover:bg-emerald-700 transition flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-print"></i><span>Print / Download PDF</span>
+                                </button>
+                            </div>
+
+                            <!-- Live Printable Document View -->
+                            <div class="lg:col-span-2 bg-white p-6 rounded-xl border-2 border-dashed border-indigo-200 flex items-center justify-center shadow-inner">
+                                <div id="printable-document" class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl border-4 border-double border-indigo-900 text-slate-800 relative space-y-4">
+                                    
+                                    <!-- School Header -->
+                                    <div class="text-center border-b-2 border-indigo-900 pb-3">
+                                        <h3 class="text-xl font-black uppercase text-indigo-950 tracking-wide">JMS Rising Public School</h3>
+                                        <p class="text-[11px] font-medium text-slate-600">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
+                                        <span id="doc-badge" class="inline-block mt-2 bg-indigo-900 text-white text-[11px] px-3 py-0.5 rounded-full font-bold uppercase tracking-widest">Admit Card 2026-27</span>
+                                    </div>
+
+                                    <!-- Student Profile & Photo Grid -->
+                                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                        <div class="space-y-1 text-xs">
+                                            <p><b>Name:</b> <span id="preview-name">Ankit Kumar Sharma</span></p>
+                                            <p><b>Father's Name:</b> <span id="preview-father">Rajesh Sharma</span></p>
+                                            <p><b>Class / Roll:</b> <span id="preview-class">Class 10th (Roll: 12)</span></p>
+                                            <p><b>Reg No:</b> <span id="preview-reg">JMS/2026/894</span></p>
+                                        </div>
+                                        <div class="w-20 h-24 bg-slate-200 rounded-lg overflow-hidden border-2 border-indigo-900 flex-shrink-0">
+                                            <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+
+                                    <!-- Main Content Body -->
+                                    <div id="preview-body" class="text-xs text-slate-700 min-h-[140px]">
+                                        <!-- Dynamic Body Content -->
+                                    </div>
+
+                                    <!-- Signatures Footer -->
+                                    <div class="pt-6 flex justify-between items-end border-t text-[11px]">
+                                        <div class="text-center">
+                                            <p class="font-bold text-slate-900">Sakshi Kumari</p>
+                                            <p class="text-slate-500">Principal Signature</p>
+                                        </div>
+                                        <div class="w-16 h-16 border rounded-full flex items-center justify-center text-[10px] font-bold text-indigo-900 bg-indigo-50 border-indigo-200 uppercase rotate-[-10deg]">
+                                            JMS Seal
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="font-bold text-slate-900">Sanjay Kumar</p>
+                                            <p class="text-slate-500">Director Signature</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- 5. PEOPLE & CRM -->
                 <div id="tab-people" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Student Admission CRM & Visitor Log</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Student Name</label><input type="text" id="crm-name" placeholder="Full Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Target Class</label><input type="text" id="crm-class" placeholder="Class" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Parent Phone</label><input type="text" id="crm-phone" placeholder="Mobile No" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div class="flex items-end"><button onclick="addAdmission()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Save Inquiry</button></div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Student Admission CRM</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" id="crm-name" placeholder="Full Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="text" id="crm-class" placeholder="Target Class" class="border p-2.5 rounded-lg text-sm">
+                            <button onclick="addAdmission()" class="bg-indigo-600 text-white rounded-lg text-sm font-semibold">Save Inquiry</button>
                         </div>
                         <div id="crm-list" class="text-sm text-slate-700 mt-2"></div>
                     </div>
@@ -232,11 +304,8 @@
                 <!-- 6. ACADEMICS & SCHEDULE -->
                 <div id="tab-academics" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Class Timetable & Homework Tracker</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Select Class</label><select class="w-full border p-2.5 rounded-lg text-sm bg-white"><option>Class 9th</option><option>Class 10th</option></select></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Homework Details</label><input type="text" id="hw-input" placeholder="e.g. Complete Exercise 4.2 in Maths" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Homework & Timetable</h3>
+                        <input type="text" id="hw-input" placeholder="Enter Homework Details" class="w-full border p-2.5 rounded-lg text-sm">
                         <button onclick="postHomework()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Broadcast Homework</button>
                         <p id="hw-status" class="text-emerald-600 text-sm font-medium"></p>
                     </div>
@@ -245,12 +314,12 @@
                 <!-- 7. OPERATIONS & STORE -->
                 <div id="tab-operations" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Library & Inventory Management</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Book Name / Asset</label><input type="text" id="lib-book" placeholder="Book Title" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Issued To Student</label><input type="text" id="lib-student" placeholder="Student Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div class="flex items-end"><button onclick="issueBook()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Issue Book</button></div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Library & Inventory</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="lib-book" placeholder="Book Title" class="border p-2.5 rounded-lg text-sm">
+                            <input type="text" id="lib-student" placeholder="Student Name" class="border p-2.5 rounded-lg text-sm">
                         </div>
+                        <button onclick="issueBook()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Issue Book</button>
                         <p id="lib-status" class="text-emerald-600 text-sm font-medium"></p>
                     </div>
                 </div>
@@ -258,12 +327,12 @@
                 <!-- 8. HR & PAYROLL -->
                 <div id="tab-hr" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Staff Attendance & Payroll Automation</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Staff Member Name</label><input type="text" id="staff-name" placeholder="Teacher Name" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-semibold text-slate-600 mb-1">Monthly Salary (₹)</label><input type="number" id="staff-salary" placeholder="Salary Amount" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                            <div class="flex items-end"><button onclick="generateSalarySlip()" class="w-full bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-semibold">Generate Salary Slip</button></div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Staff Payroll</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="staff-name" placeholder="Teacher Name" class="border p-2.5 rounded-lg text-sm">
+                            <input type="number" id="staff-salary" placeholder="Salary Amount" class="border p-2.5 rounded-lg text-sm">
                         </div>
+                        <button onclick="generateSalarySlip()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Generate Slip</button>
                         <div id="salary-output" class="p-4 bg-slate-50 border rounded-xl text-sm hidden"></div>
                     </div>
                 </div>
@@ -271,35 +340,26 @@
                 <!-- 9. TRANSPORT & GPS -->
                 <div id="tab-transport" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Transport & GPS Bus Tracking</h3>
-                        <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-xl space-y-2">
-                            <h4 class="font-bold text-slate-800 text-sm">Bus Route #1: Barhi to Rasoiya Dhamna</h4>
-                            <p class="text-xs text-slate-600">Vehicle No: <b>JH-12-AB-3456</b> | Driver: Ramesh Singh (Ph: 9876543210)</p>
-                            <p class="text-xs text-emerald-600 font-semibold">Status: GPS Live Tracking Active (Speed: 38 km/h)</p>
-                        </div>
-                        <button onclick="alert('GPS Ping refreshed successfully. Bus is on scheduled route.')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Ping Live Bus Location</button>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Transport & GPS Tracking</h3>
+                        <p class="text-sm text-slate-600">Bus Route #1: Barhi to Rasoiya Dhamna active.</p>
+                        <button onclick="alert('GPS Ping refreshed!')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Ping Bus Location</button>
                     </div>
                 </div>
 
                 <!-- 10. REPORTS & ANALYTICS -->
                 <div id="tab-reports" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Detailed Analytics & Reports</h3>
-                        <p class="text-sm text-slate-600">Comprehensive administrative summary for JMS Rising Public School, Barhi.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Fee Collection Rate</p><h4 class="text-xl font-bold text-slate-800 mt-1">91.2%</h4></div>
-                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Overall Student Pass %</p><h4 class="text-xl font-bold text-slate-800 mt-1">96.8%</h4></div>
-                            <div class="p-4 bg-slate-50 border rounded-xl"><p class="text-xs text-slate-500">Staff Attendance Rate</p><h4 class="text-xl font-bold text-slate-800 mt-1">98.5%</h4></div>
-                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">Reports & Analytics</h3>
+                        <p class="text-sm text-slate-600">Fee collection and performance statistics compiled.</p>
                     </div>
                 </div>
 
                 <!-- 11. UDISE+ REPORT -->
                 <div id="tab-udise" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5">
-                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">UDISE+ Report Generation</h3>
-                        <p class="text-sm text-slate-600">Compile official UDISE+ school data profile, infrastructure details, and enrollment records for government compliance.</p>
-                        <button onclick="alert('UDISE+ Data compiled and exported successfully in structured format.')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Export UDISE+ Compliance Report</button>
+                        <h3 class="text-lg font-bold text-slate-800 border-b pb-3">UDISE+ Report</h3>
+                        <p class="text-sm text-slate-600">JMS Rising Public School, Barhi UDISE profile ready.</p>
+                        <button onclick="alert('UDISE+ exported successfully!')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Export Report</button>
                     </div>
                 </div>
 
@@ -308,10 +368,7 @@
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-5 max-w-xl">
                         <h3 class="text-lg font-bold text-slate-800 border-b pb-3">System Settings</h3>
                         <div><label class="block text-xs font-bold text-slate-700 mb-1">School Name</label><input type="text" value="JMS Rising Public School" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Location</label><input type="text" value="Rasoiya Dhamna, Barhi" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Director</label><input type="text" value="Sanjay Kumar" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-slate-700 mb-1">Principal</label><input type="text" value="Sakshi Kumari" class="w-full border p-2.5 rounded-lg text-sm"></div>
-                        <button onclick="alert('Settings updated successfully!')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Save Configuration</button>
+                        <button onclick="alert('Settings updated!')" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold">Save Changes</button>
                     </div>
                 </div>
 
@@ -349,90 +406,199 @@
             
             const titles = {
                 'overview': 'Dashboard Overview', 'fees': 'Fee Management & Cash Counter', 'communication': 'WhatsApp & Broadcast Hub',
-                'marksheet': 'Exams & Marksheet Generator', 'people': 'People & Admission CRM', 'academics': 'Class Timetable & Homework',
+                'marksheet': 'Student Document & Certification Studio', 'people': 'People & Admission CRM', 'academics': 'Class Timetable & Homework',
                 'operations': 'Library & Inventory', 'hr': 'Staff Payroll & HR', 'transport': 'Transport & GPS Tracking',
                 'reports': 'Reports & Analytics', 'udise': 'UDISE+ Report', 'settings': 'System Settings'
             };
             document.getElementById('current-title').innerText = titles[tabId] || 'Dashboard';
         }
 
-        let receiptCounter = 102;
-        function collectFee() {
-            let name = document.getElementById('fee-student').value;
-            let cls = document.getElementById('fee-class').value;
-            let amt = document.getElementById('fee-amount').value;
-            let mode = document.getElementById('fee-mode').value;
-            if(!name || !amt) { alert('Please enter student name and amount'); return; }
-            
-            let tbody = document.querySelector('#fee-table tbody');
-            let row = document.createElement('tr');
-            row.innerHTML = `<td class="p-3">#RCP-${receiptCounter++}</td><td class="p-3">${name}</td><td class="p-3">${cls}</td><td class="p-3">₹${amt}</td><td class="p-3">${mode}</td><td class="p-3 text-emerald-600 font-medium">Paid & WhatsApp Sent</td>`;
-            tbody.prepend(row);
-            alert(`Fee of ₹${amt} successfully collected from ${name}! Free WhatsApp invoice sent.`);
-            document.getElementById('fee-student').value = '';
-            document.getElementById('fee-amount').value = '';
+        // ================= CERTIFICATE STUDIO LOGIC =================
+        let currentDoc = 'admit';
+
+        function switchDocType(type) {
+            currentDoc = type;
+            document.querySelectorAll('.doc-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-200', 'text-slate-700');
+            });
+            event.currentTarget.classList.remove('bg-slate-200', 'text-slate-700');
+            event.currentTarget.classList.add('bg-indigo-600', 'text-white');
+
+            const badges = {
+                'admit': 'Annual Exam Admit Card 2026',
+                'marksheet': 'Statement of Marks (Report Card)',
+                'original': 'Original Passing Certificate',
+                'bonafide': 'Bonafide Student Certificate',
+                'extracurr': 'Extra-Curricular Achievement Award'
+            };
+            document.getElementById('doc-badge').innerText = badges[type];
+
+            renderDynamicInputs();
+            updateDocumentPreview();
         }
 
-        function sendBroadcast() {
-            let msg = document.getElementById('comm-msg').value;
-            let type = document.getElementById('comm-type').value;
-            if(!msg) { alert('Please type a message'); return; }
-            let log = document.getElementById('comm-log');
-            log.innerHTML += `<div>[Sent] ${type}: "${msg.substring(0, 35)}..." via WhatsApp API</div>`;
-            alert('Broadcast successfully sent to parents and staff via WhatsApp & SMS!');
-            document.getElementById('comm-msg').value = '';
+        function renderDynamicInputs() {
+            let container = document.getElementById('dynamic-inputs');
+            if(currentDoc === 'admit') {
+                container.innerHTML = `
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Exam Center</label><input type="text" id="inp-center" value="JMS Campus, Rasoiya Dhamna, Barhi" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Exam Dates</label><input type="text" id="inp-dates" value="March 10 - March 22, 2026" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                `;
+            } else if(currentDoc === 'marksheet') {
+                container.innerHTML = `
+                    <div class="grid grid-cols-3 gap-2">
+                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">Maths (100)</label><input type="number" id="m-math" value="88" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
+                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">Science (100)</label><input type="number" id="m-sci" value="92" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
+                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">English (100)</label><input type="number" id="m-eng" value="85" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
+                    </div>
+                `;
+            } else if(currentDoc === 'original') {
+                container.innerHTML = `
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Division / Grade Awarded</label><input type="text" id="inp-div" value="FIRST DIVISION WITH DISTINCTION" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Academic Session</label><input type="text" id="inp-sess" value="2025 - 2026" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                `;
+            } else if(currentDoc === 'bonafide') {
+                container.innerHTML = `
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Purpose / Reason</label><input type="text" id="inp-purp" value="Passport / Bank Scholarship verification" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                `;
+            } else if(currentDoc === 'extracurr') {
+                container.innerHTML = `
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Activity / Event Name</label><input type="text" id="inp-act" value="Inter-School Science Exhibition & Quiz" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                    <div><label class="block text-xs font-semibold text-slate-600 mb-1">Position / Rank</label><input type="text" id="inp-pos" value="1st Position (Gold Medalist)" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
+                `;
+            }
         }
 
-        function calculateMarksheet() {
-            let name = document.getElementById('mark-student').value;
-            let m1 = parseFloat(document.getElementById('mark-math').value) || 0;
-            let m2 = parseFloat(document.getElementById('mark-sci').value) || 0;
-            let m3 = parseFloat(document.getElementById('mark-eng').value) || 0;
-            if(!name) { alert('Please enter student name'); return; }
-            
-            let total = m1 + m2 + m3;
-            let percentage = (total / 300) * 100;
-            let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : 'B (Pass)';
+        function updateDocumentPreview() {
+            // General Details
+            document.getElementById('preview-name').innerText = document.getElementById('doc-name').value;
+            document.getElementById('preview-father').innerText = document.getElementById('doc-father').value;
+            document.getElementById('preview-class').innerText = document.getElementById('doc-class').value;
+            document.getElementById('preview-reg').innerText = document.getElementById('doc-reg').value;
+            let photoUrl = document.getElementById('doc-photo').value;
+            if(photoUrl) document.getElementById('preview-img').src = photoUrl;
 
-            let output = document.getElementById('marksheet-output');
-            output.classList.remove('hidden');
-            output.innerHTML = `<h4 class="font-bold text-slate-800">Report Card: ${name}</h4>
-                <p>Maths: ${m1} | Science: ${m2} | English: ${m3}</p>
-                <p><b>Total Marks:</b> ${total}/300 | <b>Percentage:</b> ${percentage.toFixed(2)}% | <b>Grade:</b> ${grade}</p>
-                <span class="text-indigo-600 font-semibold block mt-1">Digital mark sheet generated and made visible on Parent Portal.</span>`;
+            let body = document.getElementById('preview-body');
+
+            if(currentDoc === 'admit') {
+                let center = document.getElementById('inp-center')?.value || '';
+                let dates = document.getElementById('inp-dates')?.value || '';
+                body.innerHTML = `
+                    <div class="space-y-2">
+                        <p class="font-semibold text-center text-indigo-900">CERTIFICATE OF EXAMINATION PERMISSION</p>
+                        <p>This is to certify that the above-named student is duly registered and permitted to appear for the examinations at the designated center below:</p>
+                        <div class="p-2.5 bg-slate-50 border rounded text-xs space-y-1">
+                            <p><b>Exam Center:</b> ${center}</p>
+                            <p><b>Schedule:</b> ${dates}</p>
+                        </div>
+                        <p class="text-[10px] text-slate-500 text-center mt-2">Candidate must bring this admit card along with school ID on all exam days.</p>
+                    </div>
+                `;
+            } else if(currentDoc === 'marksheet') {
+                let m1 = parseFloat(document.getElementById('m-math')?.value) || 0;
+                let m2 = parseFloat(document.getElementById('m-sci')?.value) || 0;
+                let m3 = parseFloat(document.getElementById('m-eng')?.value) || 0;
+                let total = m1 + m2 + m3;
+                let percentage = (total / 300) * 100;
+                let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : 'B';
+
+                body.innerHTML = `
+                    <div class="space-y-2">
+                        <table class="w-full text-left border text-xs">
+                            <tr class="bg-indigo-50 border-b"><th class="p-1.5">Subject</th><th class="p-1.5">Max Marks</th><th class="p-1.5">Marks Obtained</th></tr>
+                            <tr class="border-b"><td class="p-1.5">Mathematics</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m1}</td></tr>
+                            <tr class="border-b"><td class="p-1.5">Science</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m2}</td></tr>
+                            <tr class="border-b"><td class="p-1.5">English</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m3}</td></tr>
+                        </table>
+                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded text-xs font-bold">
+                            <span>Total: ${total}/300</span>
+                            <span>Percentage: ${percentage.toFixed(2)}%</span>
+                            <span class="text-indigo-700">Grade: ${grade}</span>
+                        </div>
+                    </div>
+                `;
+            } else if(currentDoc === 'original') {
+                let div = document.getElementById('inp-div')?.value || '';
+                let sess = document.getElementById('inp-sess')?.value || '';
+                body.innerHTML = `
+                    <div class="text-center space-y-3 py-2">
+                        <p class="text-xs uppercase tracking-wide text-slate-600">This is to certify that</p>
+                        <p class="text-base font-black text-indigo-950 uppercase">${document.getElementById('doc-name').value}</p>
+                        <p class="text-xs text-slate-600">Son/Daughter of Sri ${document.getElementById('doc-father').value} has successfully completed the course of studies and passed the annual examination held in session <b>${sess}</b>.</p>
+                        <div class="inline-block bg-amber-50 border border-amber-200 px-4 py-1.5 rounded-lg text-amber-900 font-bold text-xs">
+                            Classification: ${div}
+                        </div>
+                    </div>
+                `;
+            } else if(currentDoc === 'bonafide') {
+                let purp = document.getElementById('inp-purp')?.value || '';
+                body.innerHTML = `
+                    <div class="space-y-3 py-2 text-justify">
+                        <p>To Whomsoever It May Concern,</p>
+                        <p>This is to certify that <b>${document.getElementById('doc-name').value}</b>, son/daughter of Sri <b>${document.getElementById('doc-father').value}</b>, is a bonafide student of JMS Rising Public School, Rasoiya Dhamna, Barhi, currently enrolled in <b>${document.getElementById('doc-class').value}</b> during the academic session.</p>
+                        <p>This certificate is issued upon request for the specific purpose of: <b>${purp}</b>.</p>
+                    </div>
+                `;
+            } else if(currentDoc === 'extracurr') {
+                let act = document.getElementById('inp-act')?.value || '';
+                let pos = document.getElementById('inp-pos')?.value || '';
+                body.innerHTML = `
+                    <div class="text-center space-y-3 py-2">
+                        <p class="text-xs uppercase tracking-widest text-indigo-800 font-bold">Certificate of Merit & Excellence</p>
+                        <p class="text-xs">This certificate is proudly presented to</p>
+                        <p class="text-base font-black text-indigo-950">${document.getElementById('doc-name').value}</p>
+                        <p class="text-xs text-slate-600">for outstanding participation and securing <b>${pos}</b> in the event titled <b>"${act}"</b> organized at JMS Rising Public School.</p>
+                    </div>
+                `;
+            }
         }
 
+        // Initialize first view
+        window.onload = function() {
+            renderDynamicInputs();
+            updateDocumentPreview();
+        };
+
+        // Other basic functions
         let admissionCount = 1250;
         function addAdmission() {
             let name = document.getElementById('crm-name').value;
             let cls = document.getElementById('crm-class').value;
-            let phone = document.getElementById('crm-phone').value;
             if(!name) { alert('Enter student name'); return; }
             admissionCount++;
             document.getElementById('stat-students').innerText = admissionCount;
-            document.getElementById('crm-list').innerHTML = `<div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800"><b>New Inquiry Recorded:</b> ${name} for Class ${cls} (Contact: ${phone}). Total strength updated.</div>`;
+            document.getElementById('crm-list').innerHTML = `<div class="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800">Inquiry recorded for ${name} (${cls}). Total updated.</div>`;
         }
-
         function postHomework() {
             let hw = document.getElementById('hw-input').value;
             if(!hw) return;
-            document.getElementById('hw-status').innerText = 'Homework broadcasted successfully to all student mobile apps and parent portals!';
+            document.getElementById('hw-status').innerText = 'Homework broadcasted successfully!';
         }
-
         function issueBook() {
             let book = document.getElementById('lib-book').value;
             let student = document.getElementById('lib-student').value;
             if(!book || !student) return;
-            document.getElementById('lib-status').innerText = `Book "${book}" successfully issued to ${student}. Due date tracked automatically.`;
+            document.getElementById('lib-status').innerText = `Book "${book}" issued to ${student}.`;
         }
-
         function generateSalarySlip() {
             let name = document.getElementById('staff-name').value;
             let sal = document.getElementById('staff-salary').value;
             if(!name || !sal) return;
             let out = document.getElementById('salary-output');
             out.classList.remove('hidden');
-            out.innerHTML = `<h4 class="font-bold text-slate-800">Salary Slip Generated</h4><p>Staff: <b>${name}</b></p><p>Net Payable Salary: <b>₹${sal}</b></p><span class="text-emerald-600 font-semibold">HR compliance records and bank disbursement file updated.</span>`;
+            out.innerHTML = `Salary slip generated for <b>${name}</b> amounting to <b>₹${sal}</b>.`;
+        }
+        function collectFee() {
+            let name = document.getElementById('fee-student').value;
+            let amt = document.getElementById('fee-amount').value;
+            if(!name || !amt) { alert('Enter details'); return; }
+            alert(`Fee of ₹${amt} collected from ${name}! WhatsApp invoice sent.`);
+        }
+        function sendBroadcast() {
+            let msg = document.getElementById('comm-msg').value;
+            if(!msg) { alert('Type message'); return; }
+            document.getElementById('comm-log').innerText = 'Broadcast sent successfully via WhatsApp!';
         }
     </script>
 </body>
