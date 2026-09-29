@@ -183,13 +183,13 @@
                     </div>
                 </div>
 
-                <!-- 4. CERTIFICATES & MARKSHEETS (PREMIUM WHITE & GOLD STUDIO WITH CIRCULAR SCHOOL LOGO SECTION) -->
+                <!-- 4. CERTIFICATES & MARKSHEETS (PREMIUM WHITE & GOLD STUDIO WITH FULL FIELDS) -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 gap-4">
                             <div>
                                 <h3 class="text-lg font-bold text-slate-800">Premium White & Gold Certificate Studio</h3>
-                                <p class="text-xs text-slate-500">Manage school logo, customize all fields, subjects, and print professional white-background certificates</p>
+                                <p class="text-xs text-slate-500">Manage school logo, complete student details, and print professional white-background certificates</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="switchDocType('admit')" class="doc-btn px-3 py-1.5 bg-amber-700 text-white rounded-lg text-xs font-bold transition shadow-sm">Admit Card</button>
@@ -208,7 +208,7 @@
                                 <!-- Circular School Logo Upload Section -->
                                 <div class="bg-white p-3 rounded-lg border text-center space-y-2">
                                     <label class="block text-xs font-bold text-slate-700 uppercase">School Logo Upload (Circular Space)</label>
-                                    <div class="w-20 h-20 mx-auto rounded-full border-2 border-dashed border-amber-600 overflow-hidden bg-slate-100 flex items-center justify-center shadow-inner">
+                                    <div class="w-16 h-16 mx-auto rounded-full border-2 border-dashed border-amber-600 overflow-hidden bg-slate-100 flex items-center justify-center shadow-inner">
                                         <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-preview">
                                     </div>
                                     <input type="file" id="school-logo-file" accept="image/*" onchange="handleSchoolLogoUpload(event)" class="w-full border p-1 rounded text-[11px] bg-white file:mr-2 file:py-0.5 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
@@ -251,7 +251,7 @@
                                     <input type="file" id="doc-photo-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full border p-1.5 rounded text-xs bg-white file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
                                 </div>
 
-                                <!-- Dynamic Fully Editable Fields -->
+                                <!-- Dynamic Fully Editable Fields based on Document Type -->
                                 <div id="dynamic-inputs" class="space-y-3 pt-2 border-t">
                                     <!-- Injected via JS -->
                                 </div>
@@ -263,7 +263,7 @@
 
                             <!-- Live Premium White & Gold Landscape Document View -->
                             <div class="lg:col-span-2 bg-slate-900 p-6 rounded-xl border border-amber-900/40 flex items-center justify-center shadow-2xl overflow-x-auto">
-                                <div id="printable-document" class="w-[720px] h-[480px] bg-white p-8 rounded-xl shadow-2xl relative flex flex-col justify-between overflow-hidden border-[6px] border-amber-600 ring-4 ring-amber-100">
+                                <div id="printable-document" class="w-[720px] h-[480px] bg-white p-6 rounded-xl shadow-2xl relative flex flex-col justify-between overflow-hidden border-[6px] border-amber-600 ring-4 ring-amber-100">
                                     
                                     <!-- Inner Decorative Gold Border Frame -->
                                     <div class="absolute inset-2 border border-amber-400 pointer-events-none rounded-lg"></div>
@@ -275,46 +275,46 @@
                                     </div>
 
                                     <!-- School Header (Landscape with Uploaded Circular Logo & Centered School Name) -->
-                                    <div class="border-b-2 border-amber-600 pb-3 relative z-10 flex justify-between items-center">
+                                    <div class="border-b-2 border-amber-600 pb-2 relative z-10 flex justify-between items-center">
                                         <!-- Circular School Logo on Left -->
-                                        <div class="w-16 h-16 rounded-full border-2 border-amber-600 overflow-hidden bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                                        <div class="w-14 h-14 rounded-full border-2 border-amber-600 overflow-hidden bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                                             <img src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fae?w=150" alt="School Logo" class="w-full h-full object-cover" id="school-logo-img-preview">
                                         </div>
 
                                         <!-- Centered School Name & Address -->
                                         <div class="text-center flex-1 px-4">
                                             <div class="text-[9px] font-bold text-amber-800 uppercase tracking-widest">ISO 9001:2015 Certified Institute</div>
-                                            <h3 class="text-xl font-black uppercase text-slate-900 tracking-wide font-serif">JMS Rising Public School</h3>
-                                            <p class="text-[10px] font-semibold text-slate-600">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
+                                            <h3 class="text-lg font-black uppercase text-slate-900 tracking-wide font-serif">JMS Rising Public School</h3>
+                                            <p class="text-[9px] font-semibold text-slate-600">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
                                             <div class="mt-1">
                                                 <span id="doc-badge" class="inline-block bg-amber-700 text-white text-[9px] px-3 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">Annual Exam Admit Card</span>
                                             </div>
                                         </div>
 
                                         <!-- Student Photo on Right -->
-                                        <div class="w-16 h-20 bg-slate-100 rounded border-2 border-amber-600 overflow-hidden flex-shrink-0 shadow-sm">
+                                        <div class="w-14 h-18 bg-slate-100 rounded border-2 border-amber-600 overflow-hidden flex-shrink-0 shadow-sm">
                                             <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="w-full h-full object-cover">
                                         </div>
                                     </div>
 
-                                    <!-- Main Landscape Content Body -->
-                                    <div id="preview-body" class="text-xs text-slate-800 my-auto relative z-10 space-y-3 px-2">
+                                    <!-- Main Landscape Content Body with Name, Parents Name, etc. -->
+                                    <div id="preview-body" class="text-xs text-slate-800 my-auto relative z-10 space-y-2 px-2">
                                         <!-- Dynamic Body Content -->
                                     </div>
 
                                     <!-- Signatures Footer (Landscape) -->
-                                    <div class="pt-3 flex justify-between items-end border-t border-amber-200 text-[11px] relative z-10 px-2">
+                                    <div class="pt-2 flex justify-between items-end border-t border-amber-200 text-[11px] relative z-10 px-2">
                                         <div class="text-center">
-                                            <div class="font-serif italic text-amber-900 text-xs font-bold" id="footer-prin-name">Sakshi Kumari</div>
+                                            <div class="font-serif italic text-amber-900 text-xs font-bold">Sakshi Kumari</div>
                                             <div class="w-24 border-t border-amber-600 mt-0.5"></div>
                                             <p class="font-bold text-slate-800 mt-0.5 text-[10px]">Principal Signature</p>
                                         </div>
                                         <div class="text-center">
-                                            <div class="w-10 h-10 mx-auto rounded-full border-2 border-amber-600 flex items-center justify-center text-[9px] font-bold text-amber-700 bg-amber-50">JMS</div>
-                                            <p class="text-[9px] text-amber-800 font-semibold mt-0.5">Official Seal</p>
+                                            <div class="w-8 h-8 mx-auto rounded-full border-2 border-amber-600 flex items-center justify-center text-[8px] font-bold text-amber-700 bg-amber-50">JMS</div>
+                                            <p class="text-[8px] text-amber-800 font-semibold mt-0.5">Official Seal</p>
                                         </div>
                                         <div class="text-center">
-                                            <div class="font-serif italic text-amber-900 text-xs font-bold" id="footer-dir-name">Sanjay Kumar</div>
+                                            <div class="font-serif italic text-amber-900 text-xs font-bold">Sanjay Kumar</div>
                                             <div class="w-24 border-t border-amber-600 mt-0.5"></div>
                                             <p class="font-bold text-slate-800 mt-0.5 text-[10px]">Director Signature</p>
                                         </div>
@@ -375,7 +375,7 @@
                     </div>
                 </div>
 
-                <!-- Remaining Tabs Placeholder/Closing structure -->
+                <!-- Other Tabs Placeholders -->
                 <div id="tab-transport" class="tab-content hidden space-y-6"></div>
                 <div id="tab-reports" class="tab-content hidden space-y-6"></div>
                 <div id="tab-udise" class="tab-content hidden space-y-6"></div>
@@ -386,7 +386,13 @@
     </div>
 
     <script>
-        // School Logo Upload Handler Function
+        let currentDocType = 'admit';
+
+        // Initialize Studio on load
+        window.onload = function() {
+            switchDocType('admit');
+        };
+
         function handleSchoolLogoUpload(event) {
             const file = event.target.files[0];
             if (file) {
@@ -399,7 +405,6 @@
             }
         }
 
-        // Student Photo Upload Handler
         function handleImageUpload(event) {
             const file = event.target.files[0];
             if (file) {
@@ -411,7 +416,6 @@
             }
         }
 
-        // Basic Tab Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-' + tabId).classList.remove('hidden');
@@ -429,13 +433,139 @@
             document.getElementById('login-screen').classList.remove('hidden');
         }
 
-        // Placeholder functions for studio updates
         function switchDocType(type) {
-            // Document type switcher logic
+            currentDocType = type;
+            document.querySelectorAll('.doc-btn').forEach(btn => {
+                btn.className = "doc-btn px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs font-bold transition border";
+            });
+            event.target.className = "doc-btn px-3 py-1.5 bg-amber-700 text-white rounded-lg text-xs font-bold transition shadow-sm";
+
+            const badge = document.getElementById('doc-badge');
+            const dynamicInputs = document.getElementById('dynamic-inputs');
+            
+            if(type === 'admit') {
+                badge.innerText = "Annual Examination Admit Card - 2026";
+                dynamicInputs.innerHTML = `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Examination Center</label>
+                        <input type="text" id="doc-extra1" value="JMS Rising Public School, Barhi" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                    </div>
+                `;
+            } else if(type === 'marksheet') {
+                badge.innerText = "Statement of Marks (Marksheet)";
+                dynamicInputs.innerHTML = `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Total Marks / Percentage</label>
+                        <input type="text" id="doc-extra1" value="480/500 (96% - Distinction)" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                    </div>
+                `;
+            } else if(type === 'original') {
+                badge.innerText = "Certificate of Passing";
+                dynamicInputs.innerHTML = `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Division / Grade Awarded</label>
+                        <input type="text" id="doc-extra1" value="First Division with Honours" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                    </div>
+                `;
+            } else if(type === 'bonafide') {
+                badge.innerText = "Bonafide Student Certificate";
+                dynamicInputs.innerHTML = `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Purpose of Certificate</label>
+                        <input type="text" id="doc-extra1" value="Passport / Scholarship Application" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                    </div>
+                `;
+            } else if(type === 'extracurr') {
+                badge.innerText = "Extra-Curricular Achievement Award";
+                dynamicInputs.innerHTML = `
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Activity / Event Name</label>
+                        <input type="text" id="doc-extra1" value="Inter-School Science Exhibition 1st Prize" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                    </div>
+                `;
+            }
+            updateDocumentPreview();
         }
 
         function updateDocumentPreview() {
-            // Update preview live
+            const name = document.getElementById('doc-name').value;
+            const father = document.getElementById('doc-father').value;
+            const mother = document.getElementById('doc-mother').value;
+            const className = document.getElementById('doc-class').value;
+            const roll = document.getElementById('doc-roll').value;
+            const dob = document.getElementById('doc-dob').value;
+            const reg = document.getElementById('doc-reg').value;
+            const extra1El = document.getElementById('doc-extra1');
+            const extra1 = extra1El ? extra1El.value : '';
+
+            const body = document.getElementById('preview-body');
+
+            if(currentDocType === 'admit') {
+                body.innerHTML = `
+                    <div class="text-center font-medium text-slate-700">This is to certify that the undermentioned student is eligible to appear for the Annual Examination.</div>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 bg-amber-50/60 p-3 rounded-lg border border-amber-200 mt-2">
+                        <div><b>Student Name:</b> <span class="text-slate-900 font-bold">${name}</span></div>
+                        <div><b>Roll Number:</b> <span class="text-slate-900 font-bold">${roll}</span></div>
+                        <div><b>Father's Name:</b> <span class="text-slate-900 font-bold">${father}</span></div>
+                        <div><b>Mother's Name:</b> <span class="text-slate-900 font-bold">${mother}</span></div>
+                        <div><b>Class & Section:</b> <span class="text-slate-900 font-bold">${className}</span></div>
+                        <div><b>Date of Birth:</b> <span class="text-slate-900 font-bold">${dob}</span></div>
+                        <div class="col-span-2"><b>Registration / Unique ID:</b> <span class="text-slate-900 font-bold">${reg}</span></div>
+                        <div class="col-span-2 text-indigo-900"><b>Exam Center:</b> <span class="font-bold">${extra1}</span></div>
+                    </div>
+                `;
+            } else if(currentDocType === 'marksheet') {
+                body.innerHTML = `
+                    <div class="text-center font-medium text-slate-700">This is to certify the academic performance record of the student in the final examinations.</div>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-1 bg-amber-50/60 p-2.5 rounded-lg border border-amber-200">
+                        <div><b>Name:</b> ${name}</div><div><b>Roll:</b> ${roll}</div>
+                        <div><b>Father:</b> ${father}</div><div><b>Mother:</b> ${mother}</div>
+                        <div><b>Class:</b> ${className}</div><div><b>DOB:</b> ${dob}</div>
+                        <div class="col-span-2 text-emerald-800"><b>Academic Result:</b> <span class="font-bold">${extra1}</span></div>
+                    </div>
+                `;
+            } else if(currentDocType === 'original') {
+                body.innerHTML = `
+                    <div class="text-center font-medium text-slate-700">Certified that the student has successfully completed the course of study and passed the examination.</div>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-1 bg-amber-50/60 p-2.5 rounded-lg border border-amber-200">
+                        <div><b>Name:</b> ${name}</div><div><b>Roll:</b> ${roll}</div>
+                        <div><b>Father:</b> ${father}</div><div><b>Mother:</b> ${mother}</div>
+                        <div><b>Class:</b> ${className}</div><div><b>Reg No:</b> ${reg}</div>
+                        <div class="col-span-2 text-amber-900 font-bold"><b>Awarded:</b> ${extra1}</div>
+                    </div>
+                `;
+            } else if(currentDocType === 'bonafide') {
+                body.innerHTML = `
+                    <div class="text-center font-medium text-slate-700">This is to verify that the student is a bonafide and regular student of our institution on rolls.</div>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-1 bg-amber-50/60 p-2.5 rounded-lg border border-amber-200">
+                        <div><b>Student Name:</b> ${name}</div><div><b>Class:</b> ${className}</div>
+                        <div><b>Father's Name:</b> ${father}</div><div><b>Mother's Name:</b> ${mother}</div>
+                        <div><b>Date of Birth:</b> ${dob}</div><div><b>Reg ID:</b> ${reg}</div>
+                        <div class="col-span-2 text-blue-900"><b>Issued For:</b> <span class="font-bold">${extra1}</span></div>
+                    </div>
+                `;
+            } else if(currentDocType === 'extracurr') {
+                body.innerHTML = `
+                    <div class="text-center font-medium text-slate-700">Presented with appreciation for outstanding participation and excellence in school activities.</div>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-1 bg-amber-50/60 p-2.5 rounded-lg border border-amber-200">
+                        <div><b>Student Name:</b> ${name}</div><div><b>Class:</b> ${className}</div>
+                        <div><b>Father's Name:</b> ${father}</div><div><b>Mother's Name:</b> ${mother}</div>
+                        <div class="col-span-2 text-purple-900 font-bold"><b>Achievement:</b> ${extra1}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Placeholder for CRM & other tabs
+        function collectFee() { alert('Fee collected & receipt ready.'); }
+        function sendBroadcast() { document.getElementById('comm-log').innerText = 'Broadcast sent successfully via WhatsApp!'; }
+        function addAdmission() { alert('Inquiry saved to CRM.'); }
+        function postHomework() { document.getElementById('hw-status').innerText = 'Homework broadcasted successfully!'; }
+        function issueBook() { document.getElementById('lib-status').innerText = 'Book issued successfully!'; }
+        function generateSalarySlip() { 
+            const box = document.getElementById('salary-output');
+            box.classList.remove('hidden');
+            box.innerHTML = '<b>Salary Slip Generated Successfully</b> for ' + document.getElementById('staff-name').value;
         }
     </script>
 </body>
