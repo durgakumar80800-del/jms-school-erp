@@ -183,13 +183,13 @@
                     </div>
                 </div>
 
-                <!-- 4. CERTIFICATES & MARKSHEETS (ADVANCED STUDIO) -->
+                <!-- 4. CERTIFICATES & MARKSHEETS (PREMIUM STUDIO) -->
                 <div id="tab-marksheet" class="tab-content hidden space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
                         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 gap-4">
                             <div>
                                 <h3 class="text-lg font-bold text-slate-800">Student Document & Certification Studio</h3>
-                                <p class="text-xs text-slate-500">Design, Enter Data Manually, Attach Photos, and Print Official School Documents</p>
+                                <p class="text-xs text-slate-500">Design, Customize Subjects, Attach Photos, and Print Royal School Documents</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="switchDocType('admit')" class="doc-btn px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-bold transition">Admit Card</button>
@@ -224,11 +224,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Student Photo (Image URL or Upload)</label>
-                                    <input type="text" id="doc-photo" value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" placeholder="Paste image URL here" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()">
+                                    <label class="block text-xs font-semibold text-slate-600 mb-1">Upload Student Photo</label>
+                                    <input type="file" id="doc-photo-file" accept="image/*" onchange="handleImageUpload(event)" class="w-full border p-1.5 rounded text-xs bg-white file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                                 </div>
 
-                                <!-- Dynamic Dynamic Fields depending on type -->
+                                <!-- Dynamic Fields depending on type -->
                                 <div id="dynamic-inputs" class="space-y-3 pt-2 border-t">
                                     <!-- Injected via JS -->
                                 </div>
@@ -238,47 +238,52 @@
                                 </button>
                             </div>
 
-                            <!-- Live Printable Document View -->
-                            <div class="lg:col-span-2 bg-white p-6 rounded-xl border-2 border-dashed border-indigo-200 flex items-center justify-center shadow-inner">
-                                <div id="printable-document" class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl border-4 border-double border-indigo-900 text-slate-800 relative space-y-4">
+                            <!-- Live Premium Printable Document View -->
+                            <div class="lg:col-span-2 bg-slate-900 p-6 rounded-xl border border-indigo-900 flex items-center justify-center shadow-2xl">
+                                <div id="printable-document" class="w-full max-w-lg bg-amber-50/95 p-8 rounded-2xl shadow-2xl border-8 border-double border-amber-800 text-slate-900 relative space-y-4 overflow-hidden">
                                     
+                                    <!-- Decorative watermark seal background effect -->
+                                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
+                                        <i class="fa-solid fa-graduation-cap text-[280px] text-amber-900"></i>
+                                    </div>
+
                                     <!-- School Header -->
-                                    <div class="text-center border-b-2 border-indigo-900 pb-3">
-                                        <h3 class="text-xl font-black uppercase text-indigo-950 tracking-wide">JMS Rising Public School</h3>
-                                        <p class="text-[11px] font-medium text-slate-600">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
-                                        <span id="doc-badge" class="inline-block mt-2 bg-indigo-900 text-white text-[11px] px-3 py-0.5 rounded-full font-bold uppercase tracking-widest">Admit Card 2026-27</span>
+                                    <div class="text-center border-b-2 border-amber-800 pb-3 relative z-10">
+                                        <div class="inline-block px-3 py-0.5 bg-amber-900 text-amber-100 text-[10px] font-bold tracking-widest uppercase rounded mb-1">ISO 9001:2015 Certified Institution</div>
+                                        <h3 class="text-2xl font-black uppercase text-amber-950 tracking-wider">JMS Rising Public School</h3>
+                                        <p class="text-[11px] font-semibold text-amber-900">Rasoiya Dhamna, Barhi, Hazaribagh (Jharkhand)</p>
+                                        <span id="doc-badge" class="inline-block mt-2 bg-gradient-to-r from-amber-700 to-amber-900 text-amber-100 text-[11px] px-4 py-0.5 rounded-full font-bold uppercase tracking-widest shadow">Admit Card 2026-27</span>
                                     </div>
 
                                     <!-- Student Profile & Photo Grid -->
-                                    <div class="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                    <div class="flex justify-between items-center bg-white/80 p-3.5 rounded-xl border border-amber-300 relative z-10 shadow-sm">
                                         <div class="space-y-1 text-xs">
-                                            <p><b>Name:</b> <span id="preview-name">Ankit Kumar Sharma</span></p>
+                                            <p><b>Student Name:</b> <span id="preview-name" class="font-bold text-amber-950">Ankit Kumar Sharma</span></p>
                                             <p><b>Father's Name:</b> <span id="preview-father">Rajesh Sharma</span></p>
-                                            <p><b>Class / Roll:</b> <span id="preview-class">Class 10th (Roll: 12)</span></p>
-                                            <p><b>Reg No:</b> <span id="preview-reg">JMS/2026/894</span></p>
+                                            <p><b>Class & Roll:</b> <span id="preview-class">Class 10th (Roll: 12)</span></p>
+                                            <p><b>Registration No:</b> <span id="preview-reg">JMS/2026/894</span></p>
                                         </div>
-                                        <div class="w-20 h-24 bg-slate-200 rounded-lg overflow-hidden border-2 border-indigo-900 flex-shrink-0">
+                                        <div class="w-20 h-24 bg-slate-200 rounded-lg overflow-hidden border-2 border-amber-800 flex-shrink-0 shadow">
                                             <img id="preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="w-full h-full object-cover">
                                         </div>
                                     </div>
 
                                     <!-- Main Content Body -->
-                                    <div id="preview-body" class="text-xs text-slate-700 min-h-[140px]">
+                                    <div id="preview-body" class="text-xs text-slate-800 min-h-[140px] relative z-10">
                                         <!-- Dynamic Body Content -->
                                     </div>
 
                                     <!-- Signatures Footer -->
-                                    <div class="pt-6 flex justify-between items-end border-t text-[11px]">
+                                    <div class="pt-6 flex justify-between items-end border-t border-amber-300 text-[11px] relative z-10">
                                         <div class="text-center">
-                                            <p class="font-bold text-slate-900">Sakshi Kumari</p>
-                                            <p class="text-slate-500">Principal Signature</p>
-                                        </div>
-                                        <div class="w-16 h-16 border rounded-full flex items-center justify-center text-[10px] font-bold text-indigo-900 bg-indigo-50 border-indigo-200 uppercase rotate-[-10deg]">
-                                            JMS Seal
+                                            <div class="font-serif italic text-amber-900 text-sm font-bold">Sakshi Kumari</div>
+                                            <div class="w-28 border-t border-amber-800 mt-0.5"></div>
+                                            <p class="font-bold text-slate-900 mt-0.5">Principal Signature</p>
                                         </div>
                                         <div class="text-center">
-                                            <p class="font-bold text-slate-900">Sanjay Kumar</p>
-                                            <p class="text-slate-500">Director Signature</p>
+                                            <div class="font-serif italic text-amber-900 text-sm font-bold">Sanjay Kumar</div>
+                                            <div class="w-28 border-t border-amber-800 mt-0.5"></div>
+                                            <p class="font-bold text-slate-900 mt-0.5">Director Signature</p>
                                         </div>
                                     </div>
 
@@ -416,6 +421,13 @@
         // ================= CERTIFICATE STUDIO LOGIC =================
         let currentDoc = 'admit';
 
+        // Initial default subjects for marksheets
+        let subjectsList = [
+            { name: 'Mathematics', max: 100, obt: 88 },
+            { name: 'Science', max: 100, obt: 92 },
+            { name: 'English', max: 100, obt: 85 }
+        ];
+
         function switchDocType(type) {
             currentDoc = type;
             document.querySelectorAll('.doc-btn').forEach(btn => {
@@ -438,6 +450,40 @@
             updateDocumentPreview();
         }
 
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-img').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addSubjectRow() {
+            subjectsList.push({ name: 'New Subject', max: 100, obt: 75 });
+            renderDynamicInputs();
+            updateDocumentPreview();
+        }
+
+        function removeSubjectRow(index) {
+            subjectsList.splice(index, 1);
+            renderDynamicInputs();
+            updateDocumentPreview();
+        }
+
+        function updateSubjectData(index, field, value) {
+            if(field === 'name') {
+                subjectsList[index].name = value;
+            } else if(field === 'obt') {
+                subjectsList[index].obt = parseFloat(value) || 0;
+            } else if(field === 'max') {
+                subjectsList[index].max = parseFloat(value) || 100;
+            }
+            updateDocumentPreview();
+        }
+
         function renderDynamicInputs() {
             let container = document.getElementById('dynamic-inputs');
             if(currentDoc === 'admit') {
@@ -446,13 +492,21 @@
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Exam Dates</label><input type="text" id="inp-dates" value="March 10 - March 22, 2026" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
                 `;
             } else if(currentDoc === 'marksheet') {
-                container.innerHTML = `
-                    <div class="grid grid-cols-3 gap-2">
-                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">Maths (100)</label><input type="number" id="m-math" value="88" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
-                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">Science (100)</label><input type="number" id="m-sci" value="92" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
-                        <div><label class="block text-[10px] font-semibold text-slate-600 mb-1">English (100)</label><input type="number" id="m-eng" value="85" class="w-full border p-1.5 rounded text-xs bg-white" oninput="updateDocumentPreview()"></div>
-                    </div>
-                `;
+                let subHtml = `<div class="flex justify-between items-center"><label class="block text-xs font-semibold text-slate-700">Manage Subjects & Marks</label><button onclick="addSubjectRow()" class="text-xs bg-indigo-600 text-white px-2 py-1 rounded font-semibold">+ Add Subject</button></div><div class="space-y-2 max-h-48 overflow-y-auto pr-1">`;
+                
+                subjectsList.forEach((sub, idx) => {
+                    subHtml += `
+                        <div class="flex gap-2 items-center bg-white p-1.5 rounded border">
+                            <input type="text" value="${sub.name}" oninput="updateSubjectData(${idx}, 'name', this.value)" placeholder="Subject Name" class="w-28 border p-1 rounded text-xs">
+                            <input type="number" value="${sub.obt}" oninput="updateSubjectData(${idx}, 'obt', this.value)" placeholder="Obt" class="w-16 border p-1 rounded text-xs">
+                            <span class="text-xs text-slate-500">/</span>
+                            <input type="number" value="${sub.max}" oninput="updateSubjectData(${idx}, 'max', this.value)" placeholder="Max" class="w-16 border p-1 rounded text-xs">
+                            <button onclick="removeSubjectRow(${idx})" class="text-red-500 hover:text-red-700 text-xs px-1"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                });
+                subHtml += `</div>`;
+                container.innerHTML = subHtml;
             } else if(currentDoc === 'original') {
                 container.innerHTML = `
                     <div><label class="block text-xs font-semibold text-slate-600 mb-1">Division / Grade Awarded</label><input type="text" id="inp-div" value="FIRST DIVISION WITH DISTINCTION" class="w-full border p-2 rounded text-sm bg-white" oninput="updateDocumentPreview()"></div>
@@ -476,8 +530,6 @@
             document.getElementById('preview-father').innerText = document.getElementById('doc-father').value;
             document.getElementById('preview-class').innerText = document.getElementById('doc-class').value;
             document.getElementById('preview-reg').innerText = document.getElementById('doc-reg').value;
-            let photoUrl = document.getElementById('doc-photo').value;
-            if(photoUrl) document.getElementById('preview-img').src = photoUrl;
 
             let body = document.getElementById('preview-body');
 
@@ -485,36 +537,41 @@
                 let center = document.getElementById('inp-center')?.value || '';
                 let dates = document.getElementById('inp-dates')?.value || '';
                 body.innerHTML = `
-                    <div class="space-y-2">
-                        <p class="font-semibold text-center text-indigo-900">CERTIFICATE OF EXAMINATION PERMISSION</p>
-                        <p>This is to certify that the above-named student is duly registered and permitted to appear for the examinations at the designated center below:</p>
-                        <div class="p-2.5 bg-slate-50 border rounded text-xs space-y-1">
-                            <p><b>Exam Center:</b> ${center}</p>
-                            <p><b>Schedule:</b> ${dates}</p>
+                    <div class="space-y-3 py-1">
+                        <p class="font-bold text-center text-amber-950 uppercase text-xs tracking-wider border-b border-amber-200 pb-1">Admit Card & Examination Authorization</p>
+                        <p class="text-justify text-xs">This is to certify that the above-named candidate is duly enrolled at JMS Rising Public School and is hereby permitted to appear for the annual examinations at the designated venue below:</p>
+                        <div class="p-3 bg-amber-100/60 border border-amber-300 rounded-lg text-xs space-y-1 shadow-inner">
+                            <p><b>Examination Center:</b> ${center}</p>
+                            <p><b>Examination Schedule:</b> ${dates}</p>
                         </div>
-                        <p class="text-[10px] text-slate-500 text-center mt-2">Candidate must bring this admit card along with school ID on all exam days.</p>
+                        <p class="text-[10px] text-amber-900 text-center italic mt-2">* Candidate must carry this card along with student ID to the examination hall.</p>
                     </div>
                 `;
             } else if(currentDoc === 'marksheet') {
-                let m1 = parseFloat(document.getElementById('m-math')?.value) || 0;
-                let m2 = parseFloat(document.getElementById('m-sci')?.value) || 0;
-                let m3 = parseFloat(document.getElementById('m-eng')?.value) || 0;
-                let total = m1 + m2 + m3;
-                let percentage = (total / 300) * 100;
-                let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : 'B';
+                let totalObt = 0;
+                let totalMax = 0;
+                let tableRows = '';
+
+                subjectsList.forEach(sub => {
+                    totalObt += sub.obt;
+                    totalMax += sub.max;
+                    tableRows += `<tr class="border-b border-amber-200"><td class="p-1.5 font-medium">${sub.name}</td><td class="p-1.5 text-center">${sub.max}</td><td class="p-1.5 text-center font-bold text-amber-950">${sub.obt}</td></tr>`;
+                });
+
+                let percentage = totalMax > 0 ? (totalObt / totalMax) * 100 : 0;
+                let grade = percentage >= 80 ? 'A+ (Distinction)' : percentage >= 60 ? 'A (First Class)' : percentage >= 40 ? 'B (Second Class)' : 'C';
 
                 body.innerHTML = `
-                    <div class="space-y-2">
-                        <table class="w-full text-left border text-xs">
-                            <tr class="bg-indigo-50 border-b"><th class="p-1.5">Subject</th><th class="p-1.5">Max Marks</th><th class="p-1.5">Marks Obtained</th></tr>
-                            <tr class="border-b"><td class="p-1.5">Mathematics</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m1}</td></tr>
-                            <tr class="border-b"><td class="p-1.5">Science</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m2}</td></tr>
-                            <tr class="border-b"><td class="p-1.5">English</td><td class="p-1.5">100</td><td class="p-1.5 font-bold">${m3}</td></tr>
+                    <div class="space-y-3">
+                        <p class="font-bold text-center text-amber-950 uppercase text-xs tracking-wider border-b border-amber-200 pb-1">Statement of Marks & Academic Performance</p>
+                        <table class="w-full text-left border border-amber-300 text-xs bg-white/60">
+                            <tr class="bg-amber-900 text-amber-100 border-b border-amber-900"><th class="p-1.5">Subject Description</th><th class="p-1.5 text-center">Max Marks</th><th class="p-1.5 text-center">Marks Obtained</th></tr>
+                            ${tableRows}
                         </table>
-                        <div class="flex justify-between items-center bg-slate-50 p-2 rounded text-xs font-bold">
-                            <span>Total: ${total}/300</span>
+                        <div class="flex justify-between items-center bg-amber-100/80 p-2.5 rounded-lg border border-amber-300 text-xs font-bold shadow-inner">
+                            <span>Total: ${totalObt}/${totalMax}</span>
                             <span>Percentage: ${percentage.toFixed(2)}%</span>
-                            <span class="text-indigo-700">Grade: ${grade}</span>
+                            <span class="text-amber-900">Grade: ${grade}</span>
                         </div>
                     </div>
                 `;
@@ -523,21 +580,23 @@
                 let sess = document.getElementById('inp-sess')?.value || '';
                 body.innerHTML = `
                     <div class="text-center space-y-3 py-2">
-                        <p class="text-xs uppercase tracking-wide text-slate-600">This is to certify that</p>
-                        <p class="text-base font-black text-indigo-950 uppercase">${document.getElementById('doc-name').value}</p>
-                        <p class="text-xs text-slate-600">Son/Daughter of Sri ${document.getElementById('doc-father').value} has successfully completed the course of studies and passed the annual examination held in session <b>${sess}</b>.</p>
-                        <div class="inline-block bg-amber-50 border border-amber-200 px-4 py-1.5 rounded-lg text-amber-900 font-bold text-xs">
-                            Classification: ${div}
+                        <p class="text-xs uppercase tracking-widest text-amber-900 font-bold">Certificate of Academic Completion</p>
+                        <p class="text-xs">This is to certify with honor that</p>
+                        <p class="text-lg font-black text-amber-950 uppercase tracking-wide">${document.getElementById('doc-name').value}</p>
+                        <p class="text-xs text-slate-700 max-w-md mx-auto">Son/Daughter of Sri <b>${document.getElementById('doc-father').value}</b> has successfully completed the prescribed curriculum and passed the annual school examination held during academic session <b>${sess}</b>.</p>
+                        <div class="inline-block bg-amber-200/80 border border-amber-400 px-5 py-2 rounded-xl text-amber-950 font-extrabold text-xs shadow-sm">
+                            Awarded: ${div}
                         </div>
                     </div>
                 `;
             } else if(currentDoc === 'bonafide') {
                 let purp = document.getElementById('inp-purp')?.value || '';
                 body.innerHTML = `
-                    <div class="space-y-3 py-2 text-justify">
-                        <p>To Whomsoever It May Concern,</p>
-                        <p>This is to certify that <b>${document.getElementById('doc-name').value}</b>, son/daughter of Sri <b>${document.getElementById('doc-father').value}</b>, is a bonafide student of JMS Rising Public School, Rasoiya Dhamna, Barhi, currently enrolled in <b>${document.getElementById('doc-class').value}</b> during the academic session.</p>
-                        <p>This certificate is issued upon request for the specific purpose of: <b>${purp}</b>.</p>
+                    <div class="space-y-3 py-2 text-justify text-xs">
+                        <p class="font-bold text-center text-amber-950 uppercase tracking-wider border-b border-amber-200 pb-1">Bonafide Student Certificate</p>
+                        <p class="text-center font-semibold text-amber-900 mt-2">To Whomsoever It May Concern,</p>
+                        <p>This is to certify that <b>${document.getElementById('doc-name').value}</b>, son/daughter of Sri <b>${document.getElementById('doc-father').value}</b>, is a bonafide student of JMS Rising Public School, Rasoiya Dhamna, Barhi (Hazaribagh), currently enrolled in class <b>${document.getElementById('doc-class').value}</b>.</p>
+                        <p class="bg-amber-100/60 p-2.5 rounded border border-amber-300"><b>Stated Purpose:</b> This certificate is issued upon official request for <b>${purp}</b>.</p>
                     </div>
                 `;
             } else if(currentDoc === 'extracurr') {
@@ -545,10 +604,10 @@
                 let pos = document.getElementById('inp-pos')?.value || '';
                 body.innerHTML = `
                     <div class="text-center space-y-3 py-2">
-                        <p class="text-xs uppercase tracking-widest text-indigo-800 font-bold">Certificate of Merit & Excellence</p>
-                        <p class="text-xs">This certificate is proudly presented to</p>
-                        <p class="text-base font-black text-indigo-950">${document.getElementById('doc-name').value}</p>
-                        <p class="text-xs text-slate-600">for outstanding participation and securing <b>${pos}</b> in the event titled <b>"${act}"</b> organized at JMS Rising Public School.</p>
+                        <p class="text-xs uppercase tracking-widest text-amber-900 font-bold">Certificate of Merit & Excellence</p>
+                        <p class="text-xs">This certificate is proudly presented in recognition of exceptional talent to</p>
+                        <p class="text-lg font-black text-amber-950">${document.getElementById('doc-name').value}</p>
+                        <p class="text-xs text-slate-700 max-w-md mx-auto">for remarkable participation and securing <b>${pos}</b> in <b>"${act}"</b> held at JMS Rising Public School campus.</p>
                     </div>
                 `;
             }
